@@ -1,6 +1,6 @@
 # 03_skills_installation: 16 UI skills, checked before installing
 
-> **Branch:** 03_skills_installation · **Date:** 2026-10-24 · **Status:** In progress
+> **Branch:** 03_skills_installation · **Date:** 2026-10-24 · **Status:** Done
 
 ## In one minute
 
