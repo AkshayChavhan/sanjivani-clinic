@@ -13,11 +13,14 @@ We build this project in small, numbered **tasks**. The full list is in [documen
 3. When a task is finished, it is merged into `main` with `git merge --no-ff`. That way the history shows where each task starts and ends.
 4. Every task gets one **learning doc** in [document/learning/](document/learning/). It explains why we did the task, what changed and how we did it.
 
+The rules Claude follows in this repo (the workflow, git rules and definition of done) are in [CLAUDE.md](CLAUDE.md).
+
 ## Repo map
 
 | Path | What it is |
 | --- | --- |
 | `readme.md` | This file: what the project is and how we work |
+| `CLAUDE.md` | The rules Claude reads at the start of every session |
 | `.gitignore` | The list of files git must never track: dependencies, build output, secrets |
 | `document/task/task.md` | The task tracker: every task, its status and its steps |
 | `document/learning/TEMPLATE.md` | The template every learning doc starts from |
