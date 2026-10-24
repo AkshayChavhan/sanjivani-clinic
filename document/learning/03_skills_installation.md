@@ -32,7 +32,7 @@ But a skill is someone else's text, and Claude follows it with your permissions.
    - The shadcn skill pre-approves every `npx shadcn@latest` command, so Claude won't ask before running them.
    - The 21st skills can spend paid AI credits.
 
-2. **Deal with a surprise: the installer needs a newer Node.** `npm view skills engines` showed the latest installer (1.7.4) needs Node 22.20 or newer, and this machine has Node 20.20.2. We listed the older releases:
+2. **Deal with a surprise: the installer needs a newer Node.** `npm view skills name version description repository.url bin engines` printed `version = '1.7.4'` and `engines = { node: '>=22.20.0' }`. So the latest installer needs Node 22.20 or newer, and this machine has Node 20.20.2. We listed the older releases:
 
    ```bash
    npm view 'skills@>=1.5.0 <1.6.0' engines
@@ -89,7 +89,7 @@ The design-system search ran:
 python3 -B .claude/skills/ui-ux-pro-max/scripts/search.py "A fast, multilingual website where patients see the doctor, services and timings, and book an appointment." --design-system -p "Sanjivani Clinic"
 ```
 
-(`-B` stops Python from writing `__pycache__` folders inside `.claude/skills/`.) The first lines of the real output:
+(`-B` stops Python from writing `__pycache__` folders inside `.claude/skills/`.) Three lines from near the top of the real output (border lines left out):
 
 ```text
 ║  TARGET: Sanjivani Clinic - RECOMMENDED DESIGN SYSTEM                                   ║
@@ -103,7 +103,22 @@ A fresh Claude session also listed the 16 skill names when asked, from `21st-ai`
 
 ## Review and lessons
 
-Self-review: pending. This section is filled in after the review.
+**Who reviewed it:** Claude reviewed its own work against the rules (a self-review). The code-reviewer agent arrives in task 04.
+
+**Verdict:** ready to merge after two fixes.
+
+| Finding | Fix |
+| --- | --- |
+| This doc quoted `npm view skills engines`, but the command really run asked for more fields | Showed the real command and the two lines it printed |
+| It called three lines "the first lines" of the search output, but the border lines had been skipped | Reworded to "three lines from near the top (border lines left out)" |
+
+Also checked and fine:
+- Every step of the plan for this task was done.
+- The two deviations are written down in skills.md and CLAUDE.md: the pinned installer version, and telemetry switched off.
+- `git ls-files` contains no `node_modules`, `__pycache__`, `.env` or `dist`.
+- The installer touched only `.claude/skills/` and `skills-lock.json`.
+- The commits follow Conventional Commits, one per skill source.
+- **A note, not fixed:** this doc is longer than two screens, because the task had two surprises worth explaining.
 
 ## Common mistakes
 
