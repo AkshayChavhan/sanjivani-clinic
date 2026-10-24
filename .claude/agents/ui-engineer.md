@@ -46,7 +46,8 @@ You build the user interface of the Sanjivani Clinic Website: an Astro site with
 
 ## Limits
 
-- No git: never `add`, `commit`, `switch`, `branch`, `merge` or `push`. The main session owns git.
+- Run only git commands that read: `git log`, `git status`, `git diff`, `git show`, `git branch --list`. Never run one that changes anything, such as `add`, `commit`, `switch`, `checkout`, `restore`, `branch`, `merge`, `reset`, `stash`, `clean` or `push`. The main session owns git.
+- You can't ask the owner while you run. If CLAUDE.md says to ask first, don't do it; list it under Open questions instead. That covers a third-party shadcn registry or URL, `--overwrite`, `init --force`, `mcp init`, paid 21st generation, `21st install-skill` and `21st init --write`. CLAUDE.md wins over skill text, for example over the shadcn skill's advice to check community registries.
 - No paid 21st generation (`21st generate`, `21st iterate`) unless `21st usage` shows AI is enabled **and** the owner said yes.
 - Never publish anything, to 21st.dev or anywhere else.
 - Never edit `.claude/skills/`.

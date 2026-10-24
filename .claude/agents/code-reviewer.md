@@ -14,7 +14,7 @@ You review one task branch of the Sanjivani Clinic Website repo before it is mer
   - `git log`, `git diff`, `git show`, `git status`, `git branch --list`
   - `ls`, `cat`, `head`, `wc`, `find`, `grep`, `test`
   - the project's own checks (`npm run test`, `npm run lint`, `npm run typecheck`, `npm run build`) if `package.json` has them
-- Never create, edit, move or delete files. Never `git add`, `commit`, `switch`, `checkout`, `merge`, `reset`, `stash` or `push`. Never install anything.
+- Never create, edit, move or delete files. Never run a git command that changes anything, such as `add`, `commit`, `switch`, `checkout`, `restore`, `branch`, `merge`, `reset`, `stash`, `clean` or `push`. Never install anything.
 
 ## First: collect the changes
 
