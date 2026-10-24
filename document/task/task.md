@@ -13,7 +13,7 @@ This file tracks every task in this project.
 | 01 | 01_project_setup | Git repo, readme, .gitignore, task tracker, learning-doc template | Done | [01_project_setup](../learning/01_project_setup.md) |
 | 02 | 02_claude_guidelines | CLAUDE.md: the rules Claude follows in this repo | Done | [02_claude_guidelines](../learning/02_claude_guidelines.md) |
 | 03 | 03_skills_installation | 16 Claude skills for UI work, plus a skills guide | Done | [03_skills_installation](../learning/03_skills_installation.md) |
-| 04 | 04_agents | 4 project subagents | To do | — |
+| 04 | 04_agents | 4 project subagents | In progress | — |
 | 05 | 05_compound_engineering | The Compound Engineering plugin, pinned and configured | To do | — |
 | 06 | 06_react_app_setup | The Astro + React app, shadcn init, GSAP (runs in a new session) | To do | — |
 
@@ -53,7 +53,7 @@ This file tracks every task in this project.
 
 ### 04_agents
 
-- [ ] Create branch
+- [x] Create branch
 - [ ] Write the 4 agents in .claude/agents/ (task-planner, ui-engineer, learning-doc-writer, code-reviewer)
 - [ ] Check that they load in a fresh process
 - [ ] Add an Agents section to CLAUDE.md and update readme.md
