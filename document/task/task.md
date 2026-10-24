@@ -10,7 +10,7 @@ This file tracks every task in this project.
 
 | # | Task (= branch) | Goal | Status | Learning doc |
 | --- | --- | --- | --- | --- |
-| 01 | 01_project_setup | Git repo, readme, .gitignore, task tracker, learning-doc template | In progress | [01_project_setup](../learning/01_project_setup.md) |
+| 01 | 01_project_setup | Git repo, readme, .gitignore, task tracker, learning-doc template | Done | [01_project_setup](../learning/01_project_setup.md) |
 | 02 | 02_claude_guidelines | CLAUDE.md: the rules Claude follows in this repo | To do | — |
 | 03 | 03_skills_installation | 16 Claude skills for UI work, plus a skills guide | To do | — |
 | 04 | 04_agents | 4 project subagents | To do | — |
@@ -28,7 +28,7 @@ This file tracks every task in this project.
 - [x] Add the learning-doc template
 - [x] Write the learning doc
 - [x] Review (self-review: the reviewer agent doesn't exist yet)
-- [ ] Merge into main
+- [x] Merge into main
 
 ### 02_claude_guidelines
 

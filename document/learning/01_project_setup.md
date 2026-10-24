@@ -1,6 +1,6 @@
 # 01_project_setup: Git repo, readme, .gitignore and task tracker
 
-> **Branch:** 01_project_setup · **Date:** 2026-10-24 · **Status:** In progress
+> **Branch:** 01_project_setup · **Date:** 2026-10-24 · **Status:** Done
 
 ## In one minute
 
