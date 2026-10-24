@@ -1,6 +1,6 @@
 # 02_claude_guidelines: CLAUDE.md, the rules Claude follows here
 
-> **Branch:** 02_claude_guidelines · **Date:** 2026-10-24 · **Status:** In progress
+> **Branch:** 02_claude_guidelines · **Date:** 2026-10-24 · **Status:** Done
 
 ## In one minute
 
