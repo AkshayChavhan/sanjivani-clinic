@@ -53,7 +53,9 @@ One long session doing everything gets cluttered, and it is bad at checking its 
 
 ## New ideas in this task
 
+- **Context window:** everything the model can "see" at once: the instructions, the conversation and the files it has read.
 - **Subagent:** a helper Claude with its own context window, tools and instructions. It returns a report to the main session.
+- **YAML:** a simple text format for settings, one `key: value` per line, and lists written with `- item`.
 - **Frontmatter:** the block between the two `---` lines at the top of the file, holding settings in YAML.
 - **Tool allow-list (`tools`):** which tools an agent may use. Leaving it out means all tools.
 - **Preloaded skills (`skills`):** ui-engineer starts with frontend-design, ui-ux-pro-max, shadcn and gsap-react already loaded, so it doesn't have to discover them.
@@ -93,7 +95,7 @@ Review: pending. This section is filled in after code-reviewer runs.
 About 10 minutes:
 
 1. Run `claude -p "Plan a task to add a FAQ page. Don't edit any files; just show me the plan." --agent task-planner --max-turns 5`.
-2. Check that the plan has a `NN_short_name`, 3 to 8 steps, and the four steps every task needs.
+2. Check that the plan has a `NN_short_name`, 5 to 8 steps, and the five steps every task needs (Create branch, Write the learning doc, Review, Compound, Merge).
 3. Run `git status`. If anything changed, undo it with `git restore document/task/task.md`.
 
 ## Learn more
