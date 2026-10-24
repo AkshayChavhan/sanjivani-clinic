@@ -23,6 +23,7 @@ Claude reads this file at the start of every session. Follow it over your defaul
 | `document/skills/skills.md` | The skills guide: what each skill does, how to manage them, the vetting record |
 | `.claude/skills/` | The 16 installed project skills (third-party; never edit) |
 | `skills-lock.json` | Which skills are installed, where they came from, and a content hash for each |
+| `.claude/agents/` | The 4 project subagents (task-planner, ui-engineer, learning-doc-writer, code-reviewer) |
 
 ## Task workflow
 
@@ -93,6 +94,22 @@ Rules:
 - 21st needs the owner's login or `TWENTYFIRST_TOKEN`. Never commit the key. No hosted generation (`21st generate` or `iterate`) unless `21st usage` shows AI is enabled and the owner agrees. Never publish to 21st.dev, and never run `21st install-skill`, `21st init --write`, or any publish, profile or delete command. Review every `21st add` diff and its new npm packages.
 - Don't edit `.claude/skills/`. Project rules go in this file.
 - For a new skill: read it first, install it with the project-scope command (`DISABLE_TELEMETRY=1 npx -y skills@1.5.18 add <owner/repo> --agent claude-code --skill <name> --copy -y`; the pin is needed while Node is below 22.20), and update skills.md.
+
+## Agents
+
+Project subagents live in `.claude/agents/`. Each one does one job in its own context and reports back.
+
+| Agent | Use it when | Can it change files? |
+| --- | --- | --- |
+| task-planner | Starting new work that may need more than one task | Yes, but only `document/task/task.md` |
+| ui-engineer | A task changes how the app looks, feels or moves | Yes: app UI files (never git, never `.claude/skills/`) |
+| learning-doc-writer | A task's changes are committed on its branch, before the merge | Yes, but only that task's learning doc |
+| code-reviewer | A task is ready to merge | No: read-only by its instructions |
+
+- **The main session owns git.** Subagents never branch, commit or merge; they do their job and report back.
+- **Run independent agents in parallel**, in one message.
+- A running session only sees agents that existed when it started. That's why the review runs code-reviewer in a fresh process (step 5 of the task workflow).
+- When an agent's job changes, update its file and this table in the same task.
 
 ## Definition of done
 
