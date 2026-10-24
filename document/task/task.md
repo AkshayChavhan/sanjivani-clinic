@@ -48,7 +48,7 @@ This file tracks every task in this project.
 - [x] Write document/skills/skills.md
 - [x] Add a Skills section to CLAUDE.md and update readme.md
 - [x] Write the learning doc
-- [ ] Review (self-review: the reviewer agent doesn't exist yet)
+- [x] Review (self-review: the reviewer agent doesn't exist yet)
 - [ ] Merge into main
 
 ### 04_agents
