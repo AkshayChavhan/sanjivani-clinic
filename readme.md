@@ -28,6 +28,7 @@ The rules Claude follows in this repo (the workflow, git rules and definition of
 | `document/skills/skills.md` | The skills guide: the 16 UI skills, how they work together, how to manage them |
 | `.claude/skills/` | The 16 Claude Code skills installed for this project (third-party files; never edit them) |
 | `skills-lock.json` | Which skills are installed and where they came from |
+| `.claude/agents/` | 4 project subagents: task-planner, ui-engineer, learning-doc-writer, code-reviewer (see the Agents section in CLAUDE.md) |
 
 ## Prerequisites
 

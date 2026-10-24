@@ -12,8 +12,8 @@ This file tracks every task in this project.
 | --- | --- | --- | --- | --- |
 | 01 | 01_project_setup | Git repo, readme, .gitignore, task tracker, learning-doc template | Done | [01_project_setup](../learning/01_project_setup.md) |
 | 02 | 02_claude_guidelines | CLAUDE.md: the rules Claude follows in this repo | Done | [02_claude_guidelines](../learning/02_claude_guidelines.md) |
-| 03 | 03_skills_installation | 16 Claude skills for UI work, plus a skills guide | In progress | [03_skills_installation](../learning/03_skills_installation.md) |
-| 04 | 04_agents | 4 project subagents | To do | — |
+| 03 | 03_skills_installation | 16 Claude skills for UI work, plus a skills guide | Done | [03_skills_installation](../learning/03_skills_installation.md) |
+| 04 | 04_agents | 4 project subagents | In progress | [04_agents](../learning/04_agents.md) |
 | 05 | 05_compound_engineering | The Compound Engineering plugin, pinned and configured | To do | — |
 | 06 | 06_react_app_setup | The Astro + React app, shadcn init, GSAP (runs in a new session) | To do | — |
 
@@ -49,15 +49,15 @@ This file tracks every task in this project.
 - [x] Add a Skills section to CLAUDE.md and update readme.md
 - [x] Write the learning doc
 - [x] Review (self-review: the reviewer agent doesn't exist yet)
-- [ ] Merge into main
+- [x] Merge into main
 
 ### 04_agents
 
-- [ ] Create branch
-- [ ] Write the 4 agents in .claude/agents/ (task-planner, ui-engineer, learning-doc-writer, code-reviewer)
-- [ ] Check that they load in a fresh process
-- [ ] Add an Agents section to CLAUDE.md and update readme.md
-- [ ] Write the learning doc
+- [x] Create branch
+- [x] Write the 4 agents in .claude/agents/ (task-planner, ui-engineer, learning-doc-writer, code-reviewer)
+- [x] Check that they load in a fresh process
+- [x] Add an Agents section to CLAUDE.md and update readme.md
+- [x] Write the learning doc
 - [ ] Review with code-reviewer and fix what it finds
 - [ ] Merge into main
 
@@ -91,10 +91,10 @@ Runs in a **new** Claude Code session, because agents and the plugin load only w
 - [ ] Run `npm install gsap @gsap/react`. Write no animation code yet.
 - [ ] Add ESLint (eslint-plugin-astro + typescript-eslint) with an `npm run lint` script, and `npm run typecheck` (`astro check`)
 - [ ] Check it works and paste the real output into the learning doc: `npm run lint`; `npm run build`; `npm run dev` in the background, then `curl -sI http://localhost:4321` returns 200, then stop the server; `git status` shows no node_modules/, dist/ or .astro/
+- [ ] Update the docs: CLAUDE.md (stage "app scaffolded, no features yet", stack set, commands `npm run dev`, `npm run build`, `npm run lint`); readme.md ("Run it locally": `npm install`, `npm run dev`, http://localhost:4321); the backlog below
+- [ ] Write the learning doc: Astro basics and islands, the folder layout, Tailwind, what shadcn init changed, package.json vs package-lock.json, the npm scripts
 - [ ] Run ce-code-review (report only; most code is generated, so focus on config)
 - [ ] Review with code-reviewer and fix what it finds
-- [ ] Write the learning doc: Astro basics and islands, the folder layout, Tailwind, what shadcn init changed, package.json vs package-lock.json, the npm scripts
-- [ ] Update the docs: CLAUDE.md (stage "app scaffolded, no features yet", stack set, commands `npm run dev`, `npm run build`, `npm run lint`); readme.md ("Run it locally": `npm install`, `npm run dev`, http://localhost:4321); the backlog below
 - [ ] Compound: save a lesson in document/solutions/ if one passes the counterfactual question
 - [ ] Merge into main
 
