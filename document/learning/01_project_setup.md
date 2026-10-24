@@ -67,9 +67,11 @@ An empty folder gives you no way to track changes, undo mistakes or see why some
 
    - `switch` moves you to a branch. `-c` creates it first.
 
-4. **Add the files in small commits.** Code, docs and tracker changes go in separate commits. The messages follow **Conventional Commits** (a `type:` prefix such as `chore:` or `docs:`). Real `git log --oneline main..HEAD`, taken before this doc was committed:
+4. **Add the files in small commits.** Code, docs and tracker changes go in separate commits. The messages follow **Conventional Commits** (a `type:` prefix such as `chore:` or `docs:`). `main..HEAD` means "commits on this branch that are not on main". Real output of `git log --oneline main..HEAD`, run after the tracker update:
 
    ```text
+   64f54de docs(01): link learning doc and tick finished steps
+   5e9b43d docs(01): add learning doc for 01_project_setup
    959af9d docs(01): add learning-doc template
    355137e docs: write readme with how we work, repo map and prerequisites
    3932726 chore: add .gitignore
@@ -106,17 +108,28 @@ Real output: `.gitignore:16:.env	.env`. This means line 16 (`.env`) matches, so 
 git check-ignore -v .env.example
 ```
 
-Real output: `.gitignore:18:!.env.example	.env.example`. **Careful:** it still prints a line and exits with 0, but the rule starts with `!`, so `.env.example` is **NOT** ignored. Without `-v`, git prints nothing and exits with 1 ("not ignored"). We confirmed this with real files:
+Real output: `.gitignore:18:!.env.example	.env.example`. **Careful:** it still prints a line and exits with 0, but the rule starts with `!`, so `.env.example` is **NOT** ignored. Without `-v`, git prints nothing and exits with 1 ("not ignored"). We confirmed this by creating both files for a moment and running `git status --short --ignored` (then we deleted them again). Real output:
 
 ```text
-$ git status --short --ignored
-?? .env.example        <- untracked: git would commit it
-!! .env                <- ignored: git will never commit it
+?? .env.example
+!! .env
 ```
+
+`??` means untracked, so git *would* commit `.env.example`. `!!` means ignored, so git will never commit `.env`.
 
 ## Review and lessons
 
-Self-review: pending. This section is filled in after the review.
+**Who reviewed it:** Claude reviewed its own work against the rules (a **self-review**). The code-reviewer agent doesn't exist until task 04.
+
+**Verdict:** ready to merge after three fixes.
+
+| Finding | Fix |
+| --- | --- |
+| This doc showed `git log --oneline main..HEAD` output, but that exact command had not been run (only plain `git log --oneline` had) | Ran it and pasted its real output |
+| My own notes were mixed into a pasted command output | Moved the notes below the output |
+| The readme claimed tasks 01 to 05 need only Node 20.9, which nobody had checked | Reworded it to state only what is known |
+
+Also checked and fine: every `.gitignore` group and comment is there; task.md has all six tasks, steps, the backlog and "How to add a task"; the commits are small and use Conventional Commits; `git ls-files` shows no secrets and no generated folders.
 
 ## Common mistakes
 
