@@ -1,6 +1,6 @@
 # 04_agents: four project subagents
 
-> **Branch:** 04_agents · **Date:** 2026-10-24 · **Status:** In progress
+> **Branch:** 04_agents · **Date:** 2026-10-24 · **Status:** Done
 
 ## In one minute
 
