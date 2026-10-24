@@ -12,7 +12,7 @@ This file tracks every task in this project.
 | --- | --- | --- | --- | --- |
 | 01 | 01_project_setup | Git repo, readme, .gitignore, task tracker, learning-doc template | Done | [01_project_setup](../learning/01_project_setup.md) |
 | 02 | 02_claude_guidelines | CLAUDE.md: the rules Claude follows in this repo | Done | [02_claude_guidelines](../learning/02_claude_guidelines.md) |
-| 03 | 03_skills_installation | 16 Claude skills for UI work, plus a skills guide | To do | — |
+| 03 | 03_skills_installation | 16 Claude skills for UI work, plus a skills guide | In progress | — |
 | 04 | 04_agents | 4 project subagents | To do | — |
 | 05 | 05_compound_engineering | The Compound Engineering plugin, pinned and configured | To do | — |
 | 06 | 06_react_app_setup | The Astro + React app, shadcn init, GSAP (runs in a new session) | To do | — |
@@ -41,7 +41,7 @@ This file tracks every task in this project.
 
 ### 03_skills_installation
 
-- [ ] Create branch
+- [x] Create branch
 - [ ] Vet the 5 skill sources: read every SKILL.md and script, search for risky patterns, run nothing
 - [ ] Install the skills into the project (one commit per source) and compare them with the vetted copies
 - [ ] Check: `npx skills list` shows 16 skills, and the ui-ux-pro-max search script runs
