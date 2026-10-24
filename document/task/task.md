@@ -11,7 +11,7 @@ This file tracks every task in this project.
 | # | Task (= branch) | Goal | Status | Learning doc |
 | --- | --- | --- | --- | --- |
 | 01 | 01_project_setup | Git repo, readme, .gitignore, task tracker, learning-doc template | Done | [01_project_setup](../learning/01_project_setup.md) |
-| 02 | 02_claude_guidelines | CLAUDE.md: the rules Claude follows in this repo | To do | — |
+| 02 | 02_claude_guidelines | CLAUDE.md: the rules Claude follows in this repo | In progress | — |
 | 03 | 03_skills_installation | 16 Claude skills for UI work, plus a skills guide | To do | — |
 | 04 | 04_agents | 4 project subagents | To do | — |
 | 05 | 05_compound_engineering | The Compound Engineering plugin, pinned and configured | To do | — |
@@ -32,7 +32,7 @@ This file tracks every task in this project.
 
 ### 02_claude_guidelines
 
-- [ ] Create branch
+- [x] Create branch
 - [ ] Write CLAUDE.md (project, repo map, task workflow, learning docs, git rules, definition of done, talking to the user)
 - [ ] Link CLAUDE.md from readme.md
 - [ ] Write the learning doc
