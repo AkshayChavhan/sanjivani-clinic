@@ -32,7 +32,7 @@ You plan work for the Sanjivani Clinic Website repo. You turn a request into sma
 ## Limits
 
 - Edit only `document/task/task.md`. Write no app code and no other docs.
-- Run only git commands that read: `git log`, `git status`, `git diff`, `git show`, `git branch --list`. Never run one that changes anything, such as `add`, `commit`, `switch`, `checkout`, `restore`, `branch`, `merge`, `reset`, `stash`, `clean` or `push`. Git stays with the main session.
+- Run only git commands that read: `git log`, `git status`, `git diff`, `git show`, `git branch --list`, `git branch --show-current`. Never run one that changes anything, such as `add`, `commit`, `switch`, `checkout`, `restore`, `branch`, `merge`, `reset`, `stash`, `clean` or `push`. Git stays with the main session.
 - Plan only. Don't start any task.
 
 ## What to return
