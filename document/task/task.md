@@ -42,11 +42,11 @@ This file tracks every task in this project.
 ### 03_skills_installation
 
 - [x] Create branch
-- [ ] Vet the 5 skill sources: read every SKILL.md and script, search for risky patterns, run nothing
-- [ ] Install the skills into the project (one commit per source) and compare them with the vetted copies
-- [ ] Check: `npx skills list` shows 16 skills, and the ui-ux-pro-max search script runs
-- [ ] Write document/skills/skills.md
-- [ ] Add a Skills section to CLAUDE.md and update readme.md
+- [x] Vet the 5 skill sources: read every SKILL.md and script, search for risky patterns, run nothing
+- [x] Install the skills into the project (one commit per source) and compare them with the vetted copies
+- [x] Check: `npx skills list` shows 16 skills, and the ui-ux-pro-max search script runs
+- [x] Write document/skills/skills.md
+- [x] Add a Skills section to CLAUDE.md and update readme.md
 - [ ] Write the learning doc
 - [ ] Review (self-review: the reviewer agent doesn't exist yet)
 - [ ] Merge into main
