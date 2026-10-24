@@ -45,6 +45,7 @@ Every task runs these steps:
      claude -p "Review the current branch (NN_short_name) against main, following your instructions." --agent code-reviewer --allowedTools "Read" "Glob" "Grep" "Bash(git *)" "Bash(ls *)" "Bash(grep *)" "Bash(cat *)" "Bash(head *)" "Bash(wc *)" "Bash(find *)" "Bash(test *)" "Bash(npm run *)"
      ```
 
+   - After the review, run `git status` and `git log -1 --oneline`. Both must be unchanged: the reviewer is read-only only because its instructions say so.
    - Fix every "must fix". Then write the real verdict, and what you fixed, into the learning doc.
 6. **Compound (from task 05 on):** ask, "If this lesson weren't written down, would a future session repeat the mistake or redo the investigation?" Review findings are the usual source of lessons. If the answer is yes, run:
 
