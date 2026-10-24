@@ -36,7 +36,7 @@ This file tracks every task in this project.
 - [x] Write CLAUDE.md (project, repo map, task workflow, learning docs, git rules, definition of done, talking to the user)
 - [x] Link CLAUDE.md from readme.md
 - [x] Write the learning doc
-- [ ] Review (self-review: the reviewer agent doesn't exist yet)
+- [x] Review (self-review: the reviewer agent doesn't exist yet)
 - [ ] Merge into main
 
 ### 03_skills_installation
