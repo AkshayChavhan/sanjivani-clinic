@@ -33,6 +33,6 @@ We build this project in small, numbered **tasks**. The full list is in [documen
 | Python | 3 | `python3 --version` |
 | Claude Code | latest | `claude --version` |
 
-- Tasks 01 to 05 only need Node 20.9 or newer. The app from task 06 on needs Node 22.23.4 or newer, so upgrade before task 06 (Node 24 LTS is a good choice).
+- The app (task 06 on) needs Node 22.23.4 or newer. The setup tasks were started on Node 20.20.2, so upgrade before task 06 (Node 24 LTS is a good choice).
 - The first time you open this repo in Claude Code, it asks whether you **trust this folder**. Accept, so Claude Code can use this project's settings.
 - Optional: a free [21st.dev](https://21st.dev) account. Some UI skills use it from task 03 on.
