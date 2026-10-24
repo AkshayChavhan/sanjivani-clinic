@@ -58,7 +58,7 @@ This file tracks every task in this project.
 - [x] Check that they load in a fresh process
 - [x] Add an Agents section to CLAUDE.md and update readme.md
 - [x] Write the learning doc
-- [ ] Review with code-reviewer and fix what it finds
+- [x] Review with code-reviewer and fix what it finds
 - [ ] Merge into main
 
 ### 05_compound_engineering
