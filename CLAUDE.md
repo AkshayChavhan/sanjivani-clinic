@@ -20,6 +20,9 @@ Claude reads this file at the start of every session. Follow it over your defaul
 | `document/task/task.md` | The task tracker: tasks, statuses, steps, backlog |
 | `document/learning/TEMPLATE.md` | The template for learning docs |
 | `document/learning/NN_name.md` | One learning doc per task |
+| `document/skills/skills.md` | The skills guide: what each skill does, how to manage them, the vetting record |
+| `.claude/skills/` | The 16 installed project skills (third-party; never edit) |
+| `skills-lock.json` | Which skills are installed, where they came from, and a content hash for each |
 
 ## Task workflow
 
@@ -72,6 +75,24 @@ Every task runs these steps:
   - use anything paid
   - publish anything (21st.dev, Proof, any website)
   - send code or docs to another AI provider
+
+## Skills
+
+Full guide: [document/skills/skills.md](document/skills/skills.md). Order for UI work:
+
+1. **Direction:** frontend-design; ui-ux-pro-max for data; 21st-ui-explore when the direction is open.
+2. **Build:** shadcn, always through its CLI; search 21st (21st-cli-use) before hand-writing a section; 21st-ui-build for pages.
+3. **Motion:** gsap-react with `useGSAP`, plus gsap-timeline or gsap-scrolltrigger. Always handle `prefers-reduced-motion` (`gsap.matchMedia()`).
+4. **Review:** 21st-ui-review and the ui-ux-pro-max pre-delivery checklist.
+
+Rules:
+
+- Run `python3 .claude/skills/ui-ux-pro-max/scripts/search.py` from the repo root, and ignore the `${CLAUDE_PLUGIN_ROOT}` prefix in its SKILL.md. Save with `--persist --output-dir .`; never use `--force` without asking.
+- ui-ux-pro-max results are input and a checklist; frontend-design makes the call. When skills disagree, accessibility wins.
+- shadcn: add only official `@shadcn` items without asking. Ask before any third-party registry or URL, `--overwrite`, `init --force` or `mcp init`. Read every file it adds.
+- 21st needs the owner's login or `TWENTYFIRST_TOKEN`. Never commit the key. No hosted generation (`21st generate` or `iterate`) unless `21st usage` shows AI is enabled and the owner agrees. Never publish to 21st.dev, and never run `21st install-skill`, `21st init --write`, or any publish, profile or delete command. Review every `21st add` diff and its new npm packages.
+- Don't edit `.claude/skills/`. Project rules go in this file.
+- For a new skill: read it first, install it with the project-scope command (`DISABLE_TELEMETRY=1 npx -y skills@1.5.18 add <owner/repo> --agent claude-code --skill <name> --copy -y`; the pin is needed while Node is below 22.20), and update skills.md.
 
 ## Definition of done
 
