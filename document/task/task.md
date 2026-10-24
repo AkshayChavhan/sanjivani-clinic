@@ -27,7 +27,7 @@ This file tracks every task in this project.
 - [x] Add this task tracker
 - [x] Add the learning-doc template
 - [x] Write the learning doc
-- [ ] Review (self-review: the reviewer agent doesn't exist yet)
+- [x] Review (self-review: the reviewer agent doesn't exist yet)
 - [ ] Merge into main
 
 ### 02_claude_guidelines
