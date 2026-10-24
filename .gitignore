@@ -1,0 +1,36 @@
+# Dependencies: packages npm downloads; `npm install` recreates them
+node_modules/
+
+# Build output: files the build creates; building again recreates them
+.next/
+out/
+dist/
+build/
+*.tsbuildinfo
+next-env.d.ts
+
+# Tests: coverage reports from test runs
+coverage/
+
+# Secrets: real keys live in .env files; only .env.example (fake values) is committed
+.env
+.env.*
+!.env.example
+
+# Logs: debug output from npm, yarn and pnpm
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Python cache: files Python writes when it runs scripts
+__pycache__/
+*.pyc
+
+# Personal Claude files: your own local settings and notes, not shared
+.claude/settings.local.json
+CLAUDE.local.md
+
+# OS and editor: files your computer or IDE creates on its own
+.DS_Store
+.idea/
