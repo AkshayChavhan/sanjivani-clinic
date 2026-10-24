@@ -45,7 +45,7 @@ Every task runs these steps:
      claude -p "Review the current branch (NN_short_name) against main, following your instructions." --agent code-reviewer --allowedTools "Read" "Glob" "Grep" "Bash(git *)" "Bash(ls *)" "Bash(grep *)" "Bash(cat *)" "Bash(head *)" "Bash(wc *)" "Bash(find *)" "Bash(test *)" "Bash(npm run *)"
      ```
 
-   - After the review, run `git status` and `git log -1 --oneline`. Both must be unchanged: the reviewer is read-only only because its instructions say so.
+   - Before and after the review, run `git status --short`, `git log -1 --oneline` and `git show-ref --heads`. All three must match: the reviewer is read-only only because its instructions say so. (`git show-ref --heads` lists every local branch and its commit, so it also catches a deleted or moved branch.)
    - Fix every "must fix". Then write the real verdict, and what you fixed, into the learning doc.
 6. **Compound (from task 05 on):** ask, "If this lesson weren't written down, would a future session repeat the mistake or redo the investigation?" Review findings are the usual source of lessons. If the answer is yes, run:
 
@@ -103,11 +103,11 @@ Project subagents live in `.claude/agents/`. Each one does one job in its own co
 | Agent | Use it when | Can it change files? |
 | --- | --- | --- |
 | task-planner | Starting new work that may need more than one task | Yes, but only `document/task/task.md` |
-| ui-engineer | A task changes how the app looks, feels or moves | Yes: app UI files (never git, never `.claude/skills/`) |
+| ui-engineer | A task changes how the app looks, feels or moves | Yes: app UI files (read-only git; never `.claude/skills/`) |
 | learning-doc-writer | A task's changes are committed on its branch, before the merge | Yes, but only that task's learning doc |
 | code-reviewer | A task is ready to merge | No: read-only by its instructions |
 
-- **The main session owns git.** Subagents never branch, commit or merge; they do their job and report back.
+- **The main session owns git.** Subagents may read git (`log`, `status`, `diff`, `show`, `branch --list`, `branch --show-current`) but never change it: no branch, commit or merge. They do their job and report back.
 - **Run independent agents in parallel**, in one message.
 - A running session only sees agents that existed when it started. That's why the review runs code-reviewer in a fresh process (step 5 of the task workflow).
 - When an agent's job changes, update its file and this table in the same task.
