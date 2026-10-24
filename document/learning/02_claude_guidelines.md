@@ -67,7 +67,18 @@ Both answers come straight from `CLAUDE.md`, so the file is loaded.
 
 ## Review and lessons
 
-Self-review: pending. This section is filled in after the review.
+**Who reviewed it:** Claude reviewed its own work against the rules (a self-review). The code-reviewer agent arrives in task 04.
+
+**Verdict:** ready to merge after one fix.
+
+| Finding | Fix |
+| --- | --- |
+| Both Claude Code links pointed at old `docs.anthropic.com` addresses, which now redirect (HTTP 301) | Switched them to the current `code.claude.com` addresses, which answer HTTP 200 |
+
+Also checked and fine:
+- `CLAUDE.md` has every part the plan asked for: project, repo map, workflow, learning docs, git rules, definition of done (9 items) and talking to the owner.
+- The `CLAUDE.local.md` claim matches the official memory page, which describes it as "Personal project-specific preferences; add to `.gitignore`".
+- The commits are small and in Conventional Commits form.
 
 ## Common mistakes
 
@@ -86,6 +97,6 @@ About 5 minutes:
 
 ## Learn more
 
-- [Claude Code: manage memory (CLAUDE.md)](https://docs.anthropic.com/en/docs/claude-code/memory)
-- [Claude Code: CLI reference (`-p`, `--model`, `--max-turns`)](https://docs.anthropic.com/en/docs/claude-code/cli-reference)
+- [Claude Code: memory (CLAUDE.md)](https://code.claude.com/docs/en/memory)
+- [Claude Code: CLI reference (`-p`, `--model`, `--max-turns`)](https://code.claude.com/docs/en/cli-reference)
 - [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
