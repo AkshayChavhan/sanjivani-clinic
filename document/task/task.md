@@ -54,9 +54,9 @@ This file tracks every task in this project.
 ### 04_agents
 
 - [x] Create branch
-- [ ] Write the 4 agents in .claude/agents/ (task-planner, ui-engineer, learning-doc-writer, code-reviewer)
-- [ ] Check that they load in a fresh process
-- [ ] Add an Agents section to CLAUDE.md and update readme.md
+- [x] Write the 4 agents in .claude/agents/ (task-planner, ui-engineer, learning-doc-writer, code-reviewer)
+- [x] Check that they load in a fresh process
+- [x] Add an Agents section to CLAUDE.md and update readme.md
 - [ ] Write the learning doc
 - [ ] Review with code-reviewer and fix what it finds
 - [ ] Merge into main
