@@ -15,7 +15,7 @@ This file tracks every task in this project.
 | 03 | 03_skills_installation | 16 Claude skills for UI work, plus a skills guide | Done | [03_skills_installation](../learning/03_skills_installation.md) |
 | 04 | 04_agents | 4 project subagents | Done | [04_agents](../learning/04_agents.md) |
 | 05 | 05_compound_engineering | The Compound Engineering plugin, pinned and configured | Done | [05_compound_engineering](../learning/05_compound_engineering.md) |
-| 06 | 06_react_app_setup | The Astro + React app, shadcn init, GSAP (runs in a new session) | To do | — |
+| 06 | 06_react_app_setup | The Astro + React app, shadcn init, GSAP (runs in a new session) | In progress | — |
 
 ## Task steps
 
@@ -77,8 +77,8 @@ This file tracks every task in this project.
 
 Runs in a **new** Claude Code session, because agents and the plugin load only when a session starts.
 
-- [ ] Before starting: `node -v` shows 22.23.4 or newer (Astro 7 needs it)
-- [ ] Create branch
+- [x] Before starting: `node -v` shows 22.23.4 or newer (Astro 7 needs it)
+- [x] Create branch
 - [ ] Plan with `/compound-engineering:ce-plan`: "Scaffold the Astro + React app at the repo root, run shadcn init, install gsap and @gsap/react. No features." Link the plan here. When ce-plan offers next steps, choose to stop. Nothing may push or open a PR.
 - [ ] Check the scaffold's current flags: `npm create astro@latest -- --help`
 - [ ] Scaffold into a scratch folder outside the repo (for example `npm create astro@latest <scratch>/sanjivani-clinic -- --template minimal --no-install --no-git --yes`, adjusted to the flags you just checked)
