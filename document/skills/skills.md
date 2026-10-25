@@ -2,6 +2,8 @@
 
 This project has 16 Claude Code **skills** for UI work. This guide explains what a skill is, what each one is for, how they work together, and how to manage them.
 
+It also has the **Compound Engineering plugin**, which adds 36 workflow skills (34 named `ce-*`, plus `lfg` and `wtf`) for planning, building, reviewing and saving lessons. See [Compound Engineering](#compound-engineering) at the end.
+
 ## What a skill is
 
 - A **skill** is a folder with a `SKILL.md` file inside. The top of that file (the *frontmatter*) has a `name` and a `description`. The rest is instructions, sometimes with extra files and scripts.
@@ -141,3 +143,72 @@ Before installing, we cloned each source and read every `SKILL.md` and script, r
 | anthropics/skills | `dbd4588f9e1033efb41dad4bef2f7947c8993d44` | frontend-design | Safe. Two text files, Apache-2.0. |
 | nextlevelbuilder/ui-ux-pro-max-skill | `d14efff8ed1faa4187f004f79926f428c8074ec7` | ui-ux-pro-max | Safe with notes. Local Python, no network. The path prefix needs a fix (above). Writes only with `--persist`. |
 | 21st-dev/skill | `15c7436c41dc88c54094f1be93ce53bda456b114` | 5 x 21st-* | Safe with notes. No code, but it runs the 21st CLI: paid AI, community installs. |
+
+## Compound Engineering
+
+**What it is:** a **plugin**, EveryInc/compound-engineering-plugin (MIT licence). A plugin is a package of skills (it could also hold hooks, agents, commands or MCP servers) that Claude Code installs with `claude plugin`. Unlike our project skills, its files live on your machine in `~/.claude/plugins/cache/...`. The repo stores only *which* plugin and version to use, in `.claude/settings.json`.
+
+It adds a loop to every task: **plan, work, review, compound**. "Compound" means saving a reusable lesson in `document/solutions/` so future sessions don't repeat a mistake.
+
+**What we checked** (tag `compound-engineering-v3.32.0`, commit `786ac0194183fadc3d0e2525b2ba6d40353926d3`):
+
+- **What it contains:** 36 skills (34 `ce-*`, plus `lfg` and `wtf`, a plain-language "explain this" skill), and no hooks, MCP servers, agents or commands. No skill runs anything on its own when it loads.
+- **Skills that pre-approve tools:**
+  - `ce-resolve-pr-feedback`: `gh`, `git`, `bash`, `python3`, Read, Write
+  - `ce-proof`: Bash, Read, Write, WebFetch
+  - `ce-sweep` and `ce-product-pulse`: file tools and Bash
+  - We don't use any of them.
+- **`check-health`** downloads packages only with a `--warm-acpx` flag, which we never pass.
+- **`check-health` also reads `~/.codex/AGENTS.md`**, if it exists, to look for an old marker block. It's read-only, reports yes or no, and touches no session transcripts.
+- **The cached copy:** the skills in `~/.claude/plugins/cache/` are identical to the clone we read (`diff -rq`).
+
+**How it's installed** (writes `.claude/settings.json`, which is committed):
+
+```bash
+claude plugin marketplace add "EveryInc/compound-engineering-plugin#compound-engineering-v3.32.0" --scope project
+claude plugin install compound-engineering@compound-engineering-plugin --scope project
+claude plugin list     # shows: Version 3.32.0, Scope project, enabled
+```
+
+- `--scope project`: the setting goes into this repo, so every clone gets the same plugin.
+- `#compound-engineering-v3.32.0`: install that tag, not the latest code.
+- A note in `claude plugin list` that bun is missing is harmless. Bun is only needed to develop the plugin.
+- Because a tag can be moved, also check that `gitCommitSha` in `~/.claude/plugins/installed_plugins.json` is `786ac01...`.
+
+**Config:** `.compound-engineering/config.yaml` sets four things:
+- `docs_root: document`: its documents go under `document/`.
+- `cross_model_review_mode: off`: no review content goes to other AI providers.
+- `work_engine_mode: off`: no outside coding tool writes our code.
+- `auto_babysit: false`: no automatic PR watching.
+
+`config.example.yaml` is the plugin's full template, with every setting explained. Personal overrides go in `config.local.yaml`, which git ignores.
+
+**The command for each step:**
+
+| Step | Command |
+| --- | --- |
+| Read past lessons | `grep -ril "<topic>" document/solutions/` |
+| Shape a fuzzy idea | `/compound-engineering:ce-brainstorm` |
+| Plan one task (writes `document/plans/`) | `/compound-engineering:ce-plan`. When it offers next steps, stop. |
+| Build | by hand, or `/compound-engineering:ce-work` |
+| Code review (report only) | `/compound-engineering:ce-code-review` |
+| Final gate | the code-reviewer command in CLAUDE.md |
+| Save a lesson | `claude -p '/compound-engineering:ce-compound mode:non-interactive depth:lightweight <one-line lesson>' --allowedTools ...`. Copy the full command from CLAUDE.md. |
+| Health check | `bash ~/.claude/plugins/cache/compound-engineering-plugin/compound-engineering/3.32.0/skills/ce-setup/scripts/check-health --version 3.32.0` |
+
+**What we don't use, and why:**
+
+- **`lfg`, `ce-commit-push-pr`, `ce-babysit-pr`, `ce-resolve-pr-feedback`:** they push, open or watch PRs, or merge. Our workflow commits on the task branch and merges locally; pushing is the owner's call.
+- **Plain `/ce-compound` (full mode):** it scans session transcripts in your home folder. So do the compound calls made by `lfg`, `ce-debug`, `ce-optimize`, `ce-polish` and `ce-pov`. You can use those skills, but decline their offer to compound, and run the lightweight command yourself.
+- **`ce-proof`:** it publishes documents to Proof, a website.
+- **Cross-model review and outside work engines:** they would send our code to other AI companies, so the config turns them off.
+- **The optional tools** `check-health` suggests (agent-browser, ast-grep, ffmpeg, a newer Node): they are global installs, so ask the owner first.
+
+**How to update it** (always in its own task):
+
+1. Read the release notes (`CHANGELOG.md`) and the changed files between the old and the new tag.
+2. Check the new tag's commit: `git ls-remote https://github.com/EveryInc/compound-engineering-plugin "refs/tags/<new tag>*"`.
+3. Re-run the two install commands with the new tag, then check `claude plugin list` and `gitCommitSha`.
+4. Update the pinned tag and commit in CLAUDE.md and in this guide.
+
+Never point it at an unpinned branch like `main`.

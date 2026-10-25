@@ -1,6 +1,6 @@
 # 04_agents: four project subagents
 
-> **Branch:** 04_agents · **Date:** 2026-10-24 · **Status:** In progress
+> **Branch:** 04_agents · **Date:** 2026-10-24 · **Status:** Done
 
 ## In one minute
 
@@ -23,7 +23,7 @@ One long session doing everything gets cluttered, and it is bad at checking its 
 | `.claude/agents/code-reviewer.md` | Added | Reviews a branch before merge and explains each finding |
 | `CLAUDE.md` | Changed | New "Agents" section: when to use each one, and who owns git |
 | `readme.md` | Changed | Repo map row for `.claude/agents/` |
-| `document/task/task.md` | Changed | Task 04 status and steps |
+| `document/task/task.md` | Changed | Task 04 status and steps. Task 06's "Update the docs" and "Write the learning doc" steps also moved before its review, so they're done when code-reviewer checks them. |
 
 ## How: step by step
 
@@ -44,7 +44,7 @@ One long session doing everything gets cluttered, and it is bad at checking its 
    ---
    ```
 
-   Then come the instructions: read `CLAUDE.md` first, the steps, the limits (never touch git), and a "What to return" list. The `description` matters most, because the main session uses it to decide when to call the agent.
+   Then come the instructions: read `CLAUDE.md` first, the steps, the limits (read-only git: the main session makes every change), and a "What to return" list. The `description` matters most, because the main session uses it to decide when to call the agent.
 3. **Check they load, in a fresh process.** A running session only knows the agents that existed when it started, so we asked a new one:
 
    ```bash
@@ -81,7 +81,27 @@ All four are found. This session started before the agents existed, so it can't 
 
 ## Review and lessons
 
-Review: pending. This section is filled in after code-reviewer runs.
+**Who reviewed it:** the code-reviewer agent, in a fresh process (`claude -p ... --agent code-reviewer`). It is the agent's first real review, and it ran twice.
+
+**First pass, verdict "Needs changes":** one must fix and five suggestions. We fixed all six:
+
+| Finding | Label | Fix (commit) |
+| --- | --- | --- |
+| task-planner left out the Compound step, and its "3 to 8 steps" limit couldn't be met | must fix | Added Compound; now "5 to 8 steps, split if more" (`e187586`) |
+| The agents listed different forbidden git commands, and ui-engineer was told to wait for the owner's OK, which it can't ask for | suggestion | One read-only git rule; ask-first items become open questions (`24edc2f`) |
+| The `git status` safety check was only in this doc, not in the workflow | suggestion | Added to CLAUDE.md step 5 (`c60d0a5`) |
+| Task 06 listed its review before its learning doc | suggestion | Reordered task 06's steps (`1fc9b07`) |
+| "YAML" and "context window" were never explained, and the exercise said "four steps" | suggestion | Added both terms; the exercise now says five (`edcf7db`) |
+
+**Second pass, verdict "Ready to merge":** no must fix, five suggestions. We applied three:
+
+- The check now compares `git status --short`, `git log -1 --oneline` and `git show-ref --heads` before and after (`08c54eb`).
+- All agents share one read-only git list, and ui-engineer's ask-first list now says "for example" and includes `search.py --force` (`2e35b2e`).
+- This doc's wording and its What table are fixed.
+
+We didn't narrow the review command's `--allowedTools`. The command comes from the owner's setup plan, so changing it is the owner's call.
+
+**Something unexpected during the second pass:** the reviewer noticed `git status` changing while it ran. We checked: branches 01 to 04 had been pushed to GitHub from this machine at 00:04, apparently through VS Code's git buttons, and PRs #1 and #2 were merged on GitHub. None of that came from Claude or the reviewer. It's also exactly the false alarm the improved check now avoids, because a push doesn't change `git show-ref --heads`.
 
 ## Common mistakes
 

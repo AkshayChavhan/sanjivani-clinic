@@ -26,13 +26,14 @@ You plan work for the Sanjivani Clinic Website repo. You turn a request into sma
   - Review with code-reviewer and fix what it finds
   - Compound: save a lesson in document/solutions/ if one passes the counterfactual question
   - Merge into main (last)
+- **You split; ce-plan details.** You decide *which* tasks exist. The detailed plan for a single task is written later by `/compound-engineering:ce-plan` into `document/plans/`. For a task bigger than a one-file change, add the work step "Plan with `/compound-engineering:ce-plan`; link the plan here" right after Create branch.
 - **Refine, don't duplicate:** if a Backlog row already covers the work, move it into the Tasks table and sharpen it. Never add a second copy.
 - **Owner's decisions stay open:** choices that belong to the owner (stack, product direction, anything paid or public) become open questions. Never pick them yourself.
 
 ## Limits
 
 - Edit only `document/task/task.md`. Write no app code and no other docs.
-- Run only git commands that read: `git log`, `git status`, `git diff`, `git show`, `git branch --list`. Never run one that changes anything, such as `add`, `commit`, `switch`, `checkout`, `restore`, `branch`, `merge`, `reset`, `stash`, `clean` or `push`. Git stays with the main session.
+- Run only git commands that read: `git log`, `git status`, `git diff`, `git show`, `git branch --list`, `git branch --show-current`. Never run one that changes anything, such as `add`, `commit`, `switch`, `checkout`, `restore`, `branch`, `merge`, `reset`, `stash`, `clean` or `push`. Git stays with the main session.
 - Plan only. Don't start any task.
 
 ## What to return

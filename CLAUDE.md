@@ -24,6 +24,10 @@ Claude reads this file at the start of every session. Follow it over your defaul
 | `.claude/skills/` | The 16 installed project skills (third-party; never edit) |
 | `skills-lock.json` | Which skills are installed, where they came from, and a content hash for each |
 | `.claude/agents/` | The 4 project subagents (task-planner, ui-engineer, learning-doc-writer, code-reviewer) |
+| `.claude/settings.json` | Project settings: the pinned Compound Engineering marketplace and the enabled plugin |
+| `.compound-engineering/` | Compound Engineering config (`config.yaml`) and the plugin's full template (`config.example.yaml`) |
+| `document/plans/` | Plans for single tasks, written by ce-plan (the folder appears with the first plan) |
+| `document/solutions/` | Solution docs: short reusable lessons, written by ce-compound |
 
 ## Task workflow
 
@@ -35,9 +39,12 @@ Every task runs these steps:
 
 1. **Branch:** `git switch main`, then `git switch -c NN_short_name`.
 2. **Tracker:** set the task's row in `document/task/task.md` to `In progress`. Tick a step only after it's done.
-3. **Commits:** small Conventional Commits (`chore:`, `docs:`, `feat:`, `fix:`; add a scope when it helps, like `docs(03):`). Put code, docs and tracker changes in separate commits.
-4. **Learning doc:** write `document/learning/NN_short_name.md` from `document/learning/TEMPLATE.md`. Its header says `In progress` until the merge.
-5. **Review:**
+3. **Read past lessons first:** `grep -ril "<topic>" document/solutions/`. A solution doc there may save you a whole investigation. (Exit code 1 just means "no matches".)
+4. **Plan:** for anything bigger than a one-file change, run `/compound-engineering:ce-plan` (run `/compound-engineering:ce-brainstorm` first if the idea is still fuzzy). Plans go in `document/plans/`; link the plan from the task's steps in task.md. When ce-plan offers next steps, stop: this workflow decides what comes next.
+5. **Work:** build by hand or with `/compound-engineering:ce-work`. Commit in small Conventional Commits (`chore:`, `docs:`, `feat:`, `fix:`; add a scope when it helps, like `docs(03):`). Put code, docs and tracker changes in separate commits.
+6. **Learning doc:** write `document/learning/NN_short_name.md` from `document/learning/TEMPLATE.md`. Its header says `In progress` until the merge.
+7. **Review:**
+   - For code changes, first run `/compound-engineering:ce-code-review` (it only reports) unless ce-work already ran it. Then code-reviewer is the final gate.
    - Tasks 01 to 03: the reviewer agent doesn't exist yet. Review the work yourself against these rules, and say so in the learning doc.
    - From task 04 on: run the code-reviewer agent in a fresh process. (A running session only sees agents that existed when it started.)
 
@@ -45,16 +52,16 @@ Every task runs these steps:
      claude -p "Review the current branch (NN_short_name) against main, following your instructions." --agent code-reviewer --allowedTools "Read" "Glob" "Grep" "Bash(git *)" "Bash(ls *)" "Bash(grep *)" "Bash(cat *)" "Bash(head *)" "Bash(wc *)" "Bash(find *)" "Bash(test *)" "Bash(npm run *)"
      ```
 
-   - After the review, run `git status` and `git log -1 --oneline`. Both must be unchanged: the reviewer is read-only only because its instructions say so.
+   - Before and after the review, run `git status --short`, `git log -1 --oneline` and `git show-ref --heads`. All three must match: the reviewer is read-only only because its instructions say so. (`git show-ref --heads` lists every local branch and its commit, so it also catches a deleted or moved branch.)
    - Fix every "must fix". Then write the real verdict, and what you fixed, into the learning doc.
-6. **Compound (from task 05 on):** ask, "If this lesson weren't written down, would a future session repeat the mistake or redo the investigation?" Review findings are the usual source of lessons. If the answer is yes, run:
+8. **Compound (from task 05 on):** ask, "If this lesson weren't written down, would a future session repeat the mistake or redo the investigation?" Review findings are the usual source of lessons. If the answer is yes, run:
 
    ```bash
    claude -p '/compound-engineering:ce-compound mode:non-interactive depth:lightweight <one-line lesson>' --allowedTools "Read" "Glob" "Grep" "Write" "Edit" "Bash(python3 *)" "Bash(ls *)" "Bash(git log *)" "Bash(git show *)" "Bash(mkdir *)" "Bash(cat *)"
    ```
 
    Read the whole file it writes before you commit it. If the answer is no, write no lesson and say why in the learning doc.
-7. **Merge:** `git switch main && git merge --no-ff NN_short_name`. Then make one bookkeeping commit on main, `docs(NN): mark task NN done`: tick "Merge into main" and set `Done` in task.md and in the learning doc's header. This is the only kind of commit made directly on main. Keep the branches; don't delete them.
+9. **Merge:** `git switch main && git merge --no-ff NN_short_name`. Then make one bookkeeping commit on main, `docs(NN): mark task NN done`: tick "Merge into main" and set `Done` in task.md and in the learning doc's header. This is the only kind of commit made directly on main. Keep the branches; don't delete them.
 
 ## Learning docs
 
@@ -103,18 +110,45 @@ Project subagents live in `.claude/agents/`. Each one does one job in its own co
 | Agent | Use it when | Can it change files? |
 | --- | --- | --- |
 | task-planner | Starting new work that may need more than one task | Yes, but only `document/task/task.md` |
-| ui-engineer | A task changes how the app looks, feels or moves | Yes: app UI files (never git, never `.claude/skills/`) |
+| ui-engineer | A task changes how the app looks, feels or moves | Yes: app UI files (read-only git; never `.claude/skills/`) |
 | learning-doc-writer | A task's changes are committed on its branch, before the merge | Yes, but only that task's learning doc |
 | code-reviewer | A task is ready to merge | No: read-only by its instructions |
 
-- **The main session owns git.** Subagents never branch, commit or merge; they do their job and report back.
+- **The main session owns git.** Subagents may read git (`log`, `status`, `diff`, `show`, `branch --list`, `branch --show-current`) but never change it: no branch, commit or merge. They do their job and report back.
 - **Run independent agents in parallel**, in one message.
-- A running session only sees agents that existed when it started. That's why the review runs code-reviewer in a fresh process (step 5 of the task workflow).
+- A running session only sees agents that existed when it started. That's why the review runs code-reviewer in a fresh process (step 7 of the task workflow).
 - When an agent's job changes, update its file and this table in the same task.
+
+## Compound Engineering
+
+The Compound Engineering plugin (EveryInc/compound-engineering-plugin, MIT licence) adds a loop to every task: **plan, work, review, compound**. "Compound" means saving reusable lessons in `document/solutions/`, which future sessions read before similar work. How it's installed and what we use: [document/skills/skills.md](document/skills/skills.md#compound-engineering).
+
+| Job | Owner | Writes to |
+| --- | --- | --- |
+| Split work into tasks | task-planner | task.md |
+| Plan one task | ce-plan / ce-brainstorm | document/plans/ |
+| Build | you or ce-work | the code |
+| Code review | ce-code-review | nothing (report only) |
+| Repo-rules review, final gate | code-reviewer | nothing |
+| Teach the human | learning-doc-writer | document/learning/ |
+| Save a lesson | ce-compound | document/solutions/ |
+
+**Learning doc vs solution doc:** a learning doc teaches a *person* about one task: why, what and how. A solution doc is a short lesson for *future sessions*: a problem, its cause and the fix, so nobody repeats the mistake or redoes the investigation.
+
+These rules override the plugin's defaults:
+
+- **Our shipping process wins.** For any Compound Engineering skill, "shipping" means commit on the task branch, then stop. Merging happens only at the workflow's merge step. No Compound Engineering skill may push, open or update a pull request, start PR babysitting, merge, or create branches other than the task branch, unless the owner asks in that session. Don't use `lfg`, `ce-commit-push-pr`, `ce-babysit-pr` or `ce-resolve-pr-feedback` unless the owner names them. The config switches only cover some of these paths; these rules are the real protection.
+- **No other AI vendors:** never send code or docs to another model provider, and never hand implementation to one, unless the owner asks.
+- **Privacy:** only ever run `/compound-engineering:ce-compound mode:non-interactive depth:lightweight <summary>`. Plain `/ce-compound`, and the calls that `lfg`, `ce-debug`, `ce-optimize`, `ce-polish` and `ce-pov` make to it, run full mode, which scans session transcripts in the home folder. If a skill offers to run ce-compound, decline and run the lightweight command yourself. Never read other projects' session files (`~/.claude/projects/`, `~/.codex/`, `~/.cursor/`). The one exception: `check-health` reads `~/.codex/AGENTS.md` for an old marker, which is fine because it isn't a session file.
+- **Don't publish** (ce-proof or anywhere else) without asking.
+- **Pinned version:** tag `compound-engineering-v3.32.0` at commit `786ac0194183fadc3d0e2525b2ba6d40353926d3`. A tag can be moved, so check `gitCommitSha` in `~/.claude/plugins/installed_plugins.json`. If it doesn't match, stop and tell the owner.
+- **Updating:** read the release notes and the changed files first, then change the ref and the commit in their own task. Never switch to an unpinned branch.
+- **Optional tools** it suggests (agent-browser, ast-grep, ffmpeg, a newer Node) are global installs: ask first.
 
 ## Definition of done
 
 - [ ] The work is on its own branch, in small commits.
+- [ ] A task bigger than a one-file change has a plan in `document/plans/`, linked from task.md.
 - [ ] It works, and it was checked.
 - [ ] task.md links the learning doc, and every step is ticked except Merge.
 - [ ] The learning doc answers Why, What and How.
