@@ -79,6 +79,8 @@ But the plugin can do much more than we want: push code, open PRs, send code to 
 - **Override rules instead of trusting switches.** The plugin's own docs say some switches don't cover every path, so the real protection is written rules in `CLAUDE.md`.
 - **Optional tools stay uninstalled.** The health check suggests agent-browser, ast-grep, ffmpeg and a newer Node. All are global installs, which are on the ask-first list.
 - **task-planner already had the Compound step.** The plan was to add it in this task, but task 04's review asked for it early.
+- **No ce-plan plan for this task.** This task *installs* ce-plan, and a plugin only loads when a session starts. So the "bigger tasks need a plan" rule starts with task 06.
+- **`main` and GitHub have split, and that's the owner's decision.** Branches 01 to 04 were pushed, and PRs #1 to #3 merged, from the owner's account on GitHub. So GitHub's `main` has three merge commits that local `main` lacks, and local `main` has the bookkeeping commits GitHub lacks. Claude first wrote a "sync with GitHub" step into task 06. The review showed it broke the "only bookkeeping commits on main" rule, so it's now an open decision in the backlog instead.
 
 ## Check that it works
 
@@ -111,7 +113,19 @@ It ended with `✅  Project config healthy. Optional capabilities available: 2/6
 
 ## Review and lessons
 
-Review: pending. Compound: pending. This section is filled in after both.
+**Who reviewed it:** the code-reviewer agent, in a fresh process. Before and after, we saved `git status --short`, `git log -1 --oneline` and `git show-ref --heads`; they matched, so the reviewer changed nothing.
+
+**Verdict: "Needs changes"**, with one must fix and four suggestions:
+
+| Finding | Label | What we did |
+| --- | --- | --- |
+| The "sync with GitHub" step added to task 06 would make a non-bookkeeping commit on `main`. It came after the merge step, and its PR count was already out of date. | must fix | Removed it from task 06; it's now an open owner decision in the backlog (`8cb3a9f`) |
+| No plan for a 12-file task, and no reason given | suggestion | Explained under "Decisions worth knowing" |
+| `grep ... document/solutions/` errors (exit 2) while the folder doesn't exist | suggestion | Noted in CLAUDE.md and the repo maps (`740b69e`) |
+| One commit held two ideas (`6fc5df5`) | suggestion | Not rewritten, since that needs the owner's OK. We'll split such commits next time. |
+| The vetting record didn't say that `check-health` reads `~/.codex/AGENTS.md` | suggestion | Added to skills.md (`20e2ea3`) |
+
+**Compound:** pending. This part is filled in after the lesson is saved.
 
 ## Common mistakes
 
