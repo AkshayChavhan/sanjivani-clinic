@@ -97,7 +97,6 @@ Runs in a **new** Claude Code session, because agents and the plugin load only w
 - [ ] Review with code-reviewer and fix what it finds
 - [ ] Compound: save a lesson in document/solutions/ if one passes the counterfactual question
 - [ ] Merge into main
-- [ ] Sync with GitHub (option 1, the default Claude picked on 2026-10-25 when the owner said "continue"; the owner can still choose PR merges instead): `git fetch origin`, then on main `git merge origin/main` (one merge commit, no history rewrite; GitHub's main has the PR #1 and #2 merge commits). Push only if the owner asks.
 
 ## Backlog (proposed)
 
@@ -122,6 +121,10 @@ Ideas for later. **Proposed only: confirm each one with the product brief before
 | 21 | 21_seo_schema_sitemap | Page titles and descriptions, clinic schema (JSON-LD), sitemap, robots.txt | 11 |
 | 22 | 22_admin_panel | Decap CMS at /admin, with GitHub login through Vercel | 10, 23 |
 | 23 | 23_deploy_vercel | Deploy the site to Vercel | 09 |
+
+**Open decision for the owner: keeping `main` in step with GitHub.** Branches were pushed and PRs merged on GitHub from the owner's account, so local `main` and GitHub's `main` have split (each has merge commits the other lacks). Two ways forward:
+1. Keep local `--no-ff` merges, and bring GitHub's PR merge commits in with one `git merge origin/main` on main. This needs a one-time exception to the "only bookkeeping commits on main" rule in CLAUDE.md, and its own small task.
+2. Switch to GitHub pull requests: Claude stops each task at "ready to merge", the owner merges the PR on GitHub, then Claude pulls `main`. This changes step 9 of the CLAUDE.md workflow, in its own task.
 
 Not planned (the owner's choice): Google reviews, online payment.
 
