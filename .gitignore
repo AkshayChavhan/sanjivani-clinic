@@ -34,3 +34,8 @@ CLAUDE.local.md
 # OS and editor: files your computer or IDE creates on its own
 .DS_Store
 .idea/
+
+# Compound Engineering: personal config, scratch files and git worktrees
+.compound-engineering/*.local.yaml
+.context/compound-engineering/
+.worktrees/
