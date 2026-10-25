@@ -64,9 +64,9 @@ This file tracks every task in this project.
 ### 05_compound_engineering
 
 - [x] Create branch
-- [ ] Check the pin (tag `compound-engineering-v3.32.0` → commit `786ac01…`) and vet the plugin
-- [ ] Install the plugin for the project and check it
-- [ ] Configure it: .compound-engineering/, .gitignore lines, health check
+- [x] Check the pin (tag `compound-engineering-v3.32.0` → commit `786ac01…`) and vet the plugin
+- [x] Install the plugin for the project and check it
+- [x] Configure it: .compound-engineering/, .gitignore lines, health check
 - [ ] Update CLAUDE.md, the agents, skills.md and readme.md
 - [ ] Write the learning doc
 - [ ] Review with code-reviewer and fix what it finds
