@@ -97,7 +97,7 @@ Runs in a **new** Claude Code session, because agents and the plugin load only w
 - [ ] Review with code-reviewer and fix what it finds
 - [ ] Compound: save a lesson in document/solutions/ if one passes the counterfactual question
 - [ ] Merge into main
-- [ ] Sync with GitHub (the owner chose this on 2026-10-25): `git fetch origin`, then on main `git merge origin/main` (one merge commit, no history rewrite; GitHub's main has the PR #1 and #2 merge commits). Push only if the owner asks.
+- [ ] Sync with GitHub (option 1, the default Claude picked on 2026-10-25 when the owner said "continue"; the owner can still choose PR merges instead): `git fetch origin`, then on main `git merge origin/main` (one merge commit, no history rewrite; GitHub's main has the PR #1 and #2 merge commits). Push only if the owner asks.
 
 ## Backlog (proposed)
 
