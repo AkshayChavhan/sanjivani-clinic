@@ -18,10 +18,12 @@ tags: [claude-md, task-tracker, agents, workflow-rules, code-review, bookkeeping
 
 ## Context
 
-`CLAUDE.md` holds the workflow rules. Other files restate parts of them in their own words: the agent files in `.claude/agents/` and the task steps in `document/task/task.md`. Twice in a row, a step written into one of those files broke a CLAUDE.md rule. Only the code-reviewer agent caught it, both times as a "must fix".
+`CLAUDE.md` holds the workflow rules. Other files restate parts of them in their own words: the agent files in `.claude/agents/` and the task steps in `document/task/task.md`. Three times in a row, a step or rule written into one of those files broke a rule it restated. Only the code-reviewer agent caught it, each time as a "must fix".
 
 1. **Task 04: task-planner left out the Compound step.** `task-planner.md` said every task "always includes" four steps: Create branch, Write the learning doc, Review, Merge. It also allowed "3 to 8 checkbox steps". CLAUDE.md already had a Compound step (from task 05 on) when the agent was written. So every task the planner made would have had no Compound step. The review also said its "3 to 8 steps" limit couldn't be met. Fixed in `e187586`: five required steps in workflow order, Merge last, "5 to 8 steps; if it needs more, split the task".
 2. **Task 05: a tracker step would have made a non-bookkeeping commit on main.** Commit `6fc5df5` added a step to task 06, *after* "Merge into main": `git fetch origin`, then on main `git merge origin/main`. That makes a merge commit on main. CLAUDE.md says the bookkeeping commit `docs(NN): mark task NN done` "is the only kind of commit made directly on main". The step also settled how `main` relates to GitHub, which is the owner's call. Fixed in `8cb3a9f`: the step was removed, and the question is now an open owner decision in the task.md backlog.
+
+3. **Task 05 again: a new agent rule broke the agent's own tool list.** Commit `a040c93` told code-reviewer to run `git branch -vv`, but its read-only git list allows only `git branch --list` and `git branch --show-current`. code-reviewer's second pass caught it, in the same branch that saved this lesson. Fixed by using `git branch --list -vv`, which prints the same tracking info.
 
 The shared cause: the new text was written from what the task needed, not checked against the rules it restated. Each file read fine on its own. The conflict only showed up when someone compared it with CLAUDE.md.
 
