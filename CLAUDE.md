@@ -27,7 +27,7 @@ Claude reads this file at the start of every session. Follow it over your defaul
 | `.claude/settings.json` | Project settings: the pinned Compound Engineering marketplace and the enabled plugin |
 | `.compound-engineering/` | Compound Engineering config (`config.yaml`) and the plugin's full template (`config.example.yaml`) |
 | `document/plans/` | Plans for single tasks, written by ce-plan (the folder appears with the first plan) |
-| `document/solutions/` | Solution docs: short reusable lessons, written by ce-compound |
+| `document/solutions/` | Solution docs: short reusable lessons, written by ce-compound (the folder appears with the first lesson) |
 
 ## Task workflow
 
@@ -39,7 +39,7 @@ Every task runs these steps:
 
 1. **Branch:** `git switch main`, then `git switch -c NN_short_name`.
 2. **Tracker:** set the task's row in `document/task/task.md` to `In progress`. Tick a step only after it's done.
-3. **Read past lessons first:** `grep -ril "<topic>" document/solutions/`. A solution doc there may save you a whole investigation.
+3. **Read past lessons first:** `grep -ril "<topic>" document/solutions/` (skip it if the folder doesn't exist yet: grep then exits with 2, an error, instead of 1, "no matches"). A solution doc there may save you a whole investigation.
 4. **Plan:** for anything bigger than a one-file change, run `/compound-engineering:ce-plan` (run `/compound-engineering:ce-brainstorm` first if the idea is still fuzzy). Plans go in `document/plans/`; link the plan from the task's steps in task.md. When ce-plan offers next steps, stop: this workflow decides what comes next.
 5. **Work:** build by hand or with `/compound-engineering:ce-work`. Commit in small Conventional Commits (`chore:`, `docs:`, `feat:`, `fix:`; add a scope when it helps, like `docs(03):`). Put code, docs and tracker changes in separate commits.
 6. **Learning doc:** write `document/learning/NN_short_name.md` from `document/learning/TEMPLATE.md`. Its header says `In progress` until the merge.
