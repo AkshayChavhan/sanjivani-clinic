@@ -122,7 +122,7 @@ Ideas for later. **Proposed only: confirm each one with the product brief before
 | 22 | 22_admin_panel | Decap CMS at /admin, with GitHub login through Vercel | 10, 23 |
 | 23 | 23_deploy_vercel | Deploy the site to Vercel | 09 |
 
-**Open decision for the owner: keeping `main` in step with GitHub.** Branches were pushed and PRs merged on GitHub from the owner's account, so local `main` and GitHub's `main` have split (each has merge commits the other lacks). Two ways forward:
+**Open decision for the owner: keeping `main` in step with GitHub.** Branches were pushed and PRs merged on GitHub from the owner's account, so local `main` and GitHub's `main` have split. GitHub's `main` has PR merge commits that local `main` lacks. Local `main` has the bookkeeping commits, and also the last four 04_agents fixes, because PR #3 merged an earlier tip (`edcf7db`). Two ways forward:
 1. Keep local `--no-ff` merges, and bring GitHub's PR merge commits in with one `git merge origin/main` on main. This needs a one-time exception to the "only bookkeeping commits on main" rule in CLAUDE.md, and its own small task.
 2. Switch to GitHub pull requests: Claude stops each task at "ready to merge", the owner merges the PR on GitHub, then Claude pulls `main`. This changes step 9 of the CLAUDE.md workflow, in its own task.
 
