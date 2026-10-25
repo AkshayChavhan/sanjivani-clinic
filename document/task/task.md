@@ -67,7 +67,7 @@ This file tracks every task in this project.
 - [x] Check the pin (tag `compound-engineering-v3.32.0` → commit `786ac01…`) and vet the plugin
 - [x] Install the plugin for the project and check it
 - [x] Configure it: .compound-engineering/, .gitignore lines, health check
-- [ ] Update CLAUDE.md, the agents, skills.md and readme.md
+- [x] Update CLAUDE.md, the agents, skills.md and readme.md
 - [ ] Write the learning doc
 - [ ] Review with code-reviewer and fix what it finds
 - [ ] Compound: save a lesson in document/solutions/ if one passes the counterfactual question
