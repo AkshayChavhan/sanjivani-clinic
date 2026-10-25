@@ -69,8 +69,8 @@ This file tracks every task in this project.
 - [x] Configure it: .compound-engineering/, .gitignore lines, health check
 - [x] Update CLAUDE.md, the agents, skills.md and readme.md
 - [x] Write the learning doc
-- [ ] Review with code-reviewer and fix what it finds
-- [ ] Compound: save a lesson in document/solutions/ if one passes the counterfactual question
+- [x] Review with code-reviewer and fix what it finds
+- [x] Compound: save a lesson in document/solutions/ if one passes the counterfactual question
 - [ ] Merge into main
 
 ### 06_react_app_setup
