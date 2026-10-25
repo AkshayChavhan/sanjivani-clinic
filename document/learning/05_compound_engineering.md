@@ -125,7 +125,15 @@ It ended with `✅  Project config healthy. Optional capabilities available: 2/6
 | One commit held two ideas (`6fc5df5`) | suggestion | Not rewritten, since that needs the owner's OK. We'll split such commits next time. |
 | The vetting record didn't say that `check-health` reads `~/.codex/AGENTS.md` | suggestion | Added to skills.md (`20e2ea3`) |
 
-**Compound:** pending. This part is filled in after the lesson is saved.
+**Compound:** we asked, "If this lesson weren't written down, would a future session repeat the mistake?" For one finding the answer is clearly yes, because it already happened twice. In both task 04 and task 05, a rule or step written into another file contradicted CLAUDE.md, and only code-reviewer caught it. So we ran the lightweight command from CLAUDE.md:
+
+```bash
+claude -p '/compound-engineering:ce-compound mode:non-interactive depth:lightweight Before adding a step or rule to an agent file or document/task/task.md, check it against the CLAUDE.md workflow rules: ...' --allowedTools "Read" "Glob" "Grep" "Write" "Edit" "Bash(python3 *)" ...
+```
+
+Real result: `✓ Documentation complete (non-interactive lightweight mode)` and one new file, [document/solutions/workflow-issues/check-new-steps-against-claude-md.md](../solutions/workflow-issues/check-new-steps-against-claude-md.md), which is the project's first solution doc. We read it in full before committing it. Its commit IDs match `git log`, and its check `grep -n -A1 "Merge into main" document/task/task.md` really shows a blank line after each task's Merge step.
+
+It also pointed out that task 06 has 20 steps, while task-planner's rule is "5 to 8, split if more". We left that as it is, because task 06 was written from the owner's setup plan, not by the planner.
 
 ## Common mistakes
 
