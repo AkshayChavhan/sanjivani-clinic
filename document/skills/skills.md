@@ -67,7 +67,7 @@ python3 .claude/skills/ui-ux-pro-max/scripts/search.py "islands hydration" --sta
 ## shadcn
 
 - shadcn/ui components are copied into our code as source files **by its CLI**, never written by hand and never copied from GitHub.
-- It **needs the `components.json` file** that `shadcn init` creates in task 06. Until then, its commands just report "no project".
+- It reads the project's **`components.json`**, which `shadcn init` created in task 06: Base UI (`base`), the `nova` preset, Lucide icons and CSS variables. `npx shadcn@latest info` shows this setup and the installed components (none yet).
 - **When the skill loads, it runs `npx shadcn@latest info --json` automatically, and it pre-approves every `npx shadcn@latest ...` command.** So Claude won't ask before running them. Our CLAUDE.md adds the guard rails (see "Skills" there).
 - Key rules from the skill:
   - Use existing components first: check `npx shadcn@latest search` before writing custom UI. Don't re-add installed components, and read every file it adds.
