@@ -159,6 +159,7 @@ It adds a loop to every task: **plan, work, review, compound**. "Compound" means
   - `ce-sweep` and `ce-product-pulse`: file tools and Bash
   - We don't use any of them.
 - **`check-health`** downloads packages only with a `--warm-acpx` flag, which we never pass.
+- **`check-health` also reads `~/.codex/AGENTS.md`**, if it exists, to look for an old marker block. It's read-only, reports yes or no, and touches no session transcripts.
 - **The cached copy:** the skills in `~/.claude/plugins/cache/` are identical to the clone we read (`diff -rq`).
 
 **How it's installed** (writes `.claude/settings.json`, which is committed):
