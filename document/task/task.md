@@ -14,7 +14,7 @@ This file tracks every task in this project.
 | 02 | 02_claude_guidelines | CLAUDE.md: the rules Claude follows in this repo | Done | [02_claude_guidelines](../learning/02_claude_guidelines.md) |
 | 03 | 03_skills_installation | 16 Claude skills for UI work, plus a skills guide | Done | [03_skills_installation](../learning/03_skills_installation.md) |
 | 04 | 04_agents | 4 project subagents | Done | [04_agents](../learning/04_agents.md) |
-| 05 | 05_compound_engineering | The Compound Engineering plugin, pinned and configured | In progress | [05_compound_engineering](../learning/05_compound_engineering.md) |
+| 05 | 05_compound_engineering | The Compound Engineering plugin, pinned and configured | Done | [05_compound_engineering](../learning/05_compound_engineering.md) |
 | 06 | 06_react_app_setup | The Astro + React app, shadcn init, GSAP (runs in a new session) | To do | — |
 
 ## Task steps
@@ -71,7 +71,7 @@ This file tracks every task in this project.
 - [x] Write the learning doc
 - [x] Review with code-reviewer and fix what it finds
 - [x] Compound: save a lesson in document/solutions/ if one passes the counterfactual question
-- [ ] Merge into main
+- [x] Merge into main
 
 ### 06_react_app_setup
 
