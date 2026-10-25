@@ -80,16 +80,16 @@ Runs in a **new** Claude Code session, because agents and the plugin load only w
 - [x] Before starting: `node -v` shows 22.23.4 or newer (Astro 7 needs it)
 - [x] Create branch
 - [x] Plan with `/compound-engineering:ce-plan`: "Scaffold the Astro + React app at the repo root, run shadcn init, install gsap and @gsap/react. No features." Link the plan here. When ce-plan offers next steps, choose to stop. Nothing may push or open a PR. Plan: [2026-10-25-1400-chore-astro-react-app-setup-plan.md](../plans/2026-10-25-1400-chore-astro-react-app-setup-plan.md)
-- [ ] Check the scaffold's current flags: `npm create astro@latest -- --help`
-- [ ] Scaffold into a scratch folder outside the repo (for example `npm create astro@latest <scratch>/sanjivani-clinic -- --template minimal --no-install --no-git --yes`, adjusted to the flags you just checked)
-- [ ] Copy everything into the repo except README.md, .gitignore, node_modules/ and .git/. Merge the scaffold's .gitignore lines into ours and keep our comments.
+- [x] Check the scaffold's current flags: `npm create astro@latest -- --help`
+- [x] Scaffold into a scratch folder outside the repo (for example `npm create astro@latest <scratch>/sanjivani-clinic -- --template minimal --no-install --no-git --yes`, adjusted to the flags you just checked)
+- [x] Copy everything into the repo except README.md, .gitignore, node_modules/ and .git/. Merge the scaffold's .gitignore lines into ours and keep our comments.
 - [ ] If the scaffold made its own AGENTS.md or CLAUDE.md, never let it replace ours. Read it, keep AGENTS.md if it helps, and import it from CLAUDE.md with an `@AGENTS.md` line. Explain the choice in the learning doc.
-- [ ] Run `npm install`
-- [ ] Add React, Tailwind and the `@/*` path alias by following the shadcn Astro guide
-- [ ] Replace the starter page with a minimal placeholder: a "Sanjivani Clinic" heading and one line of text. Nothing else.
-- [ ] shadcn: follow the shadcn skill. Run `npx shadcn@latest init --help` first, then init with the defaults (CSS variables). Add no components. Check that `npx shadcn@latest info --json` finds components.json.
-- [ ] Run `npm install gsap @gsap/react`. Write no animation code yet.
-- [ ] Add ESLint (eslint-plugin-astro + typescript-eslint) with an `npm run lint` script, and `npm run typecheck` (`astro check`)
+- [x] Run `npm install`
+- [x] Add React, Tailwind and the `@/*` path alias by following the shadcn Astro guide
+- [x] Replace the starter page with a minimal placeholder: a "Sanjivani Clinic" heading and one line of text. Nothing else.
+- [x] shadcn: follow the shadcn skill. Run `npx shadcn@latest init --help` first, then init with the defaults (CSS variables). Add no components. Check that `npx shadcn@latest info --json` finds components.json.
+- [x] Run `npm install gsap @gsap/react`. Write no animation code yet.
+- [x] Add ESLint (eslint-plugin-astro + typescript-eslint) with an `npm run lint` script, and `npm run typecheck` (`astro check`)
 - [ ] Check it works and paste the real output into the learning doc: `npm run lint`; `npm run build`; `npm run dev` in the background, then `curl -sI http://localhost:4321` returns 200, then stop the server; `git status` shows no node_modules/, dist/ or .astro/
 - [ ] Update the docs: CLAUDE.md (stage "app scaffolded, no features yet", stack set, commands `npm run dev`, `npm run build`, `npm run lint`); readme.md ("Run it locally": `npm install`, `npm run dev`, http://localhost:4321); the backlog below
 - [ ] Write the learning doc: Astro basics and islands, the folder layout, Tailwind, what shadcn init changed, package.json vs package-lock.json, the npm scripts
