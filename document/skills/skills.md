@@ -2,7 +2,7 @@
 
 This project has 16 Claude Code **skills** for UI work. This guide explains what a skill is, what each one is for, how they work together, and how to manage them.
 
-It also has the **Compound Engineering plugin**, which adds 36 workflow skills (`ce-*`) for planning, building, reviewing and saving lessons. See [Compound Engineering](#compound-engineering) at the end.
+It also has the **Compound Engineering plugin**, which adds 36 workflow skills (34 named `ce-*`, plus `lfg` and `wtf`) for planning, building, reviewing and saving lessons. See [Compound Engineering](#compound-engineering) at the end.
 
 ## What a skill is
 
@@ -152,7 +152,7 @@ It adds a loop to every task: **plan, work, review, compound**. "Compound" means
 
 **What we checked** (tag `compound-engineering-v3.32.0`, commit `786ac0194183fadc3d0e2525b2ba6d40353926d3`):
 
-- **What it contains:** 36 skills, and no hooks, MCP servers, agents or commands. No skill runs anything on its own when it loads.
+- **What it contains:** 36 skills (34 `ce-*`, plus `lfg` and `wtf`, a plain-language "explain this" skill), and no hooks, MCP servers, agents or commands. No skill runs anything on its own when it loads.
 - **Skills that pre-approve tools:**
   - `ce-resolve-pr-feedback`: `gh`, `git`, `bash`, `python3`, Read, Write
   - `ce-proof`: Bash, Read, Write, WebFetch
