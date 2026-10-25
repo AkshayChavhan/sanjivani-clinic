@@ -77,7 +77,7 @@ Every task runs these steps:
    - From task 04 on: run the code-reviewer agent in a fresh process. (A running session only sees agents that existed when it started.)
 
      ```bash
-     claude -p "Review the current branch (NN_short_name) against main, following your instructions." --agent code-reviewer --allowedTools "Read" "Glob" "Grep" "Bash(git *)" "Bash(ls *)" "Bash(grep *)" "Bash(cat *)" "Bash(head *)" "Bash(wc *)" "Bash(find *)" "Bash(test *)" "Bash(npm run *)"
+     claude -p "Review the current branch (NN_short_name) against main, following your instructions." --agent code-reviewer --allowedTools "Read" "Glob" "Grep" "Bash(git *)" "Bash(ls *)" "Bash(grep *)" "Bash(cat *)" "Bash(head *)" "Bash(wc *)" "Bash(find *)" "Bash(test *)" "Bash(npm run lint)" "Bash(npm run typecheck)" "Bash(npm run build)" "Bash(npm run test)"
      ```
 
    - Before and after the review, run `git status --short`, `git log -1 --oneline` and `git show-ref --heads`. All three must match: the reviewer is read-only only because its instructions say so. (`git show-ref --heads` lists every local branch and its commit, so it also catches a deleted or moved branch.)
