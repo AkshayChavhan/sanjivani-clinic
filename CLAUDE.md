@@ -54,7 +54,7 @@ Run these from the repo root.
 **The dev server in a Claude session.** Astro detects Claude Code and runs `npm run dev` in the background. It prints the URL, which may not be 4321, and returns.
 
 - First run `npx astro dev status`. If a server is already running, it may be the owner's: use the URL it shows, and don't start or stop it.
-- Run `npx astro dev stop` only for a server your own `npm run dev` started (the same pid). It stops any dev server for this project, including the owner's.
+- Run `npx astro dev stop` only when your own `npm run dev` printed `Dev server running at … (pid N)` and `npx astro dev status` still shows that pid. If it printed `Dev server already running`, the server isn't yours: leave it. `astro dev stop` stops any dev server for this project, including the owner's. Never pass `--force` to `astro dev`; it replaces the running server.
 - Logs: `npx astro dev logs`. Astro's docs: https://docs.astro.build
 
 ## Task workflow
