@@ -122,6 +122,16 @@ Ideas for later. **Proposed only: confirm each one with the product brief before
 | 22 | 22_admin_panel | Decap CMS at /admin, with GitHub login through Vercel | 10, 23 |
 | 23 | 23_deploy_vercel | Deploy the site to Vercel | 09 |
 
+**Notes from task 06 for later tasks** (to fold into a task when it is planned):
+
+- **07:** the shadcn `nova` preset uses the Geist font, which has no Devanagari letters, so Hindi and Marathi text would fall back to a system font. Pick fonts that cover Devanagari. The `design-system/` folder is already kept out of lint and the Tailwind scan.
+- **First UI task (08 or 09):** add React hooks lint rules (`eslint-plugin-react-hooks`). Add accessibility lint rules (`eslint-plugin-jsx-a11y`) once a version supports ESLint 10 (6.10.2 supports only ESLint 9 or older).
+- **Small cleanups, each its own task:**
+  - a `.nvmrc` so fnm picks Node 24 on its own;
+  - the `skills@1.5.18` pin note in CLAUDE.md and readme.md, which says Node is below 22.20 (it is now 24);
+  - the `.next/` and `next-env.d.ts` lines left in `.gitignore` from an earlier stack guess (also named in CLAUDE.md and code-reviewer);
+  - code-reviewer reads every changed file in full, including `package-lock.json` (thousands of lines). Decide how it should check lockfiles instead.
+
 **Open decision for the owner: keeping `main` in step with GitHub.** Branches were pushed and PRs merged on GitHub from the owner's account, so local `main` and GitHub's `main` have split. GitHub's `main` has PR merge commits that local `main` lacks. Local `main` has the bookkeeping commits, and also the last four 04_agents fixes, because PR #3 merged an earlier tip (`edcf7db`). Two ways forward:
 1. Keep local `--no-ff` merges, and bring GitHub's PR merge commits in with one `git merge origin/main` on main. This needs a one-time exception to the "only bookkeeping commits on main" rule in CLAUDE.md, and its own small task.
 2. Switch to GitHub pull requests: Claude stops each task at "ready to merge", the owner merges the PR on GitHub, then Claude pulls `main`. This changes step 9 of the CLAUDE.md workflow, in its own task.
