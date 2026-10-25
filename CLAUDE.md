@@ -27,7 +27,7 @@ Claude reads this file at the start of every session. Follow it over your defaul
 | `.claude/settings.json` | Project settings: the pinned Compound Engineering marketplace and the enabled plugin |
 | `.compound-engineering/` | Compound Engineering config (`config.yaml`) and the plugin's full template (`config.example.yaml`) |
 | `document/plans/` | Plans for single tasks, written by ce-plan (the folder appears with the first plan) |
-| `document/solutions/` | Solution docs: short reusable lessons, written by ce-compound (the folder appears with the first lesson) |
+| `document/solutions/` | Solution docs: short reusable lessons, written by ce-compound |
 
 ## Task workflow
 
@@ -39,7 +39,7 @@ Every task runs these steps:
 
 1. **Branch:** `git switch main`, then `git switch -c NN_short_name`.
 2. **Tracker:** set the task's row in `document/task/task.md` to `In progress`. Tick a step only after it's done.
-3. **Read past lessons first:** `grep -ril "<topic>" document/solutions/` (skip it if the folder doesn't exist yet: grep then exits with 2, an error, instead of 1, "no matches"). A solution doc there may save you a whole investigation.
+3. **Read past lessons first:** `grep -ril "<topic>" document/solutions/`. A solution doc there may save you a whole investigation. (Exit code 1 just means "no matches".)
 4. **Plan:** for anything bigger than a one-file change, run `/compound-engineering:ce-plan` (run `/compound-engineering:ce-brainstorm` first if the idea is still fuzzy). Plans go in `document/plans/`; link the plan from the task's steps in task.md. When ce-plan offers next steps, stop: this workflow decides what comes next.
 5. **Work:** build by hand or with `/compound-engineering:ce-work`. Commit in small Conventional Commits (`chore:`, `docs:`, `feat:`, `fix:`; add a scope when it helps, like `docs(03):`). Put code, docs and tracker changes in separate commits.
 6. **Learning doc:** write `document/learning/NN_short_name.md` from `document/learning/TEMPLATE.md`. Its header says `In progress` until the merge.
@@ -139,7 +139,7 @@ These rules override the plugin's defaults:
 
 - **Our shipping process wins.** For any Compound Engineering skill, "shipping" means commit on the task branch, then stop. Merging happens only at the workflow's merge step. No Compound Engineering skill may push, open or update a pull request, start PR babysitting, merge, or create branches other than the task branch, unless the owner asks in that session. Don't use `lfg`, `ce-commit-push-pr`, `ce-babysit-pr` or `ce-resolve-pr-feedback` unless the owner names them. The config switches only cover some of these paths; these rules are the real protection.
 - **No other AI vendors:** never send code or docs to another model provider, and never hand implementation to one, unless the owner asks.
-- **Privacy:** only ever run `/compound-engineering:ce-compound mode:non-interactive depth:lightweight <summary>`. Plain `/ce-compound`, and the calls that `lfg`, `ce-debug`, `ce-optimize`, `ce-polish` and `ce-pov` make to it, run full mode, which scans session transcripts in the home folder. If a skill offers to run ce-compound, decline and run the lightweight command yourself. Never read other projects' session files (`~/.claude/projects/`, `~/.codex/`, `~/.cursor/`).
+- **Privacy:** only ever run `/compound-engineering:ce-compound mode:non-interactive depth:lightweight <summary>`. Plain `/ce-compound`, and the calls that `lfg`, `ce-debug`, `ce-optimize`, `ce-polish` and `ce-pov` make to it, run full mode, which scans session transcripts in the home folder. If a skill offers to run ce-compound, decline and run the lightweight command yourself. Never read other projects' session files (`~/.claude/projects/`, `~/.codex/`, `~/.cursor/`). The one exception: `check-health` reads `~/.codex/AGENTS.md` for an old marker, which is fine because it isn't a session file.
 - **Don't publish** (ce-proof or anywhere else) without asking.
 - **Pinned version:** tag `compound-engineering-v3.32.0` at commit `786ac0194183fadc3d0e2525b2ba6d40353926d3`. A tag can be moved, so check `gitCommitSha` in `~/.claude/plugins/installed_plugins.json`. If it doesn't match, stop and tell the owner.
 - **Updating:** read the release notes and the changed files first, then change the ref and the commit in their own task. Never switch to an unpinned branch.

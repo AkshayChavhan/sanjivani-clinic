@@ -33,7 +33,7 @@ The rules Claude follows in this repo (the workflow, git rules and definition of
 | `.claude/settings.json` | Project settings for Claude Code: the pinned Compound Engineering plugin |
 | `.compound-engineering/` | Compound Engineering config (`config.yaml`) and the plugin's full template (`config.example.yaml`) |
 | `document/plans/` | Plans for single tasks, written by ce-plan (the folder appears with the first plan) |
-| `document/solutions/` | Solution docs: short lessons for future sessions, written by ce-compound (the folder appears with the first lesson) |
+| `document/solutions/` | Solution docs: short lessons for future sessions, written by ce-compound |
 
 ## Prerequisites
 
