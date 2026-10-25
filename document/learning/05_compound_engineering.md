@@ -4,7 +4,7 @@
 
 ## In one minute
 
-- We installed the **Compound Engineering plugin** (36 `ce-*` workflow skills) for this project only, **pinned** to one checked version.
+- We installed the **Compound Engineering plugin** (36 workflow skills: 34 named `ce-*`, plus `lfg` and `wtf`) for this project only, **pinned** to one checked version.
 - Every task now follows a loop: **plan, work, review, compound**. "Compound" means saving a short reusable lesson in `document/solutions/`.
 - A small config file turns off the risky parts: sending code to other AI companies, outside coding tools, and automatic PR watching.
 - `CLAUDE.md` now has rules that override the plugin: it never pushes, opens PRs or merges, and only the private "lightweight" compound mode is used.
@@ -80,7 +80,7 @@ But the plugin can do much more than we want: push code, open PRs, send code to 
 - **Optional tools stay uninstalled.** The health check suggests agent-browser, ast-grep, ffmpeg and a newer Node. All are global installs, which are on the ask-first list.
 - **task-planner already had the Compound step.** The plan was to add it in this task, but task 04's review asked for it early.
 - **No ce-plan plan for this task.** This task *installs* ce-plan, and a plugin only loads when a session starts. So the "bigger tasks need a plan" rule starts with task 06.
-- **`main` and GitHub have split, and that's the owner's decision.** Branches 01 to 04 were pushed, and PRs #1 to #3 merged, from the owner's account on GitHub. So GitHub's `main` has three merge commits that local `main` lacks, and local `main` has the bookkeeping commits GitHub lacks. Claude first wrote a "sync with GitHub" step into task 06. The review showed it broke the "only bookkeeping commits on main" rule, so it's now an open decision in the backlog instead.
+- **`main` and GitHub have split, and that's the owner's decision.** Branches 01 to 04 were pushed, and PRs #1 to #3 merged, from the owner's account on GitHub. No command in this setup ran `git push` or `gh`; the pushes came through VS Code on this machine, and the merges through GitHub. So GitHub's `main` has three merge commits that local `main` lacks. Local `main` has the bookkeeping commits, and also the last four 04_agents fixes, because PR #3 merged an earlier tip (`edcf7db`). Claude first wrote a "sync with GitHub" step into task 06. The review showed it broke the "only bookkeeping commits on main" rule, so it's now an open decision in the backlog instead.
 
 ## Check that it works
 
@@ -133,7 +133,19 @@ claude -p '/compound-engineering:ce-compound mode:non-interactive depth:lightwei
 
 Real result: `✓ Documentation complete (non-interactive lightweight mode)` and one new file, [document/solutions/workflow-issues/check-new-steps-against-claude-md.md](../solutions/workflow-issues/check-new-steps-against-claude-md.md), which is the project's first solution doc. We read it in full before committing it. Its commit IDs match `git log`, and its check `grep -n -A1 "Merge into main" document/task/task.md` really shows a blank line after each task's Merge step.
 
-It also pointed out that task 06 has 20 steps, while task-planner's rule is "5 to 8, split if more". We left that as it is, because task 06 was written from the owner's setup plan, not by the planner.
+**Second review pass, verdict "Needs changes":** one must fix and four suggestions. We fixed all five:
+
+| Finding | Label | Fix (commit) |
+| --- | --- | --- |
+| The new push check told code-reviewer to run `git branch -vv`, which its own read-only git list forbids. It's the same mistake the new lesson describes. | must fix | Changed to `git branch --list -vv` (`d13c513`), and added it to the solution doc as a third example (`a526187`) |
+| "Local main has the bookkeeping commits GitHub lacks" left out the four 04_agents fixes | suggestion | Reworded here and in the backlog (`27b1fe3`) |
+| "36 `ce-*` skills": only 34 start with `ce-` | suggestion | Named all 36 (`9514c0b`) |
+| The "folder appears with the first lesson" notes go stale once this task merges | suggestion | Dropped them (`f170753`) |
+| CLAUDE.md's privacy rule banned `~/.codex/`, which `check-health` reads | suggestion | Added the exception to CLAUDE.md (`f170753`) |
+
+Both passes ran with the before-and-after check, and both showed the reviewer changed nothing.
+
+The compound run also pointed out that task 06 has 20 steps, while task-planner's rule is "5 to 8, split if more". We left that as it is, because task 06 was written from the owner's setup plan, not by the planner.
 
 ## Common mistakes
 
