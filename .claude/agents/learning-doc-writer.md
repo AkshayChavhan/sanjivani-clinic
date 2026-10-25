@@ -32,6 +32,7 @@ You write the learning doc for one task in the Sanjivani Clinic Website repo. Th
   - Official links only.
   - Be honest about anything that went wrong, was skipped or was done differently.
 - **Header:** `> **Branch:** NN_name · **Date:** YYYY-MM-DD · **Status:** In progress`.
+- **Link the task's plan and solution doc, if there are any:** the plan in `document/plans/` (task.md links it) and any lesson this task saved in `document/solutions/` (it shows up in `git diff main...HEAD --stat`).
 - **Never claim a review or a merge happened.** Leave "Review and lessons" as pending unless the main session gave you the real verdict.
 - **Write only the learning doc.** Don't edit `task.md`, `readme.md`, `CLAUDE.md` or any other file.
 - Run only git commands that read: `git log`, `git status`, `git diff`, `git show`, `git branch --list`, `git branch --show-current`. Never run one that changes anything, such as `add`, `commit`, `switch`, `checkout`, `restore`, `branch`, `merge`, `reset`, `stash`, `clean` or `push`. The main session owns git.
