@@ -14,7 +14,7 @@ This file tracks every task in this project.
 | 02 | 02_claude_guidelines | CLAUDE.md: the rules Claude follows in this repo | Done | [02_claude_guidelines](../learning/02_claude_guidelines.md) |
 | 03 | 03_skills_installation | 16 Claude skills for UI work, plus a skills guide | Done | [03_skills_installation](../learning/03_skills_installation.md) |
 | 04 | 04_agents | 4 project subagents | Done | [04_agents](../learning/04_agents.md) |
-| 05 | 05_compound_engineering | The Compound Engineering plugin, pinned and configured | To do | — |
+| 05 | 05_compound_engineering | The Compound Engineering plugin, pinned and configured | In progress | [05_compound_engineering](../learning/05_compound_engineering.md) |
 | 06 | 06_react_app_setup | The Astro + React app, shadcn init, GSAP (runs in a new session) | To do | — |
 
 ## Task steps
@@ -63,14 +63,14 @@ This file tracks every task in this project.
 
 ### 05_compound_engineering
 
-- [ ] Create branch
-- [ ] Check the pin (tag `compound-engineering-v3.32.0` → commit `786ac01…`) and vet the plugin
-- [ ] Install the plugin for the project and check it
-- [ ] Configure it: .compound-engineering/, .gitignore lines, health check
-- [ ] Update CLAUDE.md, the agents, skills.md and readme.md
-- [ ] Write the learning doc
-- [ ] Review with code-reviewer and fix what it finds
-- [ ] Compound: save a lesson in document/solutions/ if one passes the counterfactual question
+- [x] Create branch
+- [x] Check the pin (tag `compound-engineering-v3.32.0` → commit `786ac01…`) and vet the plugin
+- [x] Install the plugin for the project and check it
+- [x] Configure it: .compound-engineering/, .gitignore lines, health check
+- [x] Update CLAUDE.md, the agents, skills.md and readme.md
+- [x] Write the learning doc
+- [x] Review with code-reviewer and fix what it finds
+- [x] Compound: save a lesson in document/solutions/ if one passes the counterfactual question
 - [ ] Merge into main
 
 ### 06_react_app_setup
@@ -121,6 +121,10 @@ Ideas for later. **Proposed only: confirm each one with the product brief before
 | 21 | 21_seo_schema_sitemap | Page titles and descriptions, clinic schema (JSON-LD), sitemap, robots.txt | 11 |
 | 22 | 22_admin_panel | Decap CMS at /admin, with GitHub login through Vercel | 10, 23 |
 | 23 | 23_deploy_vercel | Deploy the site to Vercel | 09 |
+
+**Open decision for the owner: keeping `main` in step with GitHub.** Branches were pushed and PRs merged on GitHub from the owner's account, so local `main` and GitHub's `main` have split. GitHub's `main` has PR merge commits that local `main` lacks. Local `main` has the bookkeeping commits, and also the last four 04_agents fixes, because PR #3 merged an earlier tip (`edcf7db`). Two ways forward:
+1. Keep local `--no-ff` merges, and bring GitHub's PR merge commits in with one `git merge origin/main` on main. This needs a one-time exception to the "only bookkeeping commits on main" rule in CLAUDE.md, and its own small task.
+2. Switch to GitHub pull requests: Claude stops each task at "ready to merge", the owner merges the PR on GitHub, then Claude pulls `main`. This changes step 9 of the CLAUDE.md workflow, in its own task.
 
 Not planned (the owner's choice): Google reviews, online payment.
 

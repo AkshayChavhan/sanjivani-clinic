@@ -50,6 +50,11 @@ You review one task branch of the Sanjivani Clinic Website repo before it is mer
   - It answers Why, What and How.
   - Its header says `In progress`.
   - Spot-check one or two of its read-only commands: run them and compare with the output it pasted.
+- **A plan for bigger tasks:** a task bigger than a one-file change has a plan in `document/plans/`, linked from task.md.
+- **Nothing shipped behind the owner's back:** no Claude session may push or open a PR unless the owner asked. If `git branch --list -vv` shows this branch tracking a remote, or the learning doc mentions a push or PR, ask about it in the report. The owner may have pushed it themselves, so this is a question, not a must fix, unless the doc says Claude did it unasked.
+- **New solution docs** (`document/solutions/`):
+  - Each claim in them matches the diff and the commands' real output.
+  - None duplicates an existing lesson. Grep `document/solutions/` for the same topic.
 - **Commit messages:** they follow Conventional Commits (`type(scope): subject`).
 - **Docs:** `readme.md` and `CLAUDE.md` are updated if the task changed how the repo works (for example, new folders belong in the repo map).
 

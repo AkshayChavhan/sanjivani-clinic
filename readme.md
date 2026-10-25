@@ -12,6 +12,7 @@ We build this project in small, numbered **tasks**. The full list is in [documen
 2. Every task gets its own **branch** (a separate line of work in git) with the same name.
 3. When a task is finished, it is merged into `main` with `git merge --no-ff`. That way the history shows where each task starts and ends.
 4. Every task gets one **learning doc** in [document/learning/](document/learning/). It explains why we did the task, what changed and how we did it.
+5. Inside each task we follow the **Compound Engineering** loop: **plan** (bigger tasks get a written plan in `document/plans/`), **work**, **review** (an automatic code review, then the code-reviewer agent), and **compound** (save a reusable lesson in `document/solutions/` if it would stop a future mistake).
 
 The rules Claude follows in this repo (the workflow, git rules and definition of done) are in [CLAUDE.md](CLAUDE.md).
 
@@ -29,6 +30,10 @@ The rules Claude follows in this repo (the workflow, git rules and definition of
 | `.claude/skills/` | The 16 Claude Code skills installed for this project (third-party files; never edit them) |
 | `skills-lock.json` | Which skills are installed and where they came from |
 | `.claude/agents/` | 4 project subagents: task-planner, ui-engineer, learning-doc-writer, code-reviewer (see the Agents section in CLAUDE.md) |
+| `.claude/settings.json` | Project settings for Claude Code: the pinned Compound Engineering plugin |
+| `.compound-engineering/` | Compound Engineering config (`config.yaml`) and the plugin's full template (`config.example.yaml`) |
+| `document/plans/` | Plans for single tasks, written by ce-plan (the folder appears with the first plan) |
+| `document/solutions/` | Solution docs: short lessons for future sessions, written by ce-compound |
 
 ## Prerequisites
 
