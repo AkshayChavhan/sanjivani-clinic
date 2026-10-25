@@ -79,7 +79,7 @@ Runs in a **new** Claude Code session, because agents and the plugin load only w
 
 - [x] Before starting: `node -v` shows 22.23.4 or newer (Astro 7 needs it)
 - [x] Create branch
-- [ ] Plan with `/compound-engineering:ce-plan`: "Scaffold the Astro + React app at the repo root, run shadcn init, install gsap and @gsap/react. No features." Link the plan here. When ce-plan offers next steps, choose to stop. Nothing may push or open a PR.
+- [x] Plan with `/compound-engineering:ce-plan`: "Scaffold the Astro + React app at the repo root, run shadcn init, install gsap and @gsap/react. No features." Link the plan here. When ce-plan offers next steps, choose to stop. Nothing may push or open a PR. Plan: [2026-10-25-1400-chore-astro-react-app-setup-plan.md](../plans/2026-10-25-1400-chore-astro-react-app-setup-plan.md)
 - [ ] Check the scaffold's current flags: `npm create astro@latest -- --help`
 - [ ] Scaffold into a scratch folder outside the repo (for example `npm create astro@latest <scratch>/sanjivani-clinic -- --template minimal --no-install --no-git --yes`, adjusted to the flags you just checked)
 - [ ] Copy everything into the repo except README.md, .gitignore, node_modules/ and .git/. Merge the scaffold's .gitignore lines into ours and keep our comments.
