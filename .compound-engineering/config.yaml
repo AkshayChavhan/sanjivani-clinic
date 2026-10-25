@@ -1,0 +1,20 @@
+# Compound Engineering settings for this repo. This file is committed, so they are team defaults.
+# Personal overrides go in .compound-engineering/config.local.yaml, which git ignores.
+# Every setting, with the plugin's own explanations, is in config.example.yaml (a copy of the plugin's template).
+
+# Where the plugin reads and writes its documents: solution docs, plans, ideation and so on.
+# "document" puts them in document/solutions/, document/plans/ and similar, next to our task and learning docs.
+# If this folder were unusable, the plugin would stop with an error rather than write anywhere else.
+docs_root: document
+
+# Never send review content (diffs, documents) to a second AI provider during ce-code-review or ce-doc-review.
+# The plugin's own Claude reviewers still run. Asking for a cross-model review in a conversation would override this for that run.
+cross_model_review_mode: off
+
+# No standing preference for an outside coding tool (Codex, Cursor and others) to write code during ce-work.
+# "off" is also the default; we set it so the choice is visible. Instructions in a session could still ask for one.
+work_engine_mode: off
+
+# Don't start ce-babysit-pr (watching CI and PR reviews) on its own after ce-commit-push-pr opens a pull request.
+# This only covers that automatic watch; lfg runs its own babysit anyway, which is why CLAUDE.md also bans lfg.
+auto_babysit: false
