@@ -14,7 +14,7 @@ This file tracks every task in this project.
 | 02 | 02_claude_guidelines | CLAUDE.md: the rules Claude follows in this repo | Done | [02_claude_guidelines](../learning/02_claude_guidelines.md) |
 | 03 | 03_skills_installation | 16 Claude skills for UI work, plus a skills guide | Done | [03_skills_installation](../learning/03_skills_installation.md) |
 | 04 | 04_agents | 4 project subagents | Done | [04_agents](../learning/04_agents.md) |
-| 05 | 05_compound_engineering | The Compound Engineering plugin, pinned and configured | In progress | — |
+| 05 | 05_compound_engineering | The Compound Engineering plugin, pinned and configured | In progress | [05_compound_engineering](../learning/05_compound_engineering.md) |
 | 06 | 06_react_app_setup | The Astro + React app, shadcn init, GSAP (runs in a new session) | To do | — |
 
 ## Task steps
@@ -68,7 +68,7 @@ This file tracks every task in this project.
 - [x] Install the plugin for the project and check it
 - [x] Configure it: .compound-engineering/, .gitignore lines, health check
 - [x] Update CLAUDE.md, the agents, skills.md and readme.md
-- [ ] Write the learning doc
+- [x] Write the learning doc
 - [ ] Review with code-reviewer and fix what it finds
 - [ ] Compound: save a lesson in document/solutions/ if one passes the counterfactual question
 - [ ] Merge into main
@@ -97,6 +97,7 @@ Runs in a **new** Claude Code session, because agents and the plugin load only w
 - [ ] Review with code-reviewer and fix what it finds
 - [ ] Compound: save a lesson in document/solutions/ if one passes the counterfactual question
 - [ ] Merge into main
+- [ ] Sync with GitHub (the owner chose this on 2026-10-25): `git fetch origin`, then on main `git merge origin/main` (one merge commit, no history rewrite; GitHub's main has the PR #1 and #2 merge commits). Push only if the owner asks.
 
 ## Backlog (proposed)
 
