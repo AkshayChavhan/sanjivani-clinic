@@ -28,6 +28,7 @@ The four were grouped into one task because each is a few lines, and with pull r
 | `.gitignore` | Changed | `.next/` and `next-env.d.ts` removed |
 | `.claude/agents/code-reviewer.md` | Changed | `.next/` dropped, and a new step 4 checks the lockfile instead of reading it |
 | `document/plans/2026-10-26-1526-chore-small-cleanups-plan.md` | Added | The plan (its install-script check was updated after review) |
+| `document/task/task.md` | Changed | Task 25's status, ticked steps, and the learning-doc link |
 
 ## How: step by step
 
