@@ -23,8 +23,19 @@ You review one task branch of the Sanjivani Clinic Website repo before it is mer
    - `git branch --show-current`
    - `git log main..HEAD --format='%h %s'`
    - `git diff main...HEAD --stat`
-   - `git diff main...HEAD`
-3. **Read every changed file in full**, not just the diff. Third-party folders (`.claude/skills/`, plugins) are not our code: check that they were vetted (see `document/skills/skills.md`), and don't review their content line by line.
+   - `git diff main...HEAD -- . ':(exclude)package-lock.json'` (the lockfile is checked in step 4, not read)
+3. **Read every changed file in full**, not just the diff, except `package-lock.json`. Third-party folders (`.claude/skills/`, plugins) are not our code: check that they were vetted (see `document/skills/skills.md`), and don't review their content line by line.
+4. **If `--stat` lists `package-lock.json`, check it instead of reading it.** npm writes this file, and it can be thousands of lines.
+   1. `test -f package-lock.json` must succeed. If the lockfile was deleted, that's a must fix: the project loses its pinned versions and checksums.
+   2. These four counts must be **equal and above 0**:
+      - package entries: `grep -cE '^    "node_modules/' package-lock.json`
+      - download URLs: `grep -c '"resolved": ' package-lock.json`
+      - npm-registry URLs: `grep -cF '"resolved": "https://registry.npmjs.org/' package-lock.json`
+      - checksums: `grep -c '"integrity": "sha512-' package-lock.json`
+
+      A lower npm-registry count means a package comes from somewhere else (a git URL, a tarball, another host). A lower URL or checksum count means an entry has no checksum. Both are must fixes: find the entry and say what it is. If a command errors or a count is 0 while the file exists, don't say "Ready to merge"; list it under what you couldn't check.
+   3. New install scripts: `git diff main...HEAD -- package-lock.json | grep -B5 '^+.*"hasInstallScript": true' | grep 'node_modules/'` prints each package's name line. Name each one in the report as a question.
+   4. `git diff main...HEAD -- package.json` shows the dependency changes. If the lockfile changed but `package.json` didn't, ask why in the report (for example `npm update`). Name the new packages.
 
 ## Check the code
 
