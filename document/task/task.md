@@ -107,7 +107,7 @@ Runs in a **new** Claude Code session, because agents and the plugin load only w
 - [x] Rewrite CLAUDE.md steps 1 and 9 and the Definition of done for the pull-request route, and update every file that restates them (readme.md, this file's "How to add a task", skills.md, code-reviewer, the workflow lesson)
 - [x] Remove the decided "Open decision" paragraph from the backlog
 - [x] Write the learning doc
-- [ ] Review with code-reviewer and fix what it finds
+- [x] Review with code-reviewer and fix what it finds
 - [ ] Compound: save a lesson in document/solutions/ if one passes the counterfactual question
 - [ ] Merge into main
 
