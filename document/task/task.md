@@ -185,6 +185,10 @@ Ideas for later. **Proposed only: confirm each one with [the product brief](../p
 - **First UI task (08 or 09):** add React hooks lint rules (`eslint-plugin-react-hooks`). Add accessibility lint rules (`eslint-plugin-jsx-a11y`) once a version supports ESLint 10 (6.10.2 supports only ESLint 9 or older).
 - **Small cleanups:** now task 25.
 
+**Notes from task 26 for later tasks** (to fold into a task when it is planned):
+
+- **07 or its own small task:** add one-line pointers to [the product brief](../product/brief.md) from `document/skills/skills.md` (its "the brief's own words win" line), the ui-engineer and task-planner agents (then update CLAUDE.md's Agents table), and CLAUDE.md's "The project" section. readme.md and CLAUDE.md also say patients "book" an appointment, while the brief says the form only sends a request: match that wording at the same time.
+
 Not planned (the owner's choice): Google reviews, online payment.
 
 ## How to add a task
