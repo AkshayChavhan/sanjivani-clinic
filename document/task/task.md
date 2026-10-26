@@ -118,7 +118,7 @@ Runs in a **new** Claude Code session, because agents and the plugin load only w
 - [x] Add `.nvmrc`, fix the stale `skills@1.5.18` note (CLAUDE.md, readme.md, skills.md), and remove the `.next/` and `next-env.d.ts` lines (`.gitignore`, CLAUDE.md, code-reviewer)
 - [x] Teach code-reviewer how to check `package-lock.json` without reading it in full
 - [x] Write the learning doc
-- [ ] Review with code-reviewer and fix what it finds
+- [x] Review with code-reviewer and fix what it finds
 - [ ] Compound: save a lesson in document/solutions/ if one passes the counterfactual question
 - [ ] Merge into main
 
