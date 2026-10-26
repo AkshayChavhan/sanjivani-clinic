@@ -60,7 +60,9 @@ Four leftovers from earlier tasks, listed in the task 06 backlog notes:
   - Step 3 reads every changed file in full, except `package-lock.json`. If `--stat` lists the lockfile, run these checks instead (only `git`, `grep` and `test`, which code-reviewer is allowed):
     1. `test -f package-lock.json` must succeed.
     2. Four counts on the whole file must be **equal and above 0**: package entries `grep -cE '^    "node_modules/' package-lock.json`; download URLs `grep -c '"resolved": ' package-lock.json`; npm-registry URLs `grep -cF '"resolved": "https://registry.npmjs.org/' package-lock.json`; checksums `grep -c '"integrity": "sha512-' package-lock.json`. Each count is a number, so a mistyped command shows up as a mismatch, not as silence. (On task 06's lockfile all four are 755.)
-    3. New install scripts: `git diff main...HEAD -- package-lock.json | grep -B5 '^+.*"hasInstallScript": true' | grep 'node_modules/'` prints each package's name line (on task 06: `+    "node_modules/fsevents": {`).
+    3. New install scripts, on the whole file and on both sides: `git show main:package-lock.json | grep -c '"hasInstallScript": true'` and `grep -c '"hasInstallScript": true' package-lock.json` give the counts, and the same file piped through `grep -B6 '"hasInstallScript": true' | grep '^    "node_modules/'` gives the names. On each side the number of names must equal the count. A name on the branch that isn't on `main` is a new install script. (Today: 1 and 1, `fsevents` on both sides.)
+
+       *Changed after review.* The first version searched the diff: `git diff main...HEAD -- package-lock.json | grep -B5 '^+.*"hasInstallScript": true' | grep 'node_modules/'`. code-reviewer found that it prints nothing when a package already in the lockfile moves to a version that adds an install script: the name line stays unchanged, about 7 lines above the new line, out of `-B5`'s reach. A scratch repo confirmed it.
     4. `git diff main...HEAD -- package.json` shows the dependency changes that explain the lockfile change.
 
 ### Case walk (KTD4)
@@ -71,12 +73,14 @@ Four leftovers from earlier tasks, listed in the task 06 backlog notes:
 | New packages, all from npm, with `package.json` changed | check 1 succeeds; the four counts are equal and above 0; check 4 names the packages | Pass, and name the new packages |
 | A package from outside npm's registry (git URL, tarball, other host, a look-alike host) | the npm-registry count is lower than the download-URL count | Must fix: find the line and say where it comes from |
 | An entry without a checksum, or without both URL and checksum | the checksum or URL count is lower than the entry count | Must fix |
-| A new install script | check 3 prints the package's name line | Name it in the report as a question |
+| A new package with an install script | check 3: the branch count is higher, and the name is on the branch's list but not `main`'s | Name it in the report as a question |
+| A package already in the lockfile moves to a version that adds an install script | check 3: the same as a new package (the diff alone would hide it) | Name it in the report as a question |
+| The install-script names don't match the count on one side | check 3: more or fewer names than the count | Not "Ready to merge": list it under what couldn't be checked |
 | The lockfile was deleted | check 1 fails | Must fix: the project loses its pinned versions and checksums |
 | Lockfile changed, `package.json` didn't | check 4 prints nothing | Ask why in the report (for example `npm update`) |
 | Only removed packages | the four counts are still equal and above 0 | Pass |
 | A command errors or is refused, or a count is 0 while the lockfile exists | an error, or 0 | Not "Ready to merge": list it under what couldn't be checked |
-| An entry that is a local link (`"link": true`) or bundled | the entry count is higher than the URL count | Must fix unless the report explains the entry (none exist today) |
+| An entry that is a local link (`"link": true`) or bundled (`"inBundle": true`) | the npm-registry or checksum count is lower than the entry count | Must fix unless the report names the entry and says why it's there (none exist today) |
 
 ## Implementation Units
 
