@@ -28,7 +28,7 @@ Replace the local `git merge --no-ff` ending with a pull-request ending in every
 
 ### Problem Frame
 
-CLAUDE.md step 9, readme.md, task.md's "How to add a task", `document/skills/skills.md`, code-reviewer and one solution doc all describe a local merge. The owner merges on GitHub instead (tasks 01 to 06 all ended as PRs). Following the old text made local and GitHub `main` split. Task 06 needed two PRs: PR #5 was merged at 11:54, before the review passed at 12:22, and 9 of the 18 commits it missed were written after it merged. Nothing in the owner's docs said to wait for "ready to merge". A future session reads CLAUDE.md, not task 06's learning doc, so it would follow the old rule.
+CLAUDE.md step 9, readme.md, task.md's "How to add a task", `document/skills/skills.md`, code-reviewer and one solution doc all describe a local merge. The owner merges on GitHub instead (tasks 02 to 06 ended as PRs #1 to #6). Following the old text made local and GitHub `main` split. Task 06 needed two PRs: PR #5 was merged at 11:54, before the review passed at 12:22, and 9 of the 18 commits it missed were written after it merged. Nothing in the owner's docs said to wait for "ready to merge". A future session reads CLAUDE.md, not task 06's learning doc, so it would follow the old rule.
 
 ### Requirements
 
