@@ -89,7 +89,8 @@ Not testable here: code-reviewer's new push check for a branch you've already pu
 | 4 | Needs changes | Asking for a second PR didn't say "stop", so a session could make the bookkeeping commit too early and split `main` | `2e6e29b` |
 | 5 | Needs changes | Step 9 would stop on the normal path: step 1 has already pulled, so step 9's pull prints `Already up to date.`, which isn't a fast-forward. Now it goes on unless the pull *refused* | `7680a59` |
 | 6 | Needs changes | task.md's short copy of step 1 left out the check that catches a normal merge (the task still `In progress` on `main`). It now just points to CLAUDE.md. `gh` got a failure rule too | `c006e4a`, `e9cc601` |
-| 7 | **Ready to merge** | None. Five suggestions, all taken: step 1 now points to the after-merge part of step 9, task 25 got a plan step, the plan's search is copyable, and this exercise works from any branch | `013be31`, `61b15d2`, `9f3e91e`, and this doc |
+| 7 | **Ready to merge** | None. Five suggestions, all taken: step 1 now points to the after-merge part of step 9, task 25 got a plan step, task 25's step names every file with the skills note, the plan's search is copyable, and this exercise works from any branch | `013be31`, `61b15d2`, `9f3e91e`, and this doc |
+| 8 | **Ready to merge** | None. Two accuracy notes, both fixed here: the plan's A2 now matches CLAUDE.md step 1, and the pass 7 row lists all five suggestions | this doc and the plan |
 
 Smaller fixes from the same passes: the leftover search ignores letter case (`-i`). Step 9 gives you the last commit ID to match in the PR, and readme step 3 says so. Step 9 starts only after the compound step. The plan matches CLAUDE.md.
 
@@ -102,7 +103,7 @@ Smaller fixes from the same passes: the leftover search ignores letter case (`-i
 - Every failure branch should say "stop".
 - A short copy of a rule drifts. Point to the rule instead of copying it.
 
-Pending: the next code-reviewer pass, then the compound question.
+Pending: the compound question.
 
 ## Common mistakes
 
