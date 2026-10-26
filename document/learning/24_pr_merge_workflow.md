@@ -1,6 +1,6 @@
 # 24_pr_merge_workflow: every task ends with a GitHub pull request
 
-> **Branch:** 24_pr_merge_workflow · **Date:** 2026-10-26 · **Status:** In progress
+> **Branch:** 24_pr_merge_workflow · **Date:** 2026-10-26 · **Status:** Done
 
 **Plan:** [2026-10-26-1250-docs-pr-merge-workflow-plan.md](../plans/2026-10-26-1250-docs-pr-merge-workflow-plan.md). **Solution doc:** [walk-new-procedures-through-every-case.md](../solutions/workflow-issues/walk-new-procedures-through-every-case.md).
 
