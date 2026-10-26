@@ -114,7 +114,7 @@ Runs in a **new** Claude Code session, because agents and the plugin load only w
 ### 25_small_cleanups
 
 - [x] Create branch
-- [ ] Plan with `/compound-engineering:ce-plan` and link the plan here
+- [x] Plan with `/compound-engineering:ce-plan` and link the plan here: [2026-10-26-1526-chore-small-cleanups-plan.md](../plans/2026-10-26-1526-chore-small-cleanups-plan.md)
 - [ ] Add `.nvmrc`, fix the stale `skills@1.5.18` note (CLAUDE.md, readme.md, skills.md), and remove the `.next/` and `next-env.d.ts` lines (`.gitignore`, CLAUDE.md, code-reviewer)
 - [ ] Teach code-reviewer how to check `package-lock.json` without reading it in full
 - [ ] Write the learning doc
