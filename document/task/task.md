@@ -114,7 +114,8 @@ Runs in a **new** Claude Code session, because agents and the plugin load only w
 ### 25_small_cleanups
 
 - [ ] Create branch
-- [ ] Add `.nvmrc`, fix the stale `skills@1.5.18` note, and remove the `.next/` and `next-env.d.ts` lines (`.gitignore`, CLAUDE.md, code-reviewer)
+- [ ] Plan with `/compound-engineering:ce-plan` and link the plan here
+- [ ] Add `.nvmrc`, fix the stale `skills@1.5.18` note (CLAUDE.md, readme.md, skills.md), and remove the `.next/` and `next-env.d.ts` lines (`.gitignore`, CLAUDE.md, code-reviewer)
 - [ ] Teach code-reviewer how to check `package-lock.json` without reading it in full
 - [ ] Write the learning doc
 - [ ] Review with code-reviewer and fix what it finds
