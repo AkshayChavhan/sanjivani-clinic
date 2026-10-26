@@ -104,7 +104,7 @@ Runs in a **new** Claude Code session, because agents and the plugin load only w
 
 - [x] Create branch
 - [x] Plan with `/compound-engineering:ce-plan` and link the plan here: [2026-10-26-1250-docs-pr-merge-workflow-plan.md](../plans/2026-10-26-1250-docs-pr-merge-workflow-plan.md)
-- [x] Rewrite CLAUDE.md step 9 and the Definition of done for the pull-request route, and update readme.md "How we work", this file's "How to add a task" and code-reviewer's push check
+- [x] Rewrite CLAUDE.md steps 1 and 9 and the Definition of done for the pull-request route, and update every file that restates them (readme.md, this file's "How to add a task", skills.md, code-reviewer, the workflow lesson)
 - [x] Remove the decided "Open decision" paragraph from the backlog
 - [x] Write the learning doc
 - [ ] Review with code-reviewer and fix what it finds
@@ -161,7 +161,7 @@ Not planned (the owner's choice): Google reviews, online payment.
    - Good: `07_design_system`, `14_appointment_form`
    - Bad: `7_design` (needs two digits), `14-Appointment-Form` (no dashes or capitals), `14_stuff` (says nothing), `14_form_blog_and_seo` (too big, so split it)
 3. **Add it here:** a row in the Tasks table, and a `### NN_short_name` section under "Task steps" with checkbox steps. Every task includes "Create branch", "Write the learning doc", "Review with code-reviewer and fix what it finds", "Compound" and "Merge into main".
-4. **Branch from an up-to-date main**, as CLAUDE.md step 1 says: pull `main`, find unfinished tasks with `git branch --list --no-merged origin/main`, finish the merge step of any whose pull request is merged (or ask the owner to merge it first), then create the branch.
+4. **Branch from an up-to-date main** by following CLAUDE.md step 1: pull `main`, finish any earlier task that is merged but not yet marked done (or ask the owner to merge it first), then create the branch.
 5. **Set the status** to `In progress`.
 6. **Write the learning doc** from `document/learning/TEMPLATE.md`, and link it in the Learning doc column.
 7. **Merge through a pull request** (CLAUDE.md step 9): Claude stops at "ready to merge", and the owner pushes the branch, opens the PR and merges it with "Create a merge commit".
