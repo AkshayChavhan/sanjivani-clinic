@@ -119,7 +119,7 @@ Every task runs these steps:
 - **Commit types:** `feat` (new feature), `fix` (bug fix), `docs` (documentation), `chore` (setup and tooling), `refactor` (restructure without changing behaviour), `style` (formatting only), `test` (tests).
 - Keep commits small, with one idea per commit.
 - **Never commit secrets.** They go in `.env`, which git ignores. Commit a `.env.example` with fake values instead.
-- **Never commit generated folders** (`node_modules/`, `dist/`, `.astro/`, `.next/`, `coverage/`).
+- **Never commit generated folders** (`node_modules/`, `dist/`, `.astro/`, `coverage/`).
 - Read third-party files (skills, plugins, scaffolds) before you commit them.
 - **Ask the owner first** before you:
   - push, add a remote, or open a pull request
