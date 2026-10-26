@@ -126,7 +126,7 @@ Runs in a **new** Claude Code session, because agents and the plugin load only w
 ### 26_product_brief
 
 - [x] Create branch
-- [ ] Plan with `/compound-engineering:ce-plan` and link the plan here
+- [x] Plan with `/compound-engineering:ce-plan` and link the plan here: [2026-10-26-1936-docs-product-brief-plan.md](../plans/2026-10-26-1936-docs-product-brief-plan.md)
 - [ ] Write the product brief in `document/product/brief.md` from the owner's answers, and add it to the repo maps in readme.md and CLAUDE.md
 - [ ] Check each backlog idea against the brief and write down which ones fit (changing the backlog stays the owner's call)
 - [ ] Write the learning doc
