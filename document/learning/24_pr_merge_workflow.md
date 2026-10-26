@@ -89,6 +89,7 @@ Not testable here: code-reviewer's new push check for a branch you've already pu
 | 4 | Needs changes | Asking for a second PR didn't say "stop", so a session could make the bookkeeping commit too early and split `main` | `2e6e29b` |
 | 5 | Needs changes | Step 9 would stop on the normal path: step 1 has already pulled, so step 9's pull prints `Already up to date.`, which isn't a fast-forward. Now it goes on unless the pull *refused* | `7680a59` |
 | 6 | Needs changes | task.md's short copy of step 1 left out the check that catches a normal merge (the task still `In progress` on `main`). It now just points to CLAUDE.md. `gh` got a failure rule too | `c006e4a`, `e9cc601` |
+| 7 | **Ready to merge** | None. Five suggestions, all taken: step 1 now points to the after-merge part of step 9, task 25 got a plan step, the plan's search is copyable, and this exercise works from any branch | `013be31`, `61b15d2`, `9f3e91e`, and this doc |
 
 Smaller fixes from the same passes: the leftover search ignores letter case (`-i`). Step 9 gives you the last commit ID to match in the PR, and readme step 3 says so. Step 9 starts only after the compound step. The plan matches CLAUDE.md.
 
@@ -113,7 +114,7 @@ Pending: the next code-reviewer pass, then the compound question.
 
 About 5 minutes, and it changes nothing:
 
-1. Run `git status -sb` on `main`. Is it ahead of `origin/main`? By how many commits, and which ones (`git log origin/main..main --oneline`)?
+1. Run `git branch --list -vv main` (it works from any branch). Is `main` ahead of `origin/main`? By how many commits, and which ones (`git log origin/main..main --oneline`)?
 2. Run `gh pr list --state merged --json number,title` and match each PR to a task in `document/task/task.md`.
 
 ## Learn more
