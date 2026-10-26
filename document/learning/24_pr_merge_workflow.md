@@ -2,7 +2,7 @@
 
 > **Branch:** 24_pr_merge_workflow · **Date:** 2026-10-26 · **Status:** In progress
 
-**Plan:** [2026-10-26-1250-docs-pr-merge-workflow-plan.md](../plans/2026-10-26-1250-docs-pr-merge-workflow-plan.md). **Solution doc:** Pending (the compound question comes after the review).
+**Plan:** [2026-10-26-1250-docs-pr-merge-workflow-plan.md](../plans/2026-10-26-1250-docs-pr-merge-workflow-plan.md). **Solution doc:** [walk-new-procedures-through-every-case.md](../solutions/workflow-issues/walk-new-procedures-through-every-case.md).
 
 ## In one minute
 
@@ -103,7 +103,7 @@ Smaller fixes from the same passes: the leftover search ignores letter case (`-i
 - Every failure branch should say "stop".
 - A short copy of a rule drifts. Point to the rule instead of copying it.
 
-Pending: the compound question.
+**Compound:** we asked, "If this lesson weren't written down, would a future session repeat the mistake or redo the investigation?" Yes. Six passes each found one hole of the same kind in a written procedure: a failure branch with no "stop", a check reading where the answer can't be yet, wording that misfires on the normal path, and a short copy that drops a case. The next workflow edit would repeat them, and no saved lesson covered it (`check-new-steps-against-claude-md.md` checks a new step against existing rules, not against its own cases). We ran the lightweight command, and it wrote [walk-new-procedures-through-every-case.md](../solutions/workflow-issues/walk-new-procedures-through-every-case.md) (`✓ Documentation complete (non-interactive lightweight mode)`). We read it in full: its commit IDs and the old step 1 it quotes match `git log`, its search prints nothing on this branch, and we corrected one line range.
 
 ## Common mistakes
 
