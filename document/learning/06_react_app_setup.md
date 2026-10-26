@@ -83,7 +83,7 @@ node_modules/ dist/ .astro/   generated, ignored by git
 
    What it changed (`28e579a`):
    - **Added `components.json`:** style `base-nova`, CSS variables on, aliases like `@/components/ui`.
-   - **Added `src/lib/utils.ts`:** one line, `export { cn } from "cn"`.
+   - **Added `src/lib/utils.ts`:** one line, `export { cn } from "cn"`. Most shadcn guides online build `cn()` from `clsx` + `tailwind-merge` instead. A short, unfamiliar package name is what a *typosquat* (a fake package named like a real one) looks like, so we checked it. A package's own homepage field proves nothing, because anyone can write any URL there. The proof is in shadcn's own code: the official CLI in `node_modules/shadcn/dist/index.js` writes `moduleSpecifier:"cn"` and turns old `clsx` imports into `cn`, and the `shadcn` package itself depends on `cn`. The lockfile pins it to `registry.npmjs.org` with a checksum.
    - **Changed `global.css`:** imports for animations, shadcn's base CSS and the font. It also added a `.dark` class switch, colour *tokens* (named values like `--primary`, set once in `:root` and again in `.dark`), and base styles for `body`. Our `source("../")` line survived.
    - **Added 7 packages:** `@base-ui/react`, `cn`, `class-variance-authority`, `lucide-react`, `tw-animate-css`, `@fontsource-variable/geist` (font files served from our own site, no Google Fonts call) and `shadcn`.
 
@@ -255,19 +255,22 @@ After it, lint, typecheck and build passed again. `npx shadcn@latest info --json
 | A dev server left by a Claude session blocks your `npm run dev`. | A note in readme's "Run it locally" (`3306b2a`) |
 | Nothing imports through `@/` yet, so the alias was untested. | A throwaway build importing `cn` from `@/lib/utils` passed and gave `p-4` for `cn("p-2", "p-4")`; the page was then restored |
 
-**code-reviewer, first pass** (in a fresh process, with the new four-check command). We saved `git status --short`, `git log -1 --oneline` and `git show-ref --heads` before and after. They matched, so it changed nothing. Verdict: **Needs changes**, with one must fix, one question and three suggestions:
+**code-reviewer** ran six times, each in a fresh process with the four-check command. Before and after every pass we saved `git status --short`, `git log -1 --oneline` and `git show-ref --heads`. They matched every time, so it changed nothing.
 
-- **Must fix:** this section still said "pending" after ce-code-review had run. Fixed by writing it.
-- **Question, a push:** git records two pushes of this branch to GitHub, on 25 Oct at 13:55 and 26 Oct at 11:25. No command in this task ran `git push`, and GitHub had no pull request for the branch (`gh pr list` printed `[]`). **The owner confirmed they pushed it by hand.**
-- **Suggestions:** shorten this doc (we trimmed the dev-server transcript); the backlog's "open decision" about GitHub is out of date, because `cd138bb` and `8b057f7` already joined the two `main`s (it's the owner's text, so we only point it out); and the viewport tag lacks `initial-scale=1`, which is now a backlog note for task 08.
+| Pass | Verdict | The must fix | Fixed in |
+| --- | --- | --- | --- |
+| 1 | Needs changes | This section still said "pending" after ce-code-review had run | `4e2a694` |
+| 2 | Needs changes | The top line still said "No solution doc yet" after compound wrote one | `dae85a0` |
+| 3 | Needs changes | Review was ticked while the last recorded verdict was "Needs changes" | `3daf0a4` (unticked) |
+| 4 | Needs changes | This doc claimed the new lesson had a rule it didn't have | `548ba4b` (rule added to the lesson) |
+| 5 | Needs changes | "New ideas" missed the 29,400-byte font file the page loads | `ea3522b` |
+| 6 | **Ready to merge** | None | — |
 
-**code-reviewer, second pass**, after those fixes, with the same before-and-after check (it matched again). Verdict: **Needs changes**, one must fix: the line under this doc's header still said "No solution doc yet" after compound had written one. Fixed in `dae85a0`. Its other points: the owner hadn't answered the push question yet (now answered, above), and this doc is still long (300 lines when it ran, against 170 for task 05). We kept the length: the tracker asks for every topic it covers.
+Other points the passes raised:
 
-**code-reviewer, third pass**, again with matching snapshots. Verdict: **Needs changes**, one must fix: we had ticked Review in task.md while the last recorded verdict was still "Needs changes". We unticked it (`3daf0a4`). Review gets ticked only in the same sitting as a pass that says "Ready to merge". Two suggestions, both done here: the count of search hits below was out of date, and nothing said where the "mark task 06 done" commit goes with a GitHub merge.
-
-**code-reviewer, fourth pass**, snapshots matching. Verdict: **Needs changes**, one must fix: the sentence above claimed our new lesson already had the "tick Review only with a passing verdict" rule, and it didn't. We added the rule and this third example to the lesson (`548ba4b`), the way task 05 extended its lesson. That is also the compound answer for passes 3 and 4: the slip would repeat, and the existing lesson is the right home, so no new solution doc.
-
-**code-reviewer, fifth pass**, snapshots matching. Verdict: **Needs changes**, one must fix: "New ideas" said the page loads only the favicons and one CSS file, but that CSS also loads a 29,400-byte Geist font file. Fixed, with how `unicode-range` decides which font files load. Compound answer: no new lesson. Page weight and fonts belong to task 07, whose backlog note already asks for fonts that cover Devanagari. Its other point, whether a GitHub PR is now the normal way to merge, is the owner's call.
+- **A push:** git records two pushes of this branch to GitHub, on 25 Oct at 13:55 and 26 Oct at 11:25. No command in this task ran `git push`, and GitHub had no pull request for it (`gh pr list` printed `[]`). **The owner confirmed they pushed it by hand.**
+- **Done:** a viewport note for task 08 in the backlog, a shorter dev-server transcript, the bookkeeping plan for a GitHub merge (below), why `cn` is safe (step 6), and this table in place of five paragraphs.
+- **Left for the owner:** the backlog's "open decision" about GitHub is out of date, because `cd138bb` and `8b057f7` already joined the two `main`s. It's the owner's text, and whether a GitHub PR is now the normal way to merge is the owner's call.
 
 **Lesson:** a permission written for one situation can quietly grow when the project changes. `npm run *` was harmless while there were no scripts.
 
@@ -280,6 +283,12 @@ After it, lint, typecheck and build passed again. `npx shadcn@latest info --json
 So we ran the lightweight command from CLAUDE.md. It wrote [document/solutions/best-practices/tailwind-source-limit-in-global-css.md](../solutions/best-practices/tailwind-source-limit-in-global-css.md) and printed `✓ Documentation complete (non-interactive lightweight mode)`. We read it in full and ran its checks: `head -1` shows the line, the positive control `.text-3xl` counts 1, both canaries count 0, and neither canary appears in `src/`.
 
 The second pass asked the question again, because the same slip had now happened twice: this doc is written before review and compound, so its status lines go stale as those steps run. The answer is yes, because the workflow always writes the doc first. The second run wrote [document/solutions/workflow-issues/update-learning-doc-after-later-steps.md](../solutions/workflow-issues/update-learning-doc-after-later-steps.md). We read it, ran its search on this doc (four harmless hits at `dae85a0`) and checked its commit IDs against `git log`.
+
+We asked again after each later pass:
+
+- **Passes 3 and 4:** yes, the early tick would repeat. The existing lesson was the right home, so we added the rule "tick Review only with a passing verdict" and this third example to it (`548ba4b`), the way task 05 extended its lesson.
+- **Pass 5:** no new lesson. Page weight and fonts belong to task 07, whose backlog note already asks for fonts that cover Devanagari.
+- **Pass 6:** no new lesson. It found no mistake.
 
 **Merge: the owner's choice.** The owner will open a pull request on GitHub and merge it there, instead of the local `git merge --no-ff` in CLAUDE.md step 9. So this doc stays `In progress`, and task.md's Merge step stays open until the PR is merged and local `main` is pulled. Two tips:
 
