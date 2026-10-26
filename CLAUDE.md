@@ -38,6 +38,7 @@ Claude reads this file at the start of every session. Follow it over your defaul
 | `src/` | The app: `pages/` (one file per URL), `styles/global.css` (Tailwind and theme tokens), `lib/utils.ts` (`cn()`) |
 | `public/` | Files served as they are, such as the favicons |
 | `.vscode/` | Editor settings from the Astro template: recommends the Astro extension |
+| `.nvmrc` | The project's Node version (24), for fnm and nvm |
 
 ## Commands
 
