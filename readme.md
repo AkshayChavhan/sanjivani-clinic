@@ -84,4 +84,4 @@ Other commands:
 - The app needs Node 22.23.4 or newer. `.nvmrc` names Node 24: run `fnm use` (or `nvm use`) in the repo to switch to it. fnm can also switch on its own when you `cd` into the folder, if you turn on its `--use-on-cd` option in your shell setup.
 - The first time you open this repo in Claude Code, it asks whether you **trust this folder**. Accept, so Claude Code can use this project's settings.
 - Optional: a free [21st.dev](https://21st.dev) account for the 21st.dev skills. Log in with `npx @21st-dev/cli login`. Your login stays on your machine, never in the repo. See [document/skills/skills.md](document/skills/skills.md).
-- The skills were installed with `npx -y skills@1.5.18` (no global install). That version runs on Node 20; newer versions need Node 22.20 or newer.
+- The skills were installed with `npx -y skills@1.5.18` (no global install). We keep that installer version: newer ones haven't been checked yet. See [document/skills/skills.md](document/skills/skills.md).
