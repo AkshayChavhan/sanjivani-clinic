@@ -108,7 +108,7 @@ Runs in a **new** Claude Code session, because agents and the plugin load only w
 - [x] Remove the decided "Open decision" paragraph from the backlog
 - [x] Write the learning doc
 - [x] Review with code-reviewer and fix what it finds
-- [ ] Compound: save a lesson in document/solutions/ if one passes the counterfactual question
+- [x] Compound: save a lesson in document/solutions/ if one passes the counterfactual question
 - [ ] Merge into main
 
 ### 25_small_cleanups
