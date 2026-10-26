@@ -90,7 +90,7 @@ Four leftovers from earlier tasks, listed in the task 06 backlog notes:
 
 - **Files:** `CLAUDE.md`, `readme.md`, `document/skills/skills.md`
 - **Requirements:** R2
-- **Verification:** a search for `22.20` in those three files finds nothing, and `skills@1.5.18` still appears in each.
+- **Verification:** no file says the pin is needed because of Node; the only `22.20` left is skills.md's history sentence about why the pin started. `skills@1.5.18` still appears in each file.
 
 ### U3. Next.js leftovers
 
