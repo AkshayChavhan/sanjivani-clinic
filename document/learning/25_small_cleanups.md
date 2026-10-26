@@ -9,7 +9,7 @@
 - **`.nvmrc`** now names Node 24. Run `fnm use` in the repo, and fnm switches to it.
 - **The `skills@1.5.18` note** now gives the true reason for the pin: it's the installer version we used, and newer ones haven't been checked. The old reason (Node below 22.20) stopped being true when you moved to Node 24.
 - **The `.next/` lines are gone** from `.gitignore`, CLAUDE.md and code-reviewer. They came from an early guess that the site would use Next.js.
-- **code-reviewer no longer reads `package-lock.json`.** It checks it with four counts that must match, so a bad lockfile still gets caught.
+- **code-reviewer no longer reads `package-lock.json`.** It checks it with four counts that must match, and compares install scripts between `main` and the branch, so a bad lockfile still gets caught.
 
 ## Why: the problem we solved
 
@@ -27,7 +27,7 @@ The four were grouped into one task because each is a few lines, and with pull r
 | `document/skills/skills.md` | Changed | The skills pin reason |
 | `.gitignore` | Changed | `.next/` and `next-env.d.ts` removed |
 | `.claude/agents/code-reviewer.md` | Changed | `.next/` dropped, and a new step 4 checks the lockfile instead of reading it |
-| `document/plans/2026-10-26-1526-chore-small-cleanups-plan.md` | Added | The plan |
+| `document/plans/2026-10-26-1526-chore-small-cleanups-plan.md` | Added | The plan (its install-script check was updated after review) |
 
 ## How: step by step
 
@@ -40,6 +40,7 @@ The four were grouped into one task because each is a few lines, and with pull r
    The new check counts on the whole file and needs four equal numbers above 0, so none of those can pass quietly.
 2. **Walked the check through every case** before writing it (the lesson from task 24). The table is in the plan.
 3. **Made the four changes**, one file per commit.
+4. **Reviewed with code-reviewer.** It found one must fix and two suggestions. All three are fixed (see "Review and lessons").
 
 ## New ideas in this task
 
@@ -70,16 +71,33 @@ On a scratch copy with one URL changed to a look-alike host (`https://registry.n
 entries 755, resolved 755, npm-reg 754, sha512 755
 ```
 
-On task 06's diff, the install-script check names the one package, and step 2's new diff has no lockfile section:
+On task 06's diff, step 2's new diff has no lockfile section:
 
 ```text
-$ git diff 8b057f7...06_react_app_setup -- package-lock.json | grep -B5 '^+.*"hasInstallScript": true' | grep 'node_modules/'
-+    "node_modules/fsevents": {
 $ git diff 8b057f7...06_react_app_setup -- . ':(exclude)package-lock.json' | grep -c '^diff --git a/package-lock.json'
 0
 ```
 
 That filtered diff is 1,532 lines, down from 12,028.
+
+The install-script check on today's branch. The counts and names match on both sides, so nothing is new:
+
+```text
+count main:   1
+count branch: 1
+names main:   "node_modules/fsevents": {
+names branch: "node_modules/fsevents": {
+```
+
+In a scratch repo where `main` has fsevents 2.3.2 with no install script, and the branch moves it to 2.3.3 with one, the first version of the check (`grep -B5` on the diff) printed nothing. The new check catches it:
+
+```text
+old check:    (no output, exit 1)
+count main:   0
+count branch: 1
+names main:   (none)
+names branch: "node_modules/fsevents": {
+```
 
 No file names `.next/` any more (`grep` exit 1 means no matches), and git still ignores the right folders:
 
@@ -94,13 +112,23 @@ $ git status --short --ignored
 
 ## Review and lessons
 
-Pending: code-reviewer, then the compound question.
+**code-reviewer, first pass: Needs changes.** Lint, typecheck and build passed, and git was unchanged after the review (same status, last commit and branches).
+
+- **Must fix, fixed:** task.md's row 25 didn't link this learning doc (`3322de7`).
+- **Suggestion, fixed:** the install-script check searched the diff with `grep -B5`. It printed nothing when a package already in the lockfile moved to a version that adds an install script: the package's name line doesn't change, so it sits about 7 lines above the new line, out of reach. Now the check counts and names install scripts on the whole file, on `main` and on the branch, and the number of names must equal the count (`dbe8e3a`). A scratch repo confirmed the old check missed the case and the new one catches it.
+- **Suggestion, fixed:** step 4.2 said a low URL count meant a missing checksum. It now says what each low count means, and lets a local link or bundled entry pass if the report explains it, as the plan said (`1149c9e`).
+- The plan's check and case table now match (`295568b`).
+
+**code-reviewer, second pass:** Pending.
+
+**Compound:** Pending.
 
 ## Common mistakes
 
 - **Expecting `.nvmrc` to switch Node by itself.** Run `fnm use`, or turn on fnm's `--use-on-cd` option.
 - **Trusting a check that prints nothing.** A broken command prints nothing too. A count that must match another count can't fail quietly.
 - **Comparing two fields that vanish together.** Count the entries too, so a missing pair shows up.
+- **Searching a diff for a line near the change.** An unchanged line, like a package's name, can sit further from the change than `grep -B` looks. Check the whole file on both sides instead.
 
 ## Try it yourself
 
