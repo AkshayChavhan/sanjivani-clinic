@@ -2,7 +2,7 @@
 
 > **Branch:** 06_react_app_setup · **Date:** 2026-10-25 · **Status:** In progress
 
-**Plan:** [2026-10-25-1400-chore-astro-react-app-setup-plan.md](../plans/2026-10-25-1400-chore-astro-react-app-setup-plan.md). No solution doc yet: the compound question comes after the review.
+**Plan:** [2026-10-25-1400-chore-astro-react-app-setup-plan.md](../plans/2026-10-25-1400-chore-astro-react-app-setup-plan.md). **Solution doc:** [tailwind-source-limit-in-global-css.md](../solutions/best-practices/tailwind-source-limit-in-global-css.md).
 
 ## In one minute
 
