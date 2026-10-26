@@ -99,7 +99,7 @@ Every task runs these steps:
      - the branch's last commit ID (`git log -1 --format=%h`). Merge only when the PR's last commit shows that same ID;
      - choose **Create a merge commit**. Squash and rebase give commits new IDs, and the docs cite commit IDs.
    - The owner pushes the branch, opens a pull request into `main` and merges it. A Claude session never pushes, opens or merges a PR unless the owner asks in that session.
-   - After the merge: `git switch main && git pull --ff-only origin main`, then `git rev-list --count origin/main..NN_short_name`. Go on only if the pull fast-forwarded and the count is `0`. Otherwise stop, make no bookkeeping commit, and start no new task:
+   - After the merge: `git switch main && git pull --ff-only origin main`, then `git rev-list --count origin/main..NN_short_name`. Go on only if the pull didn't refuse (it fast-forwarded, or printed `Already up to date.`) and the count is `0`. Otherwise stop, make no bookkeeping commit, and start no new task:
      - **The pull refused:** the PR was probably squashed or rebased. Tell the owner, and don't ask for a second PR: it would add the whole task again under new commit IDs.
      - **The count isn't `0`, and `main` has a "Merge pull request #N" commit for this branch:** the PR was merged before the branch's last commits were pushed. Ask the owner to open a second PR from the same branch, and run this step again once it's merged.
      - **Anything else:** tell the owner what you see.
