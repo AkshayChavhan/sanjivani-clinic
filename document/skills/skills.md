@@ -198,7 +198,7 @@ claude plugin list     # shows: Version 3.32.0, Scope project, enabled
 
 **What we don't use, and why:**
 
-- **`lfg`, `ce-commit-push-pr`, `ce-babysit-pr`, `ce-resolve-pr-feedback`:** they push, open or watch PRs, or merge. Our workflow commits on the task branch and merges locally; pushing is the owner's call.
+- **`lfg`, `ce-commit-push-pr`, `ce-babysit-pr`, `ce-resolve-pr-feedback`:** they push, open or watch PRs, or merge. Our workflow commits on the task branch and stops at "ready to merge". The owner pushes, opens the pull request and merges it (CLAUDE.md step 9).
 - **Plain `/ce-compound` (full mode):** it scans session transcripts in your home folder. So do the compound calls made by `lfg`, `ce-debug`, `ce-optimize`, `ce-polish` and `ce-pov`. You can use those skills, but decline their offer to compound, and run the lightweight command yourself.
 - **`ce-proof`:** it publishes documents to Proof, a website.
 - **Cross-model review and outside work engines:** they would send our code to other AI companies, so the config turns them off.
