@@ -80,7 +80,7 @@ Four leftovers from earlier tasks, listed in the task 06 backlog notes:
 | Lockfile changed, `package.json` didn't | check 4 prints nothing | Ask why in the report (for example `npm update`) |
 | Only removed packages | the four counts are still equal and above 0 | Pass |
 | A command errors or is refused, or a count is 0 while the lockfile exists | an error, or 0 | Not "Ready to merge": list it under what couldn't be checked |
-| An entry that is a local link (`"link": true`) or bundled (`"inBundle": true`) | the npm-registry or checksum count is lower than the entry count | Must fix unless the report names the entry and says why it's there (none exist today) |
+| An entry that is a local link (`"link": true`) or bundled (`"inBundle": true`) | the URL, npm-registry or checksum count is lower than the entry count | Must fix unless the report names the entry and says why it's there (none exist today) |
 
 ## Implementation Units
 
