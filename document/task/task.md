@@ -125,6 +125,7 @@ Ideas for later. **Proposed only: confirm each one with the product brief before
 **Notes from task 06 for later tasks** (to fold into a task when it is planned):
 
 - **07:** the shadcn `nova` preset uses the Geist font, which has no Devanagari letters, so Hindi and Marathi text would fall back to a system font. Pick fonts that cover Devanagari. The `design-system/` folder is already kept out of lint and the Tailwind scan.
+- **08:** the layout's viewport tag should be `width=device-width, initial-scale=1`. The Astro template's placeholder page has only `width=device-width`.
 - **First UI task (08 or 09):** add React hooks lint rules (`eslint-plugin-react-hooks`). Add accessibility lint rules (`eslint-plugin-jsx-a11y`) once a version supports ESLint 10 (6.10.2 supports only ESLint 9 or older).
 - **Small cleanups, each its own task:**
   - a `.nvmrc` so fnm picks Node 24 on its own;
