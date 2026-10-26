@@ -31,7 +31,7 @@ You review one task branch of the Sanjivani Clinic Website repo before it is mer
 - **Bugs:** wrong logic, broken paths or links, typos in commands, wrong flags.
 - **Secrets:** API keys, tokens, passwords, private keys, or a committed `.env`. Grep the diff for patterns like `sk_`, `token`, `api_key`, `BEGIN PRIVATE KEY`.
 - **Dependencies from unknown sources:** new packages, registries, URLs or unpinned downloads.
-- **Committed generated files:** `node_modules/`, `dist/`, `.astro/`, `.next/`, `coverage/`, `__pycache__/`.
+- **Committed generated files:** `node_modules/`, `dist/`, `.astro/`, `coverage/`, `__pycache__/`.
 - **UI** (when there is UI):
   - accessibility (labels, focus, contrast, alt text)
   - the widths 375, 768, 1024 and 1440 px
