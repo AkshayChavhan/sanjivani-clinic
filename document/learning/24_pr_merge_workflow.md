@@ -79,29 +79,24 @@ Not testable here: code-reviewer's new push check for a branch you've already pu
 
 **ce-code-review:** not run. This task changes docs and agent instructions only, and CLAUDE.md runs it "for code changes".
 
-**code-reviewer, first pass** (fresh process; `git status --short`, `git log -1 --oneline` and `git show-ref --heads` matched before and after). Verdict: **Needs changes**, two must fixes and two suggestions, all fixed:
+**code-reviewer** ran in a fresh process each time. `git status --short`, `git log -1 --oneline` and `git show-ref --heads` matched before and after every pass, so it changed nothing. Each pass found a real hole in the new procedure:
 
-| What it found | Fix |
-| --- | --- |
-| Step 9's only remedy for missing commits was a second PR. After a squash or rebase merge, that would add the whole task again under new IDs, and the pull wouldn't even fast-forward. | Step 9 now says: if the pull won't fast-forward, stop and tell the owner. A second PR only after a real merge commit (`8fb205e`) |
-| The lesson I edited still said "six" Merge steps (it's eight) and called the GitHub question "now open" | Both reworded (`b6a11a4`) |
-| Step 1 read task.md before pulling, so it couldn't see the task that was just merged, and it didn't say what to do if that PR isn't merged yet | Pull first, then check; if not merged, ask the owner (`8fb205e`, `bbb1210`) |
-| This doc said `--no-ff` was in files that never had it, and quoted a rule that exists nowhere | Reworded |
+| Pass | Verdict | The main must fix | Fixed in |
+| --- | --- | --- | --- |
+| 1 | Needs changes | After a squash merge, step 9's only remedy (a second PR) would add the whole task again. Step 1 read task.md before pulling. Two stale lines in the lesson | `8fb205e`, `b6a11a4`, `bbb1210` |
+| 2 | Needs changes | Step 1's pull had no instruction for when it fails. `gh` was needed but not listed or explained | `CLAUDE.md` step 1, readme Prerequisites |
+| 3 | Needs changes | Step 1 looked for an unmerged task in task.md on `main`, which can never show one: a task becomes `In progress` only on its own branch | `ecbaa81` (ask git with `--no-merged`) |
+| 4 | Needs changes | Asking for a second PR didn't say "stop", so a session could make the bookkeeping commit too early and split `main` | Step 9 now stops on every failed check |
 
-**code-reviewer, second pass** (snapshots matched). Verdict: **Needs changes**, two must fixes and two suggestions, all done:
+Smaller fixes from the same passes: the leftover search ignores letter case (`-i`). Step 9 gives you the last commit ID to match in the PR, and readme step 3 says so. Step 9 starts only after the compound step. The plan matches CLAUDE.md.
 
-| What it found | Fix |
-| --- | --- |
-| Step 1's pull had no instruction for when it fails. After a squash, that's where a session would break first, so it would skip the merged task and branch from an old `main`. | Step 1 says: if the pull won't fast-forward, stop and tell the owner |
-| `gh` is now needed at every task's start, but the readme didn't list it and this doc didn't explain it | A Prerequisites row (`gh auth status`) and a "New ideas" entry |
-| The leftover-rules search was case-sensitive, so it couldn't find "**Open** decision" | Added `-i`, and showed it finds the paragraph on `main` |
-| Where the "mark done" commit goes (assumption A1) is the owner's call | **The owner confirmed A1:** the commit stays on local `main`, and the next PR carries it |
+**Your decision:** the "mark done" commit stays on local `main`, and the next PR carries it (assumption A1, confirmed on 2026-10-26).
 
-**Lesson from pass 2:** when you add a failure rule, add it at every place that runs the command. And run a new check once against the "before" version, to watch it catch the problem.
-
-**code-reviewer, third pass** (snapshots matched). Verdict: **Needs changes**, one must fix: step 1 looked for an unmerged task in task.md on `main`, but a task becomes `In progress` only on its own branch, so `main` can never show one. Now step 1 asks git: `git branch --list --no-merged origin/main` lists branches GitHub's `main` lacks. Its suggestions are done too: step 9 now gives you the branch's last commit ID to match in the PR before you merge, and the plan's requirement order and A3 match CLAUDE.md.
-
-**Lesson from pass 3:** when you add a check, ask where the information really lives at the moment the check runs.
+**Lessons from the passes:**
+- Put a failure rule at every place that runs the command.
+- Run a new check once against the "before" version, to watch it catch the problem.
+- When you add a check, ask where the information really lives when the check runs.
+- Every failure branch should say "stop".
 
 Pending: the next code-reviewer pass, then the compound question.
 
