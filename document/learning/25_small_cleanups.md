@@ -41,12 +41,12 @@ The four were grouped into one task because each is a few lines, and with pull r
    The new check counts on the whole file and needs four equal numbers above 0, so none of those can pass quietly.
 2. **Walked the check through every case** before writing it (the lesson from task 24). The table is in the plan.
 3. **Made the four changes**, one file per commit.
-4. **Reviewed with code-reviewer.** It found one must fix and two suggestions. All three are fixed (see "Review and lessons").
+4. **Reviewed with code-reviewer, in three passes.** The first found one must fix and two suggestions, the second found two small suggestions, and the third said Ready to merge. Every finding is fixed except one suggestion, left for later (see "Review and lessons").
 
 ## New ideas in this task
 
 - **`.nvmrc`:** a one-line file that names a Node version. fnm and nvm switch to it when you run `fnm use` or `nvm use`. Vercel doesn't read it: it uses its Project Settings or `package.json`'s `engines`.
-- **Lockfile entry fields:** for each package, `package-lock.json` records `"resolved"` (where npm downloaded it) and `"integrity"` (a `sha512-` checksum, which proves the download wasn't changed).
+- **Lockfile entry fields:** for each package, `package-lock.json` records `"resolved"` (where npm downloaded it) and `"integrity"` (usually a `sha512-` checksum, which proves the download wasn't changed; a very old package may have a weaker `sha1-` one).
 - **Install script:** code that a package runs on your machine during `npm install`. It's worth knowing about each one.
 
 ## Check that it works
@@ -120,7 +120,15 @@ $ git status --short --ignored
 - **Suggestion, fixed:** step 4.2 said a low URL count meant a missing checksum. It now says what each low count means, and lets a local link or bundled entry pass if the report explains it, as the plan said (`1149c9e`).
 - The plan's check and case table now match (`295568b`).
 
-**code-reviewer, second pass:** Pending.
+**code-reviewer, second pass: Ready to merge**, with two small suggestions, both fixed:
+
+- The file table above didn't list `task.md` (`fba752f`).
+- The link-or-bundled exception named two counts, but a bundled entry can lower all three (`250b2fe` in code-reviewer, `be6e087` in the plan).
+
+**code-reviewer, third pass: Ready to merge.** It ran because code-reviewer changed after the second pass. Git was unchanged after each of the three passes. Two suggestions:
+
+- Record passes 2 and 3 here. Done in this section.
+- **Left for later:** the checksum count only matches `sha512-`. A very old package with only a `sha1-` checksum would be reported as having *no* checksum. It fails safe (it blocks the merge instead of letting something through), and today all 755 entries are `sha512-`. Fixing it means changing code-reviewer again and running another pass, so it waits for the next task that touches code-reviewer. The fix: in step 4.2, say that an entry with `"integrity": "sha1-…"` has a weaker checksum, not none, and should be named in the report as a question.
 
 **Compound:** Pending.
 
