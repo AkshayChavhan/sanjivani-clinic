@@ -37,7 +37,7 @@ CLAUDE.md step 9, readme.md, task.md's "How to add a task", `document/skills/ski
 - R3. readme.md "How we work", task.md "How to add a task", `document/skills/skills.md`, CLAUDE.md's Definition of done and the solution doc `check-new-steps-against-claude-md.md` agree with R1.
 - R4. code-reviewer treats a branch that tracks GitHub as normal. It flags only a push or PR that the learning doc says Claude made unasked.
 - R6. The owner's own page (readme "How we work") says to open and merge the PR only after Claude says "ready to merge".
-- R7. The next session that starts a task first finishes the previous task's merge step, if its PR has been merged.
+- R7. The next session that starts a task pulls `main`, then finishes the previous task's merge step if its PR is merged, or asks the owner to merge it first.
 - R5. The backlog's "Open decision" paragraph is removed, because the owner has decided.
 
 ### Key Decisions
@@ -48,7 +48,7 @@ CLAUDE.md step 9, readme.md, task.md's "How to add a task", `document/skills/ski
 
 - No change to how the review, the compound step or the learning doc work, apart from where the bookkeeping commit goes.
 - Past learning docs (01 to 06) stay as they are: they record what happened then.
-- No GitHub settings change (branch protection, a default merge method). That's the owner's account. A squash or rebase merge would change the commit IDs the docs cite, so step 9 names "Create a merge commit", and A3 notices if it was missed.
+- No GitHub settings change (branch protection, a default merge method). That's the owner's account. A squash or rebase merge would change the commit IDs the docs cite, so step 9 names "Create a merge commit". If it was missed, the pull refuses to fast-forward and step 9 says to stop and tell the owner, not to open a second PR.
 - Considered and not built:
   - **Bookkeeping as the first commit of the next task's branch.** GitHub would show each finished task as In progress for longer, and code-reviewer would need an exception for another task's rows. Revisit if the owner wants local `main` never ahead of GitHub.
   - **Pushing `main` directly.** It's an extra manual step outside pull requests, and it's what went wrong around task 06.
@@ -64,7 +64,7 @@ CLAUDE.md step 9, readme.md, task.md's "How to add a task", `document/skills/ski
 These are this plan's own choices. The owner hasn't confirmed them yet.
 
 - A1. **The bookkeeping commit stays on local `main`, and nobody pushes it.** After the A3 check, Claude makes `docs(NN): mark task NN done` on local `main`, as today. The next task branches from local `main`, so that task's pull request carries the commit to GitHub. GitHub's `main` then fast-forwards past it, and `git pull --ff-only` keeps working. CLAUDE.md's "the only kind of commit made directly on main" stays true.
-- A2. **Step 1 starts by finishing the previous task (R7):** if task.md shows an earlier task In progress and GitHub shows its PR merged, run that task's step 9 first. Then `git pull --ff-only origin main` and branch.
+- A2. **Step 1 pulls first, then finishes the previous task (R7):** `git pull --ff-only origin main`, then read task.md on `main`. If an earlier task is In progress and its PR is merged, run its step 9. If it isn't merged yet, stop and ask the owner. Then branch.
 - A3. **The "missing commits" check runs before the bookkeeping commit:** `git rev-list --count origin/main..NN_short_name` must print 0. If it doesn't, the owner opens a second PR from the same branch, as task 06 needed PR #6.
 
 ## Implementation Units
@@ -75,7 +75,7 @@ These are this plan's own choices. The owner hasn't confirmed them yet.
 - **Requirements:** R1, R2, R3, R7
 - **Files:** `CLAUDE.md`
 - **Approach:**
-  1. Step 1 first finishes the previous task, then pulls `main` (A2).
+  1. Step 1 pulls `main`, then finishes the previous task (A2).
   2. Step 9: Claude stops at "ready to merge" and says what to push. The owner pushes, opens the PR and merges with "Create a merge commit". Claude pulls `main`, runs the A3 check, and makes the bookkeeping commit per A1.
   3. Definition of done: the PR is merged with a merge commit and the task is marked done.
 - **Test expectation:** none -- docs.
