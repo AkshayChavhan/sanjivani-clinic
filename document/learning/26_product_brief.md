@@ -6,7 +6,7 @@
 
 ## In one minute
 
-- **New: [the product brief](../product/brief.md).** It's one page, exactly 1,000 words. It covers the clinic (dermatology, in Pune, one doctor), its patients, what the first version must do, the look, the three languages, the rules and what's left out.
+- **New: [the product brief](../product/brief.md).** It's one page, 999 words (the plan's limit is 1,000). It covers the clinic (dermatology, in Pune, one doctor), its patients, what the first version must do, the look, the three languages, the rules and what's left out.
 - **Every later task checks its choices against it.** Both repo maps list it, and the backlog note links to it.
 - **All 17 backlog ideas got a verdict** in a note under the backlog table. Two don't fit (16 BMI calculator, 17 testimonials slider), and you decide what happens to them. No backlog row changed.
 - **The legal rules were checked on official websites.** The plan's legal facts came from memory, and that memory was out of date. On 6 October 2026 the National Medical Commission (NMC) issued new advertising guidelines, and they rule out testimonials.
@@ -26,7 +26,7 @@ You were about to start 07_design_system, which picks the colours and fonts. Wit
 | `document/plans/2026-10-26-1936-docs-product-brief-plan.md` | Added | The plan, written by ce-plan |
 | `readme.md` | Changed | A repo-map row for the brief |
 | `CLAUDE.md` | Changed | A repo-map row: read the brief before planning a feature or doing UI work |
-| `document/task/task.md` | Changed | Task 26's row and steps, a link to the brief in the backlog note, and the backlog check |
+| `document/task/task.md` | Changed | Task 26's row and steps, a link to the brief in the backlog note, the backlog check, and a note of the follow-up pointers to the brief |
 
 ## How: step by step
 
@@ -42,11 +42,11 @@ You were about to start 07_design_system, which picks the colours and fonts. Wit
 2. **Planned in a fresh, headless process** (`1cda371`, linked in `807d178`). This session started before the Compound Engineering plugin was set up. A running session only sees what existed when it started, which is also why code-reviewer runs in a fresh process. So ce-plan ran like this:
 
    ```bash
-   claude -p '/compound-engineering:ce-plan …the task request…' --allowedTools …
+   claude -p '/compound-engineering:ce-plan …the task request…' --allowedTools "Read" "Glob" "Grep" "Write" "Edit" "Agent" "Task" "Skill" "Bash(git log *)" "Bash(git show *)" "Bash(git status *)" "Bash(git diff *)" "Bash(git branch *)" "Bash(git rev-parse *)" "Bash(ls *)" "Bash(cat *)" "Bash(mkdir *)" "Bash(date *)" "Bash(python3 *)"
    ```
 
    - `-p`: print mode. Claude runs one prompt with no chat, prints the result and exits.
-   - `--allowedTools`: the tools it may use. The list included no git command that changes anything, so it couldn't commit.
+   - `--allowedTools`: the tools it may use without asking. Its git commands only read (`log`, `show`, `status`, `diff`, `branch`, `rev-parse`). The list isn't a hard wall, though: `Write` can write any file, and `python3` could run anything, git included. So the real check came after: `git status --short` showed only the new plan file, and `git log` showed no new commit.
 
    ce-plan wrote the plan, had five document reviewers check it, applied 14 fixes and stopped. The main session read the whole plan, then committed it. (We didn't run this again for this doc, because it writes a file.)
 
@@ -56,11 +56,11 @@ You were about to start 07_design_system, which picks the colours and fonts. Wit
 
    | Source | What it means for the site |
    | --- | --- |
-   | **NMC guidelines on ethical advertising**, 6 October 2026 (new, in force at once) | Show the doctor's name, qualifications and registration number. No "Best doctors", "No. 1 Specialist", "Guaranteed cures", "100% success", "painless treatment" or "Miracle treatment". A patient's consent doesn't make a testimonial or a before-and-after picture allowed. Doctors may not ask for reviews or share them. WhatsApp counts as advertising. |
+   | **NMC guidelines on ethical advertising**, 6 October 2026 (new, in force at once) | Show the doctor's name, qualifications and registration number. No "Best doctors", "No. 1 Specialist", "Guaranteed cures", "100% success", "painless treatment" or "Miracle treatment". A patient's consent doesn't make a testimonial or a before-and-after picture allowed. Doctors may not ask for reviews or share them. A doctor's photo isn't allowed where it's used as self-advertisement. WhatsApp counts as advertising. |
    | **The 2002 code** (the Indian Medical Council's conduct regulations) | Still in force, because the NMC's 2023 regulations have been on hold since 23 August 2023. No boasting of cures, even with consent. A doctor can claim to be a specialist only with the matching qualification. Fees may be stated publicly. |
    | **Drugs and Magic Remedies Act, 1954** | Its skin entries are leprosy, leucoderma and lupus. A 2020 draft would have added fairness, ageing and greying, but it was never passed. |
-   | **ASCI's guidelines on fairness ads** (2014) | Don't show darker skin as worse. ASCI's rules are voluntary, not law. |
-   | **DPDP Act, 2023 and its Rules** (13 November 2025) | Most duties start about May 2027. Until then the IT Act's 2011 rules apply, and they treat medical records as sensitive. |
+   | **ASCI's guidelines on fairness ads** (2014). ASCI is the Advertising Standards Council of India | Don't show darker skin as worse. ASCI's rules are voluntary, not law. |
+   | **Digital Personal Data Protection (DPDP) Act, 2023 and its Rules** (13 November 2025) | Most duties start about May 2027. Until then the IT Act's 2011 rules apply, and they treat medical records as sensitive. |
    | **Telemedicine Practice Guidelines, 2020** | Still current. A chat that only books visits is probably not a consultation, but the subagent found no rule that says so. |
    | **Consumer Protection Act, 2019** and its 2022 guidelines on misleading ads | Apply to every ad. Medical care counts as a service (the Supreme Court's V.P. Shantha case). This part rests partly on second sources. |
 
@@ -77,6 +77,7 @@ You were about to start 07_design_system, which picks the colours and fonts. Wit
    - **Fits with a change:** 07 (add a logo or wordmark), 12 (you decide the "emergency strip" wording), 14 (preferred times, not reserved slots) and 23 (four conditions before launch), all first version; 19 and 20, later.
    - **Doesn't fit, owner to decide:** 16 BMI calculator, 17 testimonials slider.
 7. **Ticked the brief and backlog steps** (`8c36f2a`).
+8. **Reviewed with code-reviewer:** Ready to merge, with six suggestions, all fixed (see "Review and lessons"). The brief went from 1,000 to 999 words.
 
 **Skipped:** ce-code-review. CLAUDE.md step 7 runs it only for code changes, and this task changes only docs.
 
@@ -102,17 +103,34 @@ You were about to start 07_design_system, which picks the colours and fonts. Wit
 
 ## Check that it works
 
-All of these were run on the branch, with every change committed.
+All of these were run on the branch, with every change committed. The word count, check 1 and check 3 were run again after the review's fixes.
 
 ```text
 $ wc -w document/product/brief.md
-    1000 document/product/brief.md
+     999 document/product/brief.md
 ```
 
-Check 1 from the plan: each part of your answers appears at least once (printed on one line here):
+Check 1 from the plan: each part of your answers appears at least once. This is the plan's loop, and its raw output:
 
 ```text
-dermatolog=2, skin, hair and nail=1, Pune=2, one doctor=1, calm=1, trustworthy=1, leaf green=2, saffron=2, off-white=2, high-contrast=1, rounded=1, logo=1, brand colo=1, task 07=2, English=2, Hindi=5, Marathi=5,
+$ for t in dermatolog 'skin, hair and nail' Pune 'one doctor' calm trustworthy 'leaf green' saffron 'off-white' 'high-contrast' rounded logo 'brand colo' 'task 07' English Hindi Marathi; do printf '%s: ' "$t"; grep -c -i -- "$t" document/product/brief.md; done
+dermatolog: 2
+skin, hair and nail: 1
+Pune: 2
+one doctor: 1
+calm: 1
+trustworthy: 1
+leaf green: 2
+saffron: 2
+off-white: 2
+high-contrast: 1
+rounded: 1
+logo: 1
+brand colo: 1
+task 07: 1
+English: 2
+Hindi: 5
+Marathi: 5
 ```
 
 Check 2 looks for laws cited by number. It printed nothing (`grep` exit 1 means no matches). Normally silence alone proves little, but this check did catch "(rule 6)" in the draft, so we know it works.
@@ -145,7 +163,16 @@ same
 
 ## Review and lessons
 
-**Pending.** code-reviewer hasn't run. ce-code-review was skipped on purpose (see "How").
+**code-reviewer: Ready to merge**, with no must fixes and six suggestions. ce-code-review was skipped on purpose (see "How"). Git was unchanged after the review (same status, last commit and branches). All six suggestions are fixed:
+
+1. **The doctor's council wasn't under "Still to confirm".** The Rules assume the Maharashtra Medical Council, so that assumption is now listed (`af71324`).
+2. **Rule 8 said the form "books" appointments,** but the first-version section says it only sends a request. Rule 8 now says "request" (`af71324`). readme.md and CLAUDE.md still say "book": that's in the task 26 note in task.md (`708886e`).
+3. **The doctor's-photo line had no recorded source.** The research did find it in the NMC guidelines, so the NMC row in the table above now says so.
+4. **The follow-up pointers to the brief were only in the plan.** They're now a "Notes from task 26" bullet in task.md, where task-planner looks (`708886e`).
+5. **Short forms weren't spelled out.** The brief now writes out the National Medical Commission, the Advertising Standards Council of India and the Information Technology Act. This doc spells out ASCI and DPDP (`af71324`, and this doc).
+6. **Two parts of this doc weren't the real commands.** Step 2 now shows the full `--allowedTools` list, and says plainly what it does and doesn't prevent. Check 1 now shows the plan's loop and its raw output.
+
+To pay for the new words, the brief dropped a few repeated ones, such as "(noted for task 07)", which the task 06 note already covers.
 
 **Compound: Pending.** The compound question comes after the review.
 
