@@ -35,7 +35,7 @@ A new session reads CLAUDE.md, not old learning docs, so it would have followed 
 
 1. **Planned with ce-plan**, then reviewed the plan with four reviewers. They changed it in three important ways:
    - **Where the "mark done" commit goes.** The first draft pushed `main` directly when no task came next, which adds a push outside the pull-request route. Now the commit stays on local `main` and travels with the next task's PR.
-   - **A trigger.** After you merge, the session has already stopped, so step 1 of the *next* task now pulls `main`, asks git which branches GitHub's `main` lacks, and finishes the previous task's step 9 (or asks you to merge it first).
+   - **A trigger.** After you merge, the session has already stopped, so step 1 of the *next* task now pulls `main` and finishes the previous task. After a normal merge, task.md on `main` still shows that task `In progress`, and that starts its step 9. `git branch --no-merged` catches the other cases: a PR that left commits out, or one not merged yet (then it asks you to merge first).
    - **Two more files** still described the old route: `skills.md` and a saved lesson.
 2. **Rewrote CLAUDE.md** step 1, step 9 and the Definition of done, then each file that restates them. Each of those files points back to CLAUDE.md instead of copying the commands, so there's one place to change next time.
 3. **Checked** for leftovers (below).
@@ -87,8 +87,8 @@ Not testable here: code-reviewer's new push check for a branch you've already pu
 | 2 | Needs changes | Step 1's pull had no instruction for when it fails. `gh` was needed but not listed or explained | `0b5aae4`, `0f051bd` |
 | 3 | Needs changes | Step 1 looked for an unmerged task in task.md on `main`, which can never show one: a task becomes `In progress` only on its own branch | `ecbaa81` (ask git with `--no-merged`) |
 | 4 | Needs changes | Asking for a second PR didn't say "stop", so a session could make the bookkeeping commit too early and split `main` | `2e6e29b` |
-
-Pass 5 found that step 9 would stop on the normal path: step 1 has already pulled, so step 9's pull prints `Already up to date.`, which isn't a fast-forward. Now it goes on unless the pull *refused*.
+| 5 | Needs changes | Step 9 would stop on the normal path: step 1 has already pulled, so step 9's pull prints `Already up to date.`, which isn't a fast-forward. Now it goes on unless the pull *refused* | `7680a59` |
+| 6 | Needs changes | task.md's short copy of step 1 left out the check that catches a normal merge (the task still `In progress` on `main`). It now just points to CLAUDE.md. `gh` got a failure rule too | `c006e4a`, `e9cc601` |
 
 Smaller fixes from the same passes: the leftover search ignores letter case (`-i`). Step 9 gives you the last commit ID to match in the PR, and readme step 3 says so. Step 9 starts only after the compound step. The plan matches CLAUDE.md.
 
@@ -99,6 +99,7 @@ Smaller fixes from the same passes: the leftover search ignores letter case (`-i
 - Run a new check once against the "before" version, to watch it catch the problem.
 - When you add a check, ask where the information really lives when the check runs.
 - Every failure branch should say "stop".
+- A short copy of a rule drifts. Point to the rule instead of copying it.
 
 Pending: the next code-reviewer pass, then the compound question.
 
