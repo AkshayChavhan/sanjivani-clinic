@@ -59,6 +59,8 @@ The rules Claude follows in this repo (the workflow, git rules and definition of
 
 3. Open http://localhost:4321. The page reloads when you save a file. Press Ctrl+C in the terminal to stop the server.
 
+If `npm run dev` says "Another astro dev server is already running", a Claude session probably left one running in the background. Use the URL it shows, or stop it with `npx astro dev stop` and run `npm run dev` again.
+
 Other commands:
 
 | Command | What it does |
