@@ -131,7 +131,7 @@ Runs in a **new** Claude Code session, because agents and the plugin load only w
 - [x] Check each backlog idea against the brief and write down which ones fit (changing the backlog stays the owner's call)
 - [x] Write the learning doc
 - [x] Review with code-reviewer and fix what it finds
-- [ ] Compound: save a lesson in document/solutions/ if one passes the counterfactual question
+- [x] Compound: save a lesson in document/solutions/ if one passes the counterfactual question
 - [ ] Merge into main
 
 ## Backlog (proposed)
