@@ -33,7 +33,7 @@ You review one task branch of the Sanjivani Clinic Website repo before it is mer
       - npm-registry URLs: `grep -cF '"resolved": "https://registry.npmjs.org/' package-lock.json`
       - checksums: `grep -c '"integrity": "sha512-' package-lock.json`
 
-      A lower npm-registry count means a package comes from somewhere else (a git URL, a tarball, another host). A lower URL or checksum count means an entry has no checksum. Both are must fixes: find the entry and say what it is. If a command errors or a count is 0 while the file exists, don't say "Ready to merge"; list it under what you couldn't check.
+      A lower npm-registry count means a package comes from somewhere else (a git URL, a tarball, another host). A lower URL count means an entry has no download location (`"resolved"`). A lower checksum count means an entry has no checksum. Each is a must fix: find the entry and say what it is. The one exception is an entry that is a local link (`"link": true`) or bundled (`"inBundle": true`), which can lack a registry URL or a checksum: it isn't a must fix if the report names it and says why it's there. If a command errors or a count is 0 while the file exists, don't say "Ready to merge"; list it under what you couldn't check.
    3. New install scripts: `git diff main...HEAD -- package-lock.json | grep -B5 '^+.*"hasInstallScript": true' | grep 'node_modules/'` prints each package's name line. Name each one in the report as a question.
    4. `git diff main...HEAD -- package.json` shows the dependency changes. If the lockfile changed but `package.json` didn't, ask why in the report (for example `npm update`). Name the new packages.
 
