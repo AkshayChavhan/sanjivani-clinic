@@ -65,7 +65,11 @@ Run these from the repo root.
 
 Every task runs these steps:
 
-1. **Branch:** `git switch main`, then `git switch -c NN_short_name`.
+1. **Branch:**
+   1. `git switch main && git pull --ff-only origin main`. If it refuses to fast-forward, the last PR was probably squashed or rebased: stop and tell the owner (see step 9).
+   2. Find unfinished tasks: `git branch --list --no-merged origin/main` lists every branch with commits GitHub's `main` lacks. (`main` itself may be listed, because of the expected bookkeeping commit.) For each task branch it lists, check its pull requests with `gh pr list --state all --head <branch> --json number,state`. If `gh` fails (missing, not logged in, offline), stop and tell the owner. If none is merged, or one is still open, stop and ask the owner to merge it first. If one is merged and none is open, the PR left commits out: do the after-merge part of that task's step 9 (from "After the merge"), which asks for a second PR, and stop there.
+   3. If `document/task/task.md` on `main` shows a task still `In progress`, its PR is merged, but its step 9 hasn't run yet: do the after-merge part of that step 9 now (from "After the merge").
+   4. Then `git switch -c NN_short_name`.
 2. **Tracker:** set the task's row in `document/task/task.md` to `In progress`. Tick a step only after it's done.
 3. **Read past lessons first:** `grep -ril "<topic>" document/solutions/`. A solution doc there may save you a whole investigation. (Exit code 1 just means "no matches".)
 4. **Plan:** for anything bigger than a one-file change, run `/compound-engineering:ce-plan` (run `/compound-engineering:ce-brainstorm` first if the idea is still fuzzy). Plans go in `document/plans/`; link the plan from the task's steps in task.md. When ce-plan offers next steps, stop: this workflow decides what comes next.
@@ -89,7 +93,18 @@ Every task runs these steps:
    ```
 
    Read the whole file it writes before you commit it. If the answer is no, write no lesson and say why in the learning doc.
-9. **Merge:** `git switch main && git merge --no-ff NN_short_name`. Then make one bookkeeping commit on main, `docs(NN): mark task NN done`: tick "Merge into main" and set `Done` in task.md and in the learning doc's header. This is the only kind of commit made directly on main. Keep the branches; don't delete them.
+9. **Merge (through a GitHub pull request):**
+   - When step 8 is committed (and the final code-reviewer pass said "Ready to merge"), stop and tell the owner three things:
+     - the task is ready;
+     - the branch's last commit ID (`git log -1 --format=%h`). Merge only when the PR's last commit shows that same ID;
+     - choose **Create a merge commit**. Squash and rebase give commits new IDs, and the docs cite commit IDs.
+   - The owner pushes the branch, opens a pull request into `main` and merges it. A Claude session never pushes, opens or merges a PR unless the owner asks in that session.
+   - After the merge: `git switch main && git pull --ff-only origin main`, then `git rev-list --count origin/main..NN_short_name`. Go on only if the pull didn't refuse (it fast-forwarded, or printed `Already up to date.`) and the count is `0`. Otherwise stop, make no bookkeeping commit, and start no new task:
+     - **The pull refused:** the PR was probably squashed or rebased. Tell the owner, and don't ask for a second PR: it would add the whole task again under new commit IDs.
+     - **The count isn't `0`, and `main` has a "Merge pull request #N" commit for this branch:** the PR was merged before the branch's last commits were pushed. Ask the owner to open a second PR from the same branch, and run this step again once it's merged.
+     - **Anything else:** tell the owner what you see.
+   - Then make one bookkeeping commit on local `main`, `docs(NN): mark task NN done`: tick "Merge into main", and set `Done` in task.md and in the learning doc's header. Don't push it: the next task branches from local `main`, so its pull request carries this commit to GitHub. Between tasks, local `main` may be one commit ahead of GitHub's.
+   - This is the only kind of commit made directly on main. Keep the branches; don't delete them.
 
 ## Learning docs
 
@@ -184,7 +199,7 @@ These rules override the plugin's defaults:
 - [ ] No secrets and no generated folders were committed.
 - [ ] The review passed, or every "must fix" is fixed.
 - [ ] The compound question was asked.
-- [ ] The task is merged with `--no-ff` and marked done.
+- [ ] The owner merged the task's pull request with a merge commit, nothing was left out, and the task is marked done.
 
 ## Talking to the owner
 

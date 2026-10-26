@@ -1,6 +1,6 @@
 # 06_react_app_setup: the Astro + React app, with Tailwind, shadcn and GSAP
 
-> **Branch:** 06_react_app_setup · **Date:** 2026-10-25 · **Status:** In progress
+> **Branch:** 06_react_app_setup · **Date:** 2026-10-25 · **Status:** Done
 
 **Plan:** [2026-10-25-1400-chore-astro-react-app-setup-plan.md](../plans/2026-10-25-1400-chore-astro-react-app-setup-plan.md). **Solution docs:** [tailwind-source-limit-in-global-css.md](../solutions/best-practices/tailwind-source-limit-in-global-css.md) and [update-learning-doc-after-later-steps.md](../solutions/workflow-issues/update-learning-doc-after-later-steps.md).
 
@@ -290,12 +290,12 @@ We asked again after each later pass:
 - **Pass 5:** no new lesson. Page weight and fonts belong to task 07, whose backlog note already asks for fonts that cover Devanagari.
 - **Pass 6:** no new lesson. It found no mistake.
 
-**Merge: the owner's choice.** The owner will open a pull request on GitHub and merge it there, instead of the local `git merge --no-ff` in CLAUDE.md step 9. So this doc stays `In progress`, and task.md's Merge step stays open until the PR is merged and local `main` is pulled. Two tips:
+**Merge: the owner's choice.** The owner merged through GitHub pull requests instead of the local `git merge --no-ff` in CLAUDE.md step 9, in two steps:
 
-- Push the branch again first. Commits made after your last push aren't on GitHub yet.
-- Choose **Create a merge commit** on GitHub, not squash or rebase. Both of those give the commits new IDs, and this doc and the solution docs cite commit IDs.
+- **PR #5** was merged on 26 Oct at 11:54, while the branch on GitHub was still at `1579037`. The owner pushed the last 18 commits (docs only) at 12:29, after that merge, so they weren't in it. GitHub doesn't add commits to a pull request that's already merged.
+- **PR #6**, from the same branch, merged those 18 commits at 12:37 (merge commit `290d11b`). Both used "Create a merge commit", so every commit ID this doc cites is unchanged.
 
-After the PR is merged, a Claude session pulls `main` and makes the one bookkeeping commit there, `docs(06): mark task 06 done` (CLAUDE.md step 9). It ticks Merge and sets this header to `Done`. The owner then pushes `main`, so local `main` and GitHub's `main` stay the same.
+Then local `main` was fast-forwarded to GitHub's `main`, with lint, typecheck and build passing again there, and this doc and task.md were marked done in one bookkeeping commit on `main`. The owner pushes `main`. Tip for next time: push first, then open the pull request, so it carries every commit.
 
 ## Common mistakes
 

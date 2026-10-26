@@ -15,7 +15,9 @@ This file tracks every task in this project.
 | 03 | 03_skills_installation | 16 Claude skills for UI work, plus a skills guide | Done | [03_skills_installation](../learning/03_skills_installation.md) |
 | 04 | 04_agents | 4 project subagents | Done | [04_agents](../learning/04_agents.md) |
 | 05 | 05_compound_engineering | The Compound Engineering plugin, pinned and configured | Done | [05_compound_engineering](../learning/05_compound_engineering.md) |
-| 06 | 06_react_app_setup | The Astro + React app, shadcn init, GSAP (runs in a new session) | In progress | [06_react_app_setup](../learning/06_react_app_setup.md) |
+| 06 | 06_react_app_setup | The Astro + React app, shadcn init, GSAP (runs in a new session) | Done | [06_react_app_setup](../learning/06_react_app_setup.md) |
+| 24 | 24_pr_merge_workflow | Every task ends with a GitHub pull request the owner merges, not a local merge | In progress | [24_pr_merge_workflow](../learning/24_pr_merge_workflow.md) |
+| 25 | 25_small_cleanups | `.nvmrc`, stale notes, old `.next/` lines, and a lockfile check for code-reviewer | To do | — |
 
 ## Task steps
 
@@ -96,6 +98,28 @@ Runs in a **new** Claude Code session, because agents and the plugin load only w
 - [x] Run ce-code-review (report only; most code is generated, so focus on config)
 - [x] Review with code-reviewer and fix what it finds
 - [x] Compound: save a lesson in document/solutions/ if one passes the counterfactual question
+- [x] Merge into main
+
+### 24_pr_merge_workflow
+
+- [x] Create branch
+- [x] Plan with `/compound-engineering:ce-plan` and link the plan here: [2026-10-26-1250-docs-pr-merge-workflow-plan.md](../plans/2026-10-26-1250-docs-pr-merge-workflow-plan.md)
+- [x] Rewrite CLAUDE.md steps 1 and 9 and the Definition of done for the pull-request route, and update every file that restates them (readme.md, this file's "How to add a task", skills.md, code-reviewer, the workflow lesson)
+- [x] Remove the decided "Open decision" paragraph from the backlog
+- [x] Write the learning doc
+- [x] Review with code-reviewer and fix what it finds
+- [x] Compound: save a lesson in document/solutions/ if one passes the counterfactual question
+- [ ] Merge into main
+
+### 25_small_cleanups
+
+- [ ] Create branch
+- [ ] Plan with `/compound-engineering:ce-plan` and link the plan here
+- [ ] Add `.nvmrc`, fix the stale `skills@1.5.18` note (CLAUDE.md, readme.md, skills.md), and remove the `.next/` and `next-env.d.ts` lines (`.gitignore`, CLAUDE.md, code-reviewer)
+- [ ] Teach code-reviewer how to check `package-lock.json` without reading it in full
+- [ ] Write the learning doc
+- [ ] Review with code-reviewer and fix what it finds
+- [ ] Compound: save a lesson in document/solutions/ if one passes the counterfactual question
 - [ ] Merge into main
 
 ## Backlog (proposed)
@@ -127,15 +151,7 @@ Ideas for later. **Proposed only: confirm each one with the product brief before
 - **07:** the shadcn `nova` preset uses the Geist font, which has no Devanagari letters, so Hindi and Marathi text would fall back to a system font. Pick fonts that cover Devanagari. The `design-system/` folder is already kept out of lint and the Tailwind scan.
 - **08:** the layout's viewport tag should be `width=device-width, initial-scale=1`. The Astro template's placeholder page has only `width=device-width`.
 - **First UI task (08 or 09):** add React hooks lint rules (`eslint-plugin-react-hooks`). Add accessibility lint rules (`eslint-plugin-jsx-a11y`) once a version supports ESLint 10 (6.10.2 supports only ESLint 9 or older).
-- **Small cleanups, each its own task:**
-  - a `.nvmrc` so fnm picks Node 24 on its own;
-  - the `skills@1.5.18` pin note in CLAUDE.md and readme.md, which says Node is below 22.20 (it is now 24);
-  - the `.next/` and `next-env.d.ts` lines left in `.gitignore` from an earlier stack guess (also named in CLAUDE.md and code-reviewer);
-  - code-reviewer reads every changed file in full, including `package-lock.json` (thousands of lines). Decide how it should check lockfiles instead.
-
-**Open decision for the owner: keeping `main` in step with GitHub.** Branches were pushed and PRs merged on GitHub from the owner's account, so local `main` and GitHub's `main` have split. GitHub's `main` has PR merge commits that local `main` lacks. Local `main` has the bookkeeping commits, and also the last four 04_agents fixes, because PR #3 merged an earlier tip (`edcf7db`). Two ways forward:
-1. Keep local `--no-ff` merges, and bring GitHub's PR merge commits in with one `git merge origin/main` on main. This needs a one-time exception to the "only bookkeeping commits on main" rule in CLAUDE.md, and its own small task.
-2. Switch to GitHub pull requests: Claude stops each task at "ready to merge", the owner merges the PR on GitHub, then Claude pulls `main`. This changes step 9 of the CLAUDE.md workflow, in its own task.
+- **Small cleanups:** now task 25.
 
 Not planned (the owner's choice): Google reviews, online payment.
 
@@ -146,8 +162,8 @@ Not planned (the owner's choice): Google reviews, online payment.
    - Good: `07_design_system`, `14_appointment_form`
    - Bad: `7_design` (needs two digits), `14-Appointment-Form` (no dashes or capitals), `14_stuff` (says nothing), `14_form_blog_and_seo` (too big, so split it)
 3. **Add it here:** a row in the Tasks table, and a `### NN_short_name` section under "Task steps" with checkbox steps. Every task includes "Create branch", "Write the learning doc", "Review with code-reviewer and fix what it finds", "Compound" and "Merge into main".
-4. **Branch from an up-to-date main:** `git switch main`, then `git switch -c NN_short_name`.
+4. **Branch from an up-to-date main** by following CLAUDE.md step 1: pull `main`, finish any earlier task that is merged but not yet marked done (or ask the owner to merge it first), then create the branch.
 5. **Set the status** to `In progress`.
 6. **Write the learning doc** from `document/learning/TEMPLATE.md`, and link it in the Learning doc column.
-7. **Merge** with `git switch main && git merge --no-ff NN_short_name`.
-8. **Mark it done** in one bookkeeping commit on main, `docs(NN): mark task NN done`: tick "Merge into main", and set `Done` here and in the learning doc's header.
+7. **Merge through a pull request** (CLAUDE.md step 9): Claude stops at "ready to merge", and the owner pushes the branch, opens the PR and merges it with "Create a merge commit".
+8. **Mark it done** in one bookkeeping commit on local `main`, `docs(NN): mark task NN done`: tick "Merge into main", and set `Done` here and in the learning doc's header. It isn't pushed: the next task's pull request carries it to GitHub.
