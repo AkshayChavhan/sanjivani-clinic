@@ -25,7 +25,7 @@ A new session reads CLAUDE.md, not old learning docs, so it would have followed 
 | --- | --- | --- |
 | `CLAUDE.md` | Changed | Step 1 pulls `main`, then finishes the previous task's merge. Step 9 is the pull-request route, including what to do after a squash. The Definition of done matches |
 | `readme.md` | Changed | "How we work" step 3 tells you your part: wait for "ready to merge", then push, open the PR and merge with a merge commit |
-| `document/task/task.md` | Changed | "How to add a task" steps 4, 7 and 8 point to CLAUDE.md. The decided "Open decision" paragraph is gone. Tasks 24 and 25 added |
+| `document/task/task.md` | Changed | "How to add a task" steps 4, 7 and 8 point to CLAUDE.md. The decided "Open decision" paragraph is gone. Tasks 24 and 25 added. Task 25 groups the four small cleanups the backlog had listed one by one: each is a few lines, and with pull requests every task costs you a merge, so Claude grouped them and said so when it set the order |
 | `document/skills/skills.md` | Changed | "merges locally" became "stops at ready to merge" |
 | `.claude/agents/code-reviewer.md` | Changed | A branch you pushed is normal now. Only a push or PR that Claude made unasked is a must fix |
 | `document/solutions/workflow-issues/check-new-steps-against-claude-md.md` | Changed | Its "Nothing after Merge" rule allows step 9's pull and check |
@@ -84,9 +84,11 @@ Not testable here: code-reviewer's new push check for a branch you've already pu
 | Pass | Verdict | The main must fix | Fixed in |
 | --- | --- | --- | --- |
 | 1 | Needs changes | After a squash merge, step 9's only remedy (a second PR) would add the whole task again. Step 1 read task.md before pulling. Two stale lines in the lesson | `8fb205e`, `b6a11a4`, `bbb1210` |
-| 2 | Needs changes | Step 1's pull had no instruction for when it fails. `gh` was needed but not listed or explained | `CLAUDE.md` step 1, readme Prerequisites |
+| 2 | Needs changes | Step 1's pull had no instruction for when it fails. `gh` was needed but not listed or explained | `0b5aae4`, `0f051bd` |
 | 3 | Needs changes | Step 1 looked for an unmerged task in task.md on `main`, which can never show one: a task becomes `In progress` only on its own branch | `ecbaa81` (ask git with `--no-merged`) |
-| 4 | Needs changes | Asking for a second PR didn't say "stop", so a session could make the bookkeeping commit too early and split `main` | Step 9 now stops on every failed check |
+| 4 | Needs changes | Asking for a second PR didn't say "stop", so a session could make the bookkeeping commit too early and split `main` | `2e6e29b` |
+
+Pass 5 found that step 9 would stop on the normal path: step 1 has already pulled, so step 9's pull prints `Already up to date.`, which isn't a fast-forward. Now it goes on unless the pull *refused*.
 
 Smaller fixes from the same passes: the leftover search ignores letter case (`-i`). Step 9 gives you the last commit ID to match in the PR, and readme step 3 says so. Step 9 starts only after the compound step. The plan matches CLAUDE.md.
 
