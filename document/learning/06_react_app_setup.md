@@ -263,7 +263,9 @@ After it, lint, typecheck and build passed again. `npx shadcn@latest info --json
 
 **code-reviewer, second pass**, after those fixes, with the same before-and-after check (it matched again). Verdict: **Needs changes**, one must fix: the line under this doc's header still said "No solution doc yet" after compound had written one. Fixed in `dae85a0`. Its other points: the owner hadn't answered the push question yet (now answered, above), and this doc is still long (300 lines when it ran, against 170 for task 05). We kept the length: the tracker asks for every topic it covers.
 
-**code-reviewer, third pass**, again with matching snapshots. Verdict: **Needs changes**, one must fix: we had ticked Review in task.md while the last recorded verdict was still "Needs changes". We unticked it (`3daf0a4`). Review gets ticked only in the same sitting as a pass that says "Ready to merge", which is what our new lesson says. Two suggestions, both done here: the count of search hits below was out of date, and nothing said where the "mark task 06 done" commit goes with a GitHub merge.
+**code-reviewer, third pass**, again with matching snapshots. Verdict: **Needs changes**, one must fix: we had ticked Review in task.md while the last recorded verdict was still "Needs changes". We unticked it (`3daf0a4`). Review gets ticked only in the same sitting as a pass that says "Ready to merge". Two suggestions, both done here: the count of search hits below was out of date, and nothing said where the "mark task 06 done" commit goes with a GitHub merge.
+
+**code-reviewer, fourth pass**, snapshots matching. Verdict: **Needs changes**, one must fix: the sentence above claimed our new lesson already had the "tick Review only with a passing verdict" rule, and it didn't. We added the rule and this third example to the lesson (`548ba4b`), the way task 05 extended its lesson. That is also the compound answer for passes 3 and 4: the slip would repeat, and the existing lesson is the right home, so no new solution doc.
 
 **Lesson:** a permission written for one situation can quietly grow when the project changes. `npm run *` was harmless while there were no scripts.
 
