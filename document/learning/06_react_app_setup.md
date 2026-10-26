@@ -2,7 +2,7 @@
 
 > **Branch:** 06_react_app_setup · **Date:** 2026-10-25 · **Status:** In progress
 
-**Plan:** [2026-10-25-1400-chore-astro-react-app-setup-plan.md](../plans/2026-10-25-1400-chore-astro-react-app-setup-plan.md). No solution doc yet: the compound question comes after the review.
+**Plan:** [2026-10-25-1400-chore-astro-react-app-setup-plan.md](../plans/2026-10-25-1400-chore-astro-react-app-setup-plan.md). **Solution docs:** [tailwind-source-limit-in-global-css.md](../solutions/best-practices/tailwind-source-limit-in-global-css.md) and [update-learning-doc-after-later-steps.md](../solutions/workflow-issues/update-learning-doc-after-later-steps.md).
 
 ## In one minute
 
@@ -36,7 +36,7 @@ Three things made this harder than one `npm create astro` command:
 | `eslint.config.js` | Added | The lint rules, and the folders lint skips |
 | `public/`, `.vscode/` | Added | Favicons; a suggestion to install the Astro editor extension (both from the template) |
 | `.gitignore` | Changed | `.astro/` (Astro's generated files) and `yarn-error.log*` (from the template) |
-| `CLAUDE.md`, `readme.md`, `document/skills/skills.md`, `document/task/task.md` | Changed | Stage, stack, repo map, a Commands section, "Run it locally", the shadcn note, backlog notes |
+| `CLAUDE.md`, `readme.md`, `document/skills/skills.md`, `document/task/task.md` | Changed | Stage, stack, repo map, a Commands section with the safe dev-server rule, a code-reviewer command that allows only the four checks, "Run it locally" with a note on a leftover dev server, the shadcn note, backlog notes |
 
 The folder layout, as a sketch:
 
@@ -83,7 +83,7 @@ node_modules/ dist/ .astro/   generated, ignored by git
 
    What it changed (`28e579a`):
    - **Added `components.json`:** style `base-nova`, CSS variables on, aliases like `@/components/ui`.
-   - **Added `src/lib/utils.ts`:** one line, `export { cn } from "cn"`.
+   - **Added `src/lib/utils.ts`:** one line, `export { cn } from "cn"`. Most shadcn guides online build `cn()` from `clsx` + `tailwind-merge` instead. A short, unfamiliar package name is what a *typosquat* (a fake package named like a real one) looks like, so we checked it. A package's own homepage field proves nothing, because anyone can write any URL there. The proof is in shadcn's own code: the official CLI in `node_modules/shadcn/dist/index.js` writes `moduleSpecifier:"cn"` and turns old `clsx` imports into `cn`, and the `shadcn` package itself depends on `cn`. The lockfile pins it to `registry.npmjs.org` with a checksum.
    - **Changed `global.css`:** imports for animations, shadcn's base CSS and the font. It also added a `.dark` class switch, colour *tokens* (named values like `--primary`, set once in `:root` and again in `.dark`), and base styles for `body`. Our `source("../")` line survived.
    - **Added 7 packages:** `@base-ui/react`, `cn`, `class-variance-authority`, `lucide-react`, `tw-animate-css`, `@fontsource-variable/geist` (font files served from our own site, no Google Fonts call) and `shadcn`.
 
@@ -98,7 +98,7 @@ node_modules/ dist/ .astro/   generated, ignored by git
 
 **Astro and islands.** Astro turns pages into plain HTML at build time. An `.astro` file starts with *frontmatter*, code between two `---` lines that runs at build time (ours imports `global.css`). The HTML comes below it. React components are *islands*: small interactive parts on a static page. A component sends JavaScript to the browser only if you add a `client:*` *directive*. For example, `<BookingForm client:load />` runs it as soon as the page loads, and `client:visible` waits until it scrolls into view. That start-up step is called *hydration*. Without a directive, React renders it to HTML at build time and ships no code.
 
-Our page has no island, so the built `dist/index.html` has **zero `<script>` tags**. It loads only the two favicons and one CSS file. The build still writes a 220,749-byte `client.FVv06Hs5.js` for future React islands, but no page loads it.
+Our page has no island, so the built `dist/index.html` has **zero `<script>` tags**. The HTML links the two favicons and one CSS file, and that CSS loads a font: shadcn's preset sets the page font to Geist. The CSS has five `@font-face` rules. Each lists the letters its font file covers (its `unicode-range`), and the browser downloads a file only when the page shows one of those letters. Our English text needs only `geist-latin-wght-normal…woff2` (29,400 bytes, the biggest file the page loads). The Cyrillic, Vietnamese and extended-Latin files wait. The build also writes a 220,749-byte `client.FVv06Hs5.js` for future React islands, but no page loads it. To see this yourself, run `npm run build` and `npm run preview`, then open the browser's Network tab.
 
 **Tailwind CSS v4.** Tailwind gives you *utility classes*: small classes that each do one thing, such as `text-3xl` (big text) or `font-bold`. At build time it scans your files for class names and writes CSS only for those. By default it scans the whole project, including `.claude/` and `document/`, which are full of class names. `source("../")` sets the scan root to the stylesheet's parent folder, `src/`.
 
@@ -211,11 +211,7 @@ $ npx astro dev status
 
 $ curl -sI http://localhost:4321
 HTTP/1.1 200 OK
-Vary: Origin
-content-type: text/html
-Date: Sun, 25 Oct 2026 08:58:34 GMT
-Connection: keep-alive
-Keep-Alive: timeout=5
+(5 more header lines, including content-type: text/html)
 
 $ npx astro dev stop
 {"message":"Stopped dev server (pid 49587).","label":"SKIP_FORMAT","level":"info"}
@@ -250,7 +246,56 @@ After it, lint, typecheck and build passed again. `npx shadcn@latest info --json
 
 ## Review and lessons
 
-**Pending.** ce-code-review and the code-reviewer agent haven't run yet, and the compound question isn't answered yet. The real verdict, the fixes and the compound answer go here before the merge.
+**ce-code-review** ran first: five reviewers (correctness, project standards, adversarial, agent-native, past lessons). Cross-model review is off in our config, so no code went to another AI company. Its verdict: **Ready to merge**, with no findings, plus five "residual risks" (things worth knowing that nobody proved are bugs) and one testing gap. We acted on four of them:
+
+| What it noticed | What we did |
+| --- | --- |
+| The code-reviewer command allowed `npm run *`. Once `package.json` existed, that also allowed `npm run dev` (a background server) and `npm run astro add` (an install). | Allowed only `lint`, `typecheck`, `build` and `test` (`1579037`) |
+| "Stop only the same pid" could still match the owner's server: when one is running, `npm run dev` prints "Dev server already running at … (pid N)" with *its* pid. | Stop only after your own `npm run dev` printed "Dev server running at" (`4825a96`) |
+| A dev server left by a Claude session blocks your `npm run dev`. | A note in readme's "Run it locally" (`3306b2a`) |
+| Nothing imports through `@/` yet, so the alias was untested. | A throwaway build importing `cn` from `@/lib/utils` passed and gave `p-4` for `cn("p-2", "p-4")`; the page was then restored |
+
+**code-reviewer** ran six times, each in a fresh process with the four-check command. Before and after every pass we saved `git status --short`, `git log -1 --oneline` and `git show-ref --heads`. They matched every time, so it changed nothing.
+
+| Pass | Verdict | The must fix | Fixed in |
+| --- | --- | --- | --- |
+| 1 | Needs changes | This section still said "pending" after ce-code-review had run | `4e2a694` |
+| 2 | Needs changes | The top line still said "No solution doc yet" after compound wrote one | `dae85a0` |
+| 3 | Needs changes | Review was ticked while the last recorded verdict was "Needs changes" | `3daf0a4` (unticked) |
+| 4 | Needs changes | This doc claimed the new lesson had a rule it didn't have | `548ba4b` (rule added to the lesson) |
+| 5 | Needs changes | "New ideas" missed the 29,400-byte font file the page loads | `ea3522b` |
+| 6 | **Ready to merge** | None | — |
+
+Other points the passes raised:
+
+- **A push:** git records two pushes of this branch to GitHub, on 25 Oct at 13:55 and 26 Oct at 11:25. No command in this task ran `git push`, and GitHub had no pull request for it (`gh pr list` printed `[]`). **The owner confirmed they pushed it by hand.**
+- **Done:** a viewport note for task 08 in the backlog, a shorter dev-server transcript, the bookkeeping plan for a GitHub merge (below), why `cn` is safe (step 6), and this table in place of five paragraphs.
+- **Left for the owner:** the backlog's "open decision" about GitHub is out of date, because `cd138bb` and `8b057f7` already joined the two `main`s. It's the owner's text, and whether a GitHub PR is now the normal way to merge is the owner's call.
+
+**Lesson:** a permission written for one situation can quietly grow when the project changes. `npm run *` was harmless while there were no scripts.
+
+**Compound:** we asked, "If this lesson weren't written down, would a future session repeat the mistake or redo the investigation?"
+
+- **The dev-server stop rule and the reviewer's permissions:** no. Both are now written in CLAUDE.md, which every session reads.
+- **Scaffolding into a non-empty folder:** no. It happens once.
+- **Tailwind's scan limit:** yes. If line 1 of `global.css` loses `source("../")`, lint, typecheck and build all still pass, and the CSS quietly grows five times. Task 07 is likely to rewrite that file (theme work or `shadcn apply`).
+
+So we ran the lightweight command from CLAUDE.md. It wrote [document/solutions/best-practices/tailwind-source-limit-in-global-css.md](../solutions/best-practices/tailwind-source-limit-in-global-css.md) and printed `✓ Documentation complete (non-interactive lightweight mode)`. We read it in full and ran its checks: `head -1` shows the line, the positive control `.text-3xl` counts 1, both canaries count 0, and neither canary appears in `src/`.
+
+The second pass asked the question again, because the same slip had now happened twice: this doc is written before review and compound, so its status lines go stale as those steps run. The answer is yes, because the workflow always writes the doc first. The second run wrote [document/solutions/workflow-issues/update-learning-doc-after-later-steps.md](../solutions/workflow-issues/update-learning-doc-after-later-steps.md). We read it, ran its search on this doc (four harmless hits at `dae85a0`) and checked its commit IDs against `git log`.
+
+We asked again after each later pass:
+
+- **Passes 3 and 4:** yes, the early tick would repeat. The existing lesson was the right home, so we added the rule "tick Review only with a passing verdict" and this third example to it (`548ba4b`), the way task 05 extended its lesson.
+- **Pass 5:** no new lesson. Page weight and fonts belong to task 07, whose backlog note already asks for fonts that cover Devanagari.
+- **Pass 6:** no new lesson. It found no mistake.
+
+**Merge: the owner's choice.** The owner will open a pull request on GitHub and merge it there, instead of the local `git merge --no-ff` in CLAUDE.md step 9. So this doc stays `In progress`, and task.md's Merge step stays open until the PR is merged and local `main` is pulled. Two tips:
+
+- Push the branch again first. Commits made after your last push aren't on GitHub yet.
+- Choose **Create a merge commit** on GitHub, not squash or rebase. Both of those give the commits new IDs, and this doc and the solution docs cite commit IDs.
+
+After the PR is merged, a Claude session pulls `main` and makes the one bookkeeping commit there, `docs(06): mark task 06 done` (CLAUDE.md step 9). It ticks Merge and sets this header to `Done`. The owner then pushes `main`, so local `main` and GitHub's `main` stay the same.
 
 ## Common mistakes
 
@@ -260,6 +305,7 @@ After it, lint, typecheck and build passed again. `npx shadcn@latest info --json
 - **Forgetting to import `global.css`.** Tailwind classes then do nothing. Here the page imports it; from task 08 the layout will.
 - **Committing `package.json` without `package-lock.json`.** Everyone else then installs different versions.
 - **Running `astro dev stop` without checking first.** It can stop the owner's server. Run `npx astro dev status` first.
+- **Leaving a wildcard permission like `Bash(npm run *)` as it is.** It matched nothing before this task and everything after. Name the exact commands.
 
 ## Try it yourself
 

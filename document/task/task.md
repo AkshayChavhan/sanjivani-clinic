@@ -93,9 +93,9 @@ Runs in a **new** Claude Code session, because agents and the plugin load only w
 - [x] Check it works and paste the real output into the learning doc: `npm run lint`; `npm run build`; `npm run dev` in the background, then `curl -sI http://localhost:4321` returns 200, then stop the server; `git status` shows no node_modules/, dist/ or .astro/
 - [x] Update the docs: CLAUDE.md (stage "app scaffolded, no features yet", stack set, commands `npm run dev`, `npm run build`, `npm run lint`); readme.md ("Run it locally": `npm install`, `npm run dev`, http://localhost:4321); the backlog below
 - [x] Write the learning doc: Astro basics and islands, the folder layout, Tailwind, what shadcn init changed, package.json vs package-lock.json, the npm scripts
-- [ ] Run ce-code-review (report only; most code is generated, so focus on config)
-- [ ] Review with code-reviewer and fix what it finds
-- [ ] Compound: save a lesson in document/solutions/ if one passes the counterfactual question
+- [x] Run ce-code-review (report only; most code is generated, so focus on config)
+- [x] Review with code-reviewer and fix what it finds
+- [x] Compound: save a lesson in document/solutions/ if one passes the counterfactual question
 - [ ] Merge into main
 
 ## Backlog (proposed)
@@ -125,6 +125,7 @@ Ideas for later. **Proposed only: confirm each one with the product brief before
 **Notes from task 06 for later tasks** (to fold into a task when it is planned):
 
 - **07:** the shadcn `nova` preset uses the Geist font, which has no Devanagari letters, so Hindi and Marathi text would fall back to a system font. Pick fonts that cover Devanagari. The `design-system/` folder is already kept out of lint and the Tailwind scan.
+- **08:** the layout's viewport tag should be `width=device-width, initial-scale=1`. The Astro template's placeholder page has only `width=device-width`.
 - **First UI task (08 or 09):** add React hooks lint rules (`eslint-plugin-react-hooks`). Add accessibility lint rules (`eslint-plugin-jsx-a11y`) once a version supports ESLint 10 (6.10.2 supports only ESLint 9 or older).
 - **Small cleanups, each its own task:**
   - a `.nvmrc` so fnm picks Node 24 on its own;
