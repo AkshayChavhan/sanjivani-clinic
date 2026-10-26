@@ -158,6 +158,26 @@ Ideas for later. **Proposed only: confirm each one with [the product brief](../p
 | 22 | 22_admin_panel | Decap CMS at /admin, with GitHub login through Vercel | 10, 23 |
 | 23 | 23_deploy_vercel | Deploy the site to Vercel | 09 |
 
+**Backlog check against [the product brief](../product/brief.md)** (task 26, 2026-10-26). Proposals only: changing, dropping or reordering a row is the owner's call.
+
+- **07** design system: Fits with a change, first version. Its goal should add a logo or wordmark, since none exists yet, and use the brief's colours and Devanagari fonts.
+- **08** layout shell: Fits, first version. Every page needs it.
+- **09** home page: Fits, first version. Keep the one entrance animation calm, with its reduced-motion fallback.
+- **10** clinic data and i18n: Fits, first version. Clinic facts stay marked placeholders until the owner gives the real ones.
+- **11** info pages: Fits, first version. FAQ answers stay general and factual, with no personal medical advice.
+- **12** quick actions: Fits with a change, first version. An "emergency strip" could suggest a skin clinic handles emergencies: owner to decide its wording, or drop it.
+- **13** open-now badge: Fits, later. Patients can book without it, and it needs the closed days and holidays from task 10.
+- **14** appointment form: Fits with a change, first version. Its "time slots" are preferred times the clinic confirms, not reserved slots, and it follows the brief's privacy rule.
+- **15** booking backends: Fits, first version. Already decided; the clinic stays responsible for the patient data each service holds.
+- **16** BMI calculator: Doesn't fit, owner to decide. BMI isn't part of skin, hair or nail care. Suggest dropping it.
+- **17** testimonials slider: Doesn't fit, owner to decide. The NMC guidelines don't allow testimonials, even with consent. Suggest dropping it.
+- **18** dark mode: Fits, later. Patients don't need it to book, and the brief's look is a light, warm off-white.
+- **19** gallery: Fits with a change, later. Photos of the clinic, its rooms and equipment only: no patients, no before-and-after.
+- **20** health blog: Fits with a change, later. Teaching articles under the doctor's name, with no self-promotion or cure claims. Each article in three languages adds translation work.
+- **21** SEO, schema, sitemap: Fits, first version. The schema uses facts only, with no ratings, since Google reviews aren't planned.
+- **22** admin panel: Fits, later. Lets the clinic change timings and fees without code, but every editor needs a GitHub login.
+- **23** deploy to Vercel: Fits with a change, first version. Before the site goes public: every placeholder is a real fact, the doctor has signed off the brief's Rules, a fluent reader has checked the Hindi and Marathi text, and the privacy notice and page are ready.
+
 **Notes from task 06 for later tasks** (to fold into a task when it is planned):
 
 - **07:** the shadcn `nova` preset uses the Geist font, which has no Devanagari letters, so Hindi and Marathi text would fall back to a system font. Pick fonts that cover Devanagari. The `design-system/` folder is already kept out of lint and the Tailwind scan.
