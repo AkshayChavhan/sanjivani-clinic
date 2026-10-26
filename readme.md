@@ -10,7 +10,7 @@ We build this project in small, numbered **tasks**. The full list is in [documen
 
 1. Every task has a number and a short name, like `01_project_setup`.
 2. Every task gets its own **branch** (a separate line of work in git) with the same name.
-3. When a task is finished, Claude says **"ready to merge"**. Only then do you push the branch, open a **pull request** into `main` on GitHub, and merge it with **Create a merge commit**. That way the history shows where each task starts and ends, and the commit IDs the docs cite stay the same. Claude's part, before and after your merge, is step 9 of the workflow in [CLAUDE.md](CLAUDE.md).
+3. When a task is finished, Claude says **"ready to merge"** and gives you the branch's last commit ID. Only then do you push the branch, open a **pull request** into `main` on GitHub, and merge it with **Create a merge commit**, once the PR's last commit shows that same ID. That way the history shows where each task starts and ends, and the commit IDs the docs cite stay the same. Claude's part, before and after your merge, is step 9 of the workflow in [CLAUDE.md](CLAUDE.md).
 4. Every task gets one **learning doc** in [document/learning/](document/learning/). It explains why we did the task, what changed and how we did it.
 5. Inside each task we follow the **Compound Engineering** loop: **plan** (bigger tasks get a written plan in `document/plans/`), **work**, **review** (an automatic code review, then the code-reviewer agent), and **compound** (save a reusable lesson in `document/solutions/` if it would stop a future mistake).
 
