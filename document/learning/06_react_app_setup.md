@@ -2,7 +2,7 @@
 
 > **Branch:** 06_react_app_setup · **Date:** 2026-10-25 · **Status:** In progress
 
-**Plan:** [2026-10-25-1400-chore-astro-react-app-setup-plan.md](../plans/2026-10-25-1400-chore-astro-react-app-setup-plan.md). **Solution doc:** [tailwind-source-limit-in-global-css.md](../solutions/best-practices/tailwind-source-limit-in-global-css.md).
+**Plan:** [2026-10-25-1400-chore-astro-react-app-setup-plan.md](../plans/2026-10-25-1400-chore-astro-react-app-setup-plan.md). **Solution docs:** [tailwind-source-limit-in-global-css.md](../solutions/best-practices/tailwind-source-limit-in-global-css.md) and [update-learning-doc-after-later-steps.md](../solutions/workflow-issues/update-learning-doc-after-later-steps.md).
 
 ## In one minute
 
@@ -258,8 +258,10 @@ After it, lint, typecheck and build passed again. `npx shadcn@latest info --json
 **code-reviewer, first pass** (in a fresh process, with the new four-check command). We saved `git status --short`, `git log -1 --oneline` and `git show-ref --heads` before and after. They matched, so it changed nothing. Verdict: **Needs changes**, with one must fix, one question and three suggestions:
 
 - **Must fix:** this section still said "pending" after ce-code-review had run. Fixed by writing it.
-- **Question, a push:** git records two pushes of this branch to GitHub, on 25 Oct at 13:55 and 26 Oct at 11:25. No command in this task ran `git push`, and GitHub has no pull request for the branch (`gh pr list` printed `[]`). Over to the owner (see the end of the task).
+- **Question, a push:** git records two pushes of this branch to GitHub, on 25 Oct at 13:55 and 26 Oct at 11:25. No command in this task ran `git push`, and GitHub had no pull request for the branch (`gh pr list` printed `[]`). **The owner confirmed they pushed it by hand.**
 - **Suggestions:** shorten this doc (we trimmed the dev-server transcript); the backlog's "open decision" about GitHub is out of date, because `cd138bb` and `8b057f7` already joined the two `main`s (it's the owner's text, so we only point it out); and the viewport tag lacks `initial-scale=1`, which is now a backlog note for task 08.
+
+**code-reviewer, second pass**, after those fixes, with the same before-and-after check (it matched again). Verdict: **Needs changes**, one must fix: the line under this doc's header still said "No solution doc yet" after compound had written one. Fixed in `dae85a0`. Its other points: the owner hadn't answered the push question yet (now answered, above), and this doc is still long (300 lines when it ran, against 170 for task 05). We kept the length: the tracker asks for every topic it covers.
 
 **Lesson:** a permission written for one situation can quietly grow when the project changes. `npm run *` was harmless while there were no scripts.
 
@@ -270,6 +272,13 @@ After it, lint, typecheck and build passed again. `npx shadcn@latest info --json
 - **Tailwind's scan limit:** yes. If line 1 of `global.css` loses `source("../")`, lint, typecheck and build all still pass, and the CSS quietly grows five times. Task 07 is likely to rewrite that file (theme work or `shadcn apply`).
 
 So we ran the lightweight command from CLAUDE.md. It wrote [document/solutions/best-practices/tailwind-source-limit-in-global-css.md](../solutions/best-practices/tailwind-source-limit-in-global-css.md) and printed `✓ Documentation complete (non-interactive lightweight mode)`. We read it in full and ran its checks: `head -1` shows the line, the positive control `.text-3xl` counts 1, both canaries count 0, and neither canary appears in `src/`.
+
+The second pass asked the question again, because the same slip had now happened twice: this doc is written before review and compound, so its status lines go stale as those steps run. The answer is yes, because the workflow always writes the doc first. The second run wrote [document/solutions/workflow-issues/update-learning-doc-after-later-steps.md](../solutions/workflow-issues/update-learning-doc-after-later-steps.md). We read it, ran its search on this doc (only four harmless hits) and checked its commit IDs against `git log`.
+
+**Merge: the owner's choice.** The owner will open a pull request on GitHub and merge it there, instead of the local `git merge --no-ff` in CLAUDE.md step 9. So this doc stays `In progress`, and task.md's Merge step stays open until the PR is merged and local `main` is pulled. Two tips:
+
+- Push the branch again first. Commits made after your last push aren't on GitHub yet.
+- Choose **Create a merge commit** on GitHub, not squash or rebase. Both of those give the commits new IDs, and this doc and the solution docs cite commit IDs.
 
 ## Common mistakes
 
