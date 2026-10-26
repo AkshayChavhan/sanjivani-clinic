@@ -2,7 +2,7 @@
 
 > **Branch:** 26_product_brief · **Date:** 2026-10-26 · **Status:** In progress
 
-**Plan:** [2026-10-26-1936-docs-product-brief-plan.md](../plans/2026-10-26-1936-docs-product-brief-plan.md). **Solution doc:** Pending: the compound question comes after the review.
+**Plan:** [2026-10-26-1936-docs-product-brief-plan.md](../plans/2026-10-26-1936-docs-product-brief-plan.md). **Solution doc:** [check-legal-rules-against-official-sources.md](../solutions/workflow-issues/check-legal-rules-against-official-sources.md).
 
 ## In one minute
 
@@ -180,7 +180,7 @@ To pay for the new words, the brief dropped a few repeated ones, such as "(noted
 2. **"Try it yourself" asked for exactly 1000 words.** It now asks for 1,000 or fewer, so a later edit can't make it wrong.
 3. **This doc is long** (about 3,000 words). Left as it is: the legal-sources table is the part a later task will need.
 
-**Compound: Pending.** The compound question comes after the review.
+**Compound:** we asked, "If this lesson weren't written down, would a future session repeat the mistake or redo the investigation?" Yes. Citing laws by name guarded against wrong numbers, but not against a rule the model had never seen, and the NMC guidelines were that kind of rule. Tasks 12, 14, 15, 17, 19, 20, 21 and 23 all rely on these rules, and a session planning one of them would trust memory again or redo the research. No saved lesson covered it. We ran the lightweight command, and it wrote [check-legal-rules-against-official-sources.md](../solutions/workflow-issues/check-legal-rules-against-official-sources.md) (`✓ Documentation complete (non-interactive lightweight mode)`). We read it in full. Its commit IDs and quotes match the repo. We corrected one sentence that overstated what would have happened to backlog 17 without the check.
 
 ## Common mistakes
 
