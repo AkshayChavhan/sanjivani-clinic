@@ -263,6 +263,8 @@ After it, lint, typecheck and build passed again. `npx shadcn@latest info --json
 
 **code-reviewer, second pass**, after those fixes, with the same before-and-after check (it matched again). Verdict: **Needs changes**, one must fix: the line under this doc's header still said "No solution doc yet" after compound had written one. Fixed in `dae85a0`. Its other points: the owner hadn't answered the push question yet (now answered, above), and this doc is still long (300 lines when it ran, against 170 for task 05). We kept the length: the tracker asks for every topic it covers.
 
+**code-reviewer, third pass**, again with matching snapshots. Verdict: **Needs changes**, one must fix: we had ticked Review in task.md while the last recorded verdict was still "Needs changes". We unticked it (`3daf0a4`). Review gets ticked only in the same sitting as a pass that says "Ready to merge", which is what our new lesson says. Two suggestions, both done here: the count of search hits below was out of date, and nothing said where the "mark task 06 done" commit goes with a GitHub merge.
+
 **Lesson:** a permission written for one situation can quietly grow when the project changes. `npm run *` was harmless while there were no scripts.
 
 **Compound:** we asked, "If this lesson weren't written down, would a future session repeat the mistake or redo the investigation?"
@@ -273,12 +275,14 @@ After it, lint, typecheck and build passed again. `npx shadcn@latest info --json
 
 So we ran the lightweight command from CLAUDE.md. It wrote [document/solutions/best-practices/tailwind-source-limit-in-global-css.md](../solutions/best-practices/tailwind-source-limit-in-global-css.md) and printed `✓ Documentation complete (non-interactive lightweight mode)`. We read it in full and ran its checks: `head -1` shows the line, the positive control `.text-3xl` counts 1, both canaries count 0, and neither canary appears in `src/`.
 
-The second pass asked the question again, because the same slip had now happened twice: this doc is written before review and compound, so its status lines go stale as those steps run. The answer is yes, because the workflow always writes the doc first. The second run wrote [document/solutions/workflow-issues/update-learning-doc-after-later-steps.md](../solutions/workflow-issues/update-learning-doc-after-later-steps.md). We read it, ran its search on this doc (only four harmless hits) and checked its commit IDs against `git log`.
+The second pass asked the question again, because the same slip had now happened twice: this doc is written before review and compound, so its status lines go stale as those steps run. The answer is yes, because the workflow always writes the doc first. The second run wrote [document/solutions/workflow-issues/update-learning-doc-after-later-steps.md](../solutions/workflow-issues/update-learning-doc-after-later-steps.md). We read it, ran its search on this doc (four harmless hits at `dae85a0`) and checked its commit IDs against `git log`.
 
 **Merge: the owner's choice.** The owner will open a pull request on GitHub and merge it there, instead of the local `git merge --no-ff` in CLAUDE.md step 9. So this doc stays `In progress`, and task.md's Merge step stays open until the PR is merged and local `main` is pulled. Two tips:
 
 - Push the branch again first. Commits made after your last push aren't on GitHub yet.
 - Choose **Create a merge commit** on GitHub, not squash or rebase. Both of those give the commits new IDs, and this doc and the solution docs cite commit IDs.
+
+After the PR is merged, a Claude session pulls `main` and makes the one bookkeeping commit there, `docs(06): mark task 06 done` (CLAUDE.md step 9). It ticks Merge and sets this header to `Done`. The owner then pushes `main`, so local `main` and GitHub's `main` stay the same.
 
 ## Common mistakes
 
