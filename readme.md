@@ -2,7 +2,7 @@
 
 A fast, multilingual website where patients see the doctor, services and timings, and book an appointment.
 
-> **Stage:** setup only. There is no app code yet.
+> **Stage:** app scaffolded, no features yet.
 
 ## How we work
 
@@ -32,8 +32,40 @@ The rules Claude follows in this repo (the workflow, git rules and definition of
 | `.claude/agents/` | 4 project subagents: task-planner, ui-engineer, learning-doc-writer, code-reviewer (see the Agents section in CLAUDE.md) |
 | `.claude/settings.json` | Project settings for Claude Code: the pinned Compound Engineering plugin |
 | `.compound-engineering/` | Compound Engineering config (`config.yaml`) and the plugin's full template (`config.example.yaml`) |
-| `document/plans/` | Plans for single tasks, written by ce-plan (the folder appears with the first plan) |
+| `document/plans/` | Plans for single tasks, written by ce-plan |
 | `document/solutions/` | Solution docs: short lessons for future sessions, written by ce-compound |
+| `package.json`, `package-lock.json` | The app's packages and npm scripts; the lockfile pins every exact version |
+| `astro.config.mjs` | Astro's config: turns on React and Tailwind |
+| `tsconfig.json` | TypeScript's config, including the `@/` shortcut for `src/` |
+| `eslint.config.js` | ESLint's config: the code checker behind `npm run lint` |
+| `components.json` | shadcn/ui's config |
+| `src/` | The app's code: pages, styles and helpers |
+| `public/` | Files served exactly as they are, such as the favicon |
+| `.vscode/` | VS Code settings from the Astro template (it recommends the Astro extension) |
+
+## Run it locally
+
+1. Install the packages (first time, and after every pull that changes `package-lock.json`):
+
+   ```bash
+   npm install
+   ```
+
+2. Start the dev server:
+
+   ```bash
+   npm run dev
+   ```
+
+3. Open http://localhost:4321. The page reloads when you save a file. Press Ctrl+C in the terminal to stop the server.
+
+Other commands:
+
+| Command | What it does |
+| --- | --- |
+| `npm run build` | Builds the finished site into `dist/` |
+| `npm run lint` | Checks the code for mistakes (ESLint) |
+| `npm run typecheck` | Checks the TypeScript types (`astro check`) |
 
 ## Prerequisites
 
@@ -45,7 +77,7 @@ The rules Claude follows in this repo (the workflow, git rules and definition of
 | Python | 3 | `python3 --version` |
 | Claude Code | latest | `claude --version` |
 
-- The app (task 06 on) needs Node 22.23.4 or newer. The setup tasks were started on Node 20.20.2, so upgrade before task 06 (Node 24 LTS is a good choice).
+- The app needs Node 22.23.4 or newer. Node 24 LTS is a good choice; the app was set up on Node 24.22.1.
 - The first time you open this repo in Claude Code, it asks whether you **trust this folder**. Accept, so Claude Code can use this project's settings.
 - Optional: a free [21st.dev](https://21st.dev) account for the 21st.dev skills. Log in with `npx @21st-dev/cli login`. Your login stays on your machine, never in the repo. See [document/skills/skills.md](document/skills/skills.md).
 - The skills were installed with `npx -y skills@1.5.18` (no global install). That version runs on Node 20; newer versions need Node 22.20 or newer.

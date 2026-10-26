@@ -6,8 +6,10 @@ Claude reads this file at the start of every session. Follow it over your defaul
 
 - **Name:** Sanjivani Clinic Website
 - **What it is:** a fast, multilingual website where patients see the doctor, services and timings, and book an appointment.
-- **Stage:** setup only. There is no app code yet.
-- **Stack (confirmed):** Astro 7 with React islands (TypeScript), Tailwind CSS v4, shadcn/ui and GSAP. The site will be hosted on Vercel later. The app needs Node 22.23.4 or newer.
+- **Stage:** app scaffolded, no features yet.
+- **Stack (confirmed):** Astro 7 with React islands (TypeScript), Tailwind CSS v4, shadcn/ui (Base UI, `nova` preset) and GSAP. The site will be hosted on Vercel later. The app needs Node 22.23.4 or newer.
+  - Versions at setup (task 06): Astro 7.4, React 19.3, Tailwind 4.3, shadcn 4.22, GSAP 3.15, ESLint 10. `package-lock.json` holds the exact versions.
+  - **TypeScript stays on `~6.0.3`.** `astro check` refuses TypeScript 7, and typescript-eslint supports only versions below 6.1. Never install `typescript@latest`.
 - **The owner is a junior software engineer who is learning.** Every task must teach: explain why, use plain words, and explain each new term the first time it appears.
 
 ## Repo map
@@ -26,8 +28,34 @@ Claude reads this file at the start of every session. Follow it over your defaul
 | `.claude/agents/` | The 4 project subagents (task-planner, ui-engineer, learning-doc-writer, code-reviewer) |
 | `.claude/settings.json` | Project settings: the pinned Compound Engineering marketplace and the enabled plugin |
 | `.compound-engineering/` | Compound Engineering config (`config.yaml`) and the plugin's full template (`config.example.yaml`) |
-| `document/plans/` | Plans for single tasks, written by ce-plan (the folder appears with the first plan) |
+| `document/plans/` | Plans for single tasks, written by ce-plan |
 | `document/solutions/` | Solution docs: short reusable lessons, written by ce-compound |
+| `package.json`, `package-lock.json` | The app's packages and npm scripts; the lockfile pins every exact version |
+| `astro.config.mjs` | Astro config: the React integration and the Tailwind Vite plugin |
+| `tsconfig.json` | TypeScript config: the `@/*` alias for `src/`, and `.claude/` and `document/` excluded |
+| `eslint.config.js` | ESLint config, with the folders lint must skip |
+| `components.json` | shadcn config: Base UI, `nova` preset, CSS variables, aliases |
+| `src/` | The app: `pages/` (one file per URL), `styles/global.css` (Tailwind and theme tokens), `lib/utils.ts` (`cn()`) |
+| `public/` | Files served as they are, such as the favicons |
+| `.vscode/` | Editor settings from the Astro template: recommends the Astro extension |
+
+## Commands
+
+Run these from the repo root.
+
+| Command | What it does |
+| --- | --- |
+| `npm install` | Installs the packages in `package-lock.json` |
+| `npm run dev` | Starts the dev server at http://localhost:4321 |
+| `npm run build` | Builds the site into `dist/` |
+| `npm run lint` | Checks the code with ESLint |
+| `npm run typecheck` | Checks types with `astro check` |
+
+**The dev server in a Claude session.** Astro detects Claude Code and runs `npm run dev` in the background. It prints the URL, which may not be 4321, and returns.
+
+- First run `npx astro dev status`. If a server is already running, it may be the owner's: use the URL it shows, and don't start or stop it.
+- Run `npx astro dev stop` only when your own `npm run dev` printed `Dev server running at … (pid N)` and `npx astro dev status` still shows that pid. If it printed `Dev server already running`, the server isn't yours: leave it. `astro dev stop` stops any dev server for this project, including the owner's. Never pass `--force` to `astro dev`; it replaces the running server.
+- Logs: `npx astro dev logs`. Astro's docs: https://docs.astro.build
 
 ## Task workflow
 
@@ -49,7 +77,7 @@ Every task runs these steps:
    - From task 04 on: run the code-reviewer agent in a fresh process. (A running session only sees agents that existed when it started.)
 
      ```bash
-     claude -p "Review the current branch (NN_short_name) against main, following your instructions." --agent code-reviewer --allowedTools "Read" "Glob" "Grep" "Bash(git *)" "Bash(ls *)" "Bash(grep *)" "Bash(cat *)" "Bash(head *)" "Bash(wc *)" "Bash(find *)" "Bash(test *)" "Bash(npm run *)"
+     claude -p "Review the current branch (NN_short_name) against main, following your instructions." --agent code-reviewer --allowedTools "Read" "Glob" "Grep" "Bash(git *)" "Bash(ls *)" "Bash(grep *)" "Bash(cat *)" "Bash(head *)" "Bash(wc *)" "Bash(find *)" "Bash(test *)" "Bash(npm run lint)" "Bash(npm run typecheck)" "Bash(npm run build)" "Bash(npm run test)"
      ```
 
    - Before and after the review, run `git status --short`, `git log -1 --oneline` and `git show-ref --heads`. All three must match: the reviewer is read-only only because its instructions say so. (`git show-ref --heads` lists every local branch and its commit, so it also catches a deleted or moved branch.)

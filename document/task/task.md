@@ -15,7 +15,7 @@ This file tracks every task in this project.
 | 03 | 03_skills_installation | 16 Claude skills for UI work, plus a skills guide | Done | [03_skills_installation](../learning/03_skills_installation.md) |
 | 04 | 04_agents | 4 project subagents | Done | [04_agents](../learning/04_agents.md) |
 | 05 | 05_compound_engineering | The Compound Engineering plugin, pinned and configured | Done | [05_compound_engineering](../learning/05_compound_engineering.md) |
-| 06 | 06_react_app_setup | The Astro + React app, shadcn init, GSAP (runs in a new session) | To do | — |
+| 06 | 06_react_app_setup | The Astro + React app, shadcn init, GSAP (runs in a new session) | In progress | [06_react_app_setup](../learning/06_react_app_setup.md) |
 
 ## Task steps
 
@@ -77,22 +77,22 @@ This file tracks every task in this project.
 
 Runs in a **new** Claude Code session, because agents and the plugin load only when a session starts.
 
-- [ ] Before starting: `node -v` shows 22.23.4 or newer (Astro 7 needs it)
-- [ ] Create branch
-- [ ] Plan with `/compound-engineering:ce-plan`: "Scaffold the Astro + React app at the repo root, run shadcn init, install gsap and @gsap/react. No features." Link the plan here. When ce-plan offers next steps, choose to stop. Nothing may push or open a PR.
-- [ ] Check the scaffold's current flags: `npm create astro@latest -- --help`
-- [ ] Scaffold into a scratch folder outside the repo (for example `npm create astro@latest <scratch>/sanjivani-clinic -- --template minimal --no-install --no-git --yes`, adjusted to the flags you just checked)
-- [ ] Copy everything into the repo except README.md, .gitignore, node_modules/ and .git/. Merge the scaffold's .gitignore lines into ours and keep our comments.
-- [ ] If the scaffold made its own AGENTS.md or CLAUDE.md, never let it replace ours. Read it, keep AGENTS.md if it helps, and import it from CLAUDE.md with an `@AGENTS.md` line. Explain the choice in the learning doc.
-- [ ] Run `npm install`
-- [ ] Add React, Tailwind and the `@/*` path alias by following the shadcn Astro guide
-- [ ] Replace the starter page with a minimal placeholder: a "Sanjivani Clinic" heading and one line of text. Nothing else.
-- [ ] shadcn: follow the shadcn skill. Run `npx shadcn@latest init --help` first, then init with the defaults (CSS variables). Add no components. Check that `npx shadcn@latest info --json` finds components.json.
-- [ ] Run `npm install gsap @gsap/react`. Write no animation code yet.
-- [ ] Add ESLint (eslint-plugin-astro + typescript-eslint) with an `npm run lint` script, and `npm run typecheck` (`astro check`)
-- [ ] Check it works and paste the real output into the learning doc: `npm run lint`; `npm run build`; `npm run dev` in the background, then `curl -sI http://localhost:4321` returns 200, then stop the server; `git status` shows no node_modules/, dist/ or .astro/
-- [ ] Update the docs: CLAUDE.md (stage "app scaffolded, no features yet", stack set, commands `npm run dev`, `npm run build`, `npm run lint`); readme.md ("Run it locally": `npm install`, `npm run dev`, http://localhost:4321); the backlog below
-- [ ] Write the learning doc: Astro basics and islands, the folder layout, Tailwind, what shadcn init changed, package.json vs package-lock.json, the npm scripts
+- [x] Before starting: `node -v` shows 22.23.4 or newer (Astro 7 needs it)
+- [x] Create branch
+- [x] Plan with `/compound-engineering:ce-plan`: "Scaffold the Astro + React app at the repo root, run shadcn init, install gsap and @gsap/react. No features." Link the plan here. When ce-plan offers next steps, choose to stop. Nothing may push or open a PR. Plan: [2026-10-25-1400-chore-astro-react-app-setup-plan.md](../plans/2026-10-25-1400-chore-astro-react-app-setup-plan.md)
+- [x] Check the scaffold's current flags: `npm create astro@latest -- --help`
+- [x] Scaffold into a scratch folder outside the repo (for example `npm create astro@latest <scratch>/sanjivani-clinic -- --template minimal --no-install --no-git --yes`, adjusted to the flags you just checked)
+- [x] Copy everything into the repo except README.md, .gitignore, node_modules/ and .git/. Merge the scaffold's .gitignore lines into ours and keep our comments.
+- [x] If the scaffold made its own AGENTS.md or CLAUDE.md, never let it replace ours. Read it, keep AGENTS.md if it helps, and import it from CLAUDE.md with an `@AGENTS.md` line. Explain the choice in the learning doc.
+- [x] Run `npm install`
+- [x] Add React, Tailwind and the `@/*` path alias by following the shadcn Astro guide
+- [x] Replace the starter page with a minimal placeholder: a "Sanjivani Clinic" heading and one line of text. Nothing else.
+- [x] shadcn: follow the shadcn skill. Run `npx shadcn@latest init --help` first, then init with the defaults (CSS variables). Add no components. Check that `npx shadcn@latest info --json` finds components.json.
+- [x] Run `npm install gsap @gsap/react`. Write no animation code yet.
+- [x] Add ESLint (eslint-plugin-astro + typescript-eslint) with an `npm run lint` script, and `npm run typecheck` (`astro check`)
+- [x] Check it works and paste the real output into the learning doc: `npm run lint`; `npm run build`; `npm run dev` in the background, then `curl -sI http://localhost:4321` returns 200, then stop the server; `git status` shows no node_modules/, dist/ or .astro/
+- [x] Update the docs: CLAUDE.md (stage "app scaffolded, no features yet", stack set, commands `npm run dev`, `npm run build`, `npm run lint`); readme.md ("Run it locally": `npm install`, `npm run dev`, http://localhost:4321); the backlog below
+- [x] Write the learning doc: Astro basics and islands, the folder layout, Tailwind, what shadcn init changed, package.json vs package-lock.json, the npm scripts
 - [ ] Run ce-code-review (report only; most code is generated, so focus on config)
 - [ ] Review with code-reviewer and fix what it finds
 - [ ] Compound: save a lesson in document/solutions/ if one passes the counterfactual question
@@ -121,6 +121,16 @@ Ideas for later. **Proposed only: confirm each one with the product brief before
 | 21 | 21_seo_schema_sitemap | Page titles and descriptions, clinic schema (JSON-LD), sitemap, robots.txt | 11 |
 | 22 | 22_admin_panel | Decap CMS at /admin, with GitHub login through Vercel | 10, 23 |
 | 23 | 23_deploy_vercel | Deploy the site to Vercel | 09 |
+
+**Notes from task 06 for later tasks** (to fold into a task when it is planned):
+
+- **07:** the shadcn `nova` preset uses the Geist font, which has no Devanagari letters, so Hindi and Marathi text would fall back to a system font. Pick fonts that cover Devanagari. The `design-system/` folder is already kept out of lint and the Tailwind scan.
+- **First UI task (08 or 09):** add React hooks lint rules (`eslint-plugin-react-hooks`). Add accessibility lint rules (`eslint-plugin-jsx-a11y`) once a version supports ESLint 10 (6.10.2 supports only ESLint 9 or older).
+- **Small cleanups, each its own task:**
+  - a `.nvmrc` so fnm picks Node 24 on its own;
+  - the `skills@1.5.18` pin note in CLAUDE.md and readme.md, which says Node is below 22.20 (it is now 24);
+  - the `.next/` and `next-env.d.ts` lines left in `.gitignore` from an earlier stack guess (also named in CLAUDE.md and code-reviewer);
+  - code-reviewer reads every changed file in full, including `package-lock.json` (thousands of lines). Decide how it should check lockfiles instead.
 
 **Open decision for the owner: keeping `main` in step with GitHub.** Branches were pushed and PRs merged on GitHub from the owner's account, so local `main` and GitHub's `main` have split. GitHub's `main` has PR merge commits that local `main` lacks. Local `main` has the bookkeeping commits, and also the last four 04_agents fixes, because PR #3 merged an earlier tip (`edcf7db`). Two ways forward:
 1. Keep local `--no-ff` merges, and bring GitHub's PR merge commits in with one `git merge origin/main` on main. This needs a one-time exception to the "only bookkeeping commits on main" rule in CLAUDE.md, and its own small task.
