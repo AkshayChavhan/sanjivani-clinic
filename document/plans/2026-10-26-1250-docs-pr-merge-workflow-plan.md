@@ -36,9 +36,9 @@ CLAUDE.md step 9, readme.md, task.md's "How to add a task", `document/skills/ski
 - R2. A Claude session still never pushes, opens a PR or merges unless the owner asks in that session. This is unchanged from the Git rules and the Compound Engineering section.
 - R3. readme.md "How we work", task.md "How to add a task", `document/skills/skills.md`, CLAUDE.md's Definition of done and the solution doc `check-new-steps-against-claude-md.md` agree with R1.
 - R4. code-reviewer treats a branch that tracks GitHub as normal. It flags only a push or PR that the learning doc says Claude made unasked.
-- R6. The owner's own page (readme "How we work") says to open and merge the PR only after Claude says "ready to merge".
-- R7. The next session that starts a task pulls `main`, then finishes the previous task's merge step if its PR is merged, or asks the owner to merge it first.
 - R5. The backlog's "Open decision" paragraph is removed, because the owner has decided.
+- R6. The owner's own page (readme "How we work") says to open and merge the PR only after Claude says "ready to merge".
+- R7. The next session that starts a task pulls `main`, then finds unfinished tasks from the local branches (`git branch --list --no-merged origin/main`) and from task.md. It finishes a merged task's step 9, or asks the owner to merge an unmerged one first.
 
 ### Key Decisions
 
@@ -64,8 +64,8 @@ CLAUDE.md step 9, readme.md, task.md's "How to add a task", `document/skills/ski
 These are this plan's own choices. The owner confirmed A1 on 2026-10-26, after the second code-reviewer pass.
 
 - A1. **The bookkeeping commit stays on local `main`, and nobody pushes it.** After the A3 check, Claude makes `docs(NN): mark task NN done` on local `main`, as today. The next task branches from local `main`, so that task's pull request carries the commit to GitHub. GitHub's `main` then fast-forwards past it, and `git pull --ff-only` keeps working. CLAUDE.md's "the only kind of commit made directly on main" stays true.
-- A2. **Step 1 pulls first, then finishes the previous task (R7):** `git pull --ff-only origin main`, and stop if it won't fast-forward. Then read task.md on `main`. If an earlier task is In progress and its PR is merged, run its step 9. If it isn't merged yet, stop and ask the owner. Then branch.
-- A3. **The "missing commits" check runs before the bookkeeping commit:** `git rev-list --count origin/main..NN_short_name` must print 0. If it doesn't, the owner opens a second PR from the same branch, as task 06 needed PR #6.
+- A2. **Step 1 pulls first, then finishes the previous task (R7):** `git pull --ff-only origin main`, and stop if it won't fast-forward. Then list branches GitHub's `main` lacks (`git branch --list --no-merged origin/main`). For a task branch with no merged PR, stop and ask the owner; for one with a merged PR, run its step 9. A task still In progress in task.md on `main` also gets its step 9. Then branch. (task.md alone can't show an unmerged task, because a task becomes In progress only on its own branch.)
+- A3. **The "missing commits" check runs before the bookkeeping commit:** `git rev-list --count origin/main..NN_short_name` must print 0. If the pull won't fast-forward, the PR was squashed or rebased: stop and tell the owner. If the PR was a merge commit and the count isn't 0, the owner opens a second PR from the same branch, as task 06 needed PR #6.
 
 ## Implementation Units
 
@@ -107,7 +107,7 @@ These are this plan's own choices. The owner confirmed A1 on 2026-10-26, after t
 ### U4. Learning doc
 
 - **Goal:** `document/learning/24_pr_merge_workflow.md` explains the new ending, and why the old one split `main`.
-- **Requirements:** R1 to R5
+- **Requirements:** R1 to R7
 - **Files:** `document/learning/24_pr_merge_workflow.md`
 - **Test expectation:** none -- docs.
 - **Verification:** its pasted commands match a re-run.
