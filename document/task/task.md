@@ -18,7 +18,7 @@ This file tracks every task in this project.
 | 06 | 06_react_app_setup | The Astro + React app, shadcn init, GSAP (runs in a new session) | Done | [06_react_app_setup](../learning/06_react_app_setup.md) |
 | 24 | 24_pr_merge_workflow | Every task ends with a GitHub pull request the owner merges, not a local merge | Done | [24_pr_merge_workflow](../learning/24_pr_merge_workflow.md) |
 | 25 | 25_small_cleanups | `.nvmrc`, stale notes, old `.next/` lines, and a lockfile check for code-reviewer | Done | [25_small_cleanups](../learning/25_small_cleanups.md) |
-| 26 | 26_product_brief | A one-page product brief: the clinic, its patients, what the site must do, its look, languages and scope | In progress | — |
+| 26 | 26_product_brief | A one-page product brief: the clinic, its patients, what the site must do, its look, languages and scope | In progress | [26_product_brief](../learning/26_product_brief.md) |
 
 ## Task steps
 
@@ -129,7 +129,7 @@ Runs in a **new** Claude Code session, because agents and the plugin load only w
 - [x] Plan with `/compound-engineering:ce-plan` and link the plan here: [2026-10-26-1936-docs-product-brief-plan.md](../plans/2026-10-26-1936-docs-product-brief-plan.md)
 - [x] Write the product brief in `document/product/brief.md` from the owner's answers, and add it to the repo maps in readme.md and CLAUDE.md
 - [x] Check each backlog idea against the brief and write down which ones fit (changing the backlog stays the owner's call)
-- [ ] Write the learning doc
+- [x] Write the learning doc
 - [ ] Review with code-reviewer and fix what it finds
 - [ ] Compound: save a lesson in document/solutions/ if one passes the counterfactual question
 - [ ] Merge into main
