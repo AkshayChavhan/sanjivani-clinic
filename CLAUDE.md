@@ -145,7 +145,7 @@ Rules:
 - shadcn: add only official `@shadcn` items without asking. Ask before any third-party registry or URL, `--overwrite`, `init --force` or `mcp init`. Read every file it adds.
 - 21st needs the owner's login or `TWENTYFIRST_TOKEN`. Never commit the key. No hosted generation (`21st generate` or `iterate`) unless `21st usage` shows AI is enabled and the owner agrees. Never publish to 21st.dev, and never run `21st install-skill`, `21st init --write`, or any publish, profile or delete command. Review every `21st add` diff and its new npm packages.
 - Don't edit `.claude/skills/`. Project rules go in this file.
-- For a new skill: read it first, install it with the project-scope command (`DISABLE_TELEMETRY=1 npx -y skills@1.5.18 add <owner/repo> --agent claude-code --skill <name> --copy -y`; the pin is needed while Node is below 22.20), and update skills.md.
+- For a new skill: read it first, install it with the project-scope command (`DISABLE_TELEMETRY=1 npx -y skills@1.5.18 add <owner/repo> --agent claude-code --skill <name> --copy -y`; keep the `1.5.18` pin: it's the installer version we used, and a newer one must be checked first, in its own task), and update skills.md.
 
 ## Agents
 
