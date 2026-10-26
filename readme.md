@@ -24,6 +24,7 @@ The rules Claude follows in this repo (the workflow, git rules and definition of
 | `CLAUDE.md` | The rules Claude reads at the start of every session |
 | `.gitignore` | The list of files git must never track: dependencies, build output, secrets |
 | `document/task/task.md` | The task tracker: every task, its status and its steps |
+| `document/product/brief.md` | The product brief: the clinic, its patients, what the site must do, its look, languages and rules. Every new task checks its choices against it |
 | `document/learning/TEMPLATE.md` | The template every learning doc starts from |
 | `document/learning/NN_name.md` | One learning doc per task, for example `01_project_setup.md` |
 | `document/skills/skills.md` | The skills guide: the 16 UI skills, how they work together, how to manage them |
