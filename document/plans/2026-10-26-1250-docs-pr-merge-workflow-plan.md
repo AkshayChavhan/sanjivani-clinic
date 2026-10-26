@@ -116,10 +116,16 @@ These are this plan's own choices. The owner confirmed A1 on 2026-10-26, after t
 
 | Check | Passes when |
 | --- | --- |
-| `grep -rn -i -E -- '--no-ff\|merges locally\|open decision' CLAUDE.md readme.md document/task/task.md document/skills/ .claude/agents/ document/solutions/` | no hits except task 24's own step title in task.md and the lesson's history note about the old `--no-ff` rule |
+| The leftover search (below) | no hits except task 24's own step title in task.md and the lesson's history note about the old `--no-ff` rule |
 | The lesson's Merge check, `grep -n -A1 "Merge into main" document/task/task.md` | a blank line after every task's Merge step |
 | Re-read CLAUDE.md "Task workflow", "Git rules" and "Compound Engineering" together | no rule lets Claude push, open a PR or merge unasked, and step 9 matches the Definition of done |
 | code-reviewer pass, with the snapshot before and after | the snapshots match, and the verdict is recorded |
+
+The leftover search:
+
+```bash
+grep -rn -i -E -- '--no-ff|merges locally|open decision' CLAUDE.md readme.md document/task/task.md document/skills/ .claude/agents/ document/solutions/
+```
 
 ## Definition of Done
 
