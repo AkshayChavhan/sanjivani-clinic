@@ -78,6 +78,7 @@ Other commands:
 | npm | comes with Node.js | `npm -v` |
 | Python | 3 | `python3 --version` |
 | Claude Code | latest | `claude --version` |
+| GitHub CLI (`gh`) | any recent version, logged in to GitHub | `gh auth status` |
 
 - The app needs Node 22.23.4 or newer. Node 24 LTS is a good choice; the app was set up on Node 24.22.1.
 - The first time you open this repo in Claude Code, it asks whether you **trust this folder**. Accept, so Claude Code can use this project's settings.
