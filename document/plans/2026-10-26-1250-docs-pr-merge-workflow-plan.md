@@ -61,10 +61,10 @@ CLAUDE.md step 9, readme.md, task.md's "How to add a task", `document/skills/ski
 
 ### Assumptions
 
-These are this plan's own choices. The owner hasn't confirmed them yet.
+These are this plan's own choices. The owner confirmed A1 on 2026-10-26, after the second code-reviewer pass.
 
 - A1. **The bookkeeping commit stays on local `main`, and nobody pushes it.** After the A3 check, Claude makes `docs(NN): mark task NN done` on local `main`, as today. The next task branches from local `main`, so that task's pull request carries the commit to GitHub. GitHub's `main` then fast-forwards past it, and `git pull --ff-only` keeps working. CLAUDE.md's "the only kind of commit made directly on main" stays true.
-- A2. **Step 1 pulls first, then finishes the previous task (R7):** `git pull --ff-only origin main`, then read task.md on `main`. If an earlier task is In progress and its PR is merged, run its step 9. If it isn't merged yet, stop and ask the owner. Then branch.
+- A2. **Step 1 pulls first, then finishes the previous task (R7):** `git pull --ff-only origin main`, and stop if it won't fast-forward. Then read task.md on `main`. If an earlier task is In progress and its PR is merged, run its step 9. If it isn't merged yet, stop and ask the owner. Then branch.
 - A3. **The "missing commits" check runs before the bookkeeping commit:** `git rev-list --count origin/main..NN_short_name` must print 0. If it doesn't, the owner opens a second PR from the same branch, as task 06 needed PR #6.
 
 ## Implementation Units
@@ -116,7 +116,7 @@ These are this plan's own choices. The owner hasn't confirmed them yet.
 
 | Check | Passes when |
 | --- | --- |
-| `grep -rn -E -- '--no-ff\|merges locally\|open decision' CLAUDE.md readme.md document/task/task.md document/skills/ .claude/agents/ document/solutions/` | no hits, except history in a lesson's Context or Examples |
+| `grep -rn -i -E -- '--no-ff\|merges locally\|open decision' CLAUDE.md readme.md document/task/task.md document/skills/ .claude/agents/ document/solutions/` | no hits, except history in a lesson's Context or Examples |
 | The lesson's Merge check, `grep -n -A1 "Merge into main" document/task/task.md` | a blank line after every task's Merge step |
 | Re-read CLAUDE.md "Task workflow", "Git rules" and "Compound Engineering" together | no rule lets Claude push, open a PR or merge unasked, and step 9 matches the Definition of done |
 | code-reviewer pass, with the snapshot before and after | the snapshots match, and the verdict is recorded |
