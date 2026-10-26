@@ -152,10 +152,6 @@ Ideas for later. **Proposed only: confirm each one with the product brief before
 - **First UI task (08 or 09):** add React hooks lint rules (`eslint-plugin-react-hooks`). Add accessibility lint rules (`eslint-plugin-jsx-a11y`) once a version supports ESLint 10 (6.10.2 supports only ESLint 9 or older).
 - **Small cleanups:** now task 25.
 
-**Open decision for the owner: keeping `main` in step with GitHub.** Branches were pushed and PRs merged on GitHub from the owner's account, so local `main` and GitHub's `main` have split. GitHub's `main` has PR merge commits that local `main` lacks. Local `main` has the bookkeeping commits, and also the last four 04_agents fixes, because PR #3 merged an earlier tip (`edcf7db`). Two ways forward:
-1. Keep local `--no-ff` merges, and bring GitHub's PR merge commits in with one `git merge origin/main` on main. This needs a one-time exception to the "only bookkeeping commits on main" rule in CLAUDE.md, and its own small task.
-2. Switch to GitHub pull requests: Claude stops each task at "ready to merge", the owner merges the PR on GitHub, then Claude pulls `main`. This changes step 9 of the CLAUDE.md workflow, in its own task.
-
 Not planned (the owner's choice): Google reviews, online payment.
 
 ## How to add a task
@@ -165,8 +161,8 @@ Not planned (the owner's choice): Google reviews, online payment.
    - Good: `07_design_system`, `14_appointment_form`
    - Bad: `7_design` (needs two digits), `14-Appointment-Form` (no dashes or capitals), `14_stuff` (says nothing), `14_form_blog_and_seo` (too big, so split it)
 3. **Add it here:** a row in the Tasks table, and a `### NN_short_name` section under "Task steps" with checkbox steps. Every task includes "Create branch", "Write the learning doc", "Review with code-reviewer and fix what it finds", "Compound" and "Merge into main".
-4. **Branch from an up-to-date main:** `git switch main`, then `git switch -c NN_short_name`.
+4. **Branch from an up-to-date main**, as CLAUDE.md step 1 says: finish the previous task's merge step if its pull request is merged, then pull `main` and create the branch.
 5. **Set the status** to `In progress`.
 6. **Write the learning doc** from `document/learning/TEMPLATE.md`, and link it in the Learning doc column.
-7. **Merge** with `git switch main && git merge --no-ff NN_short_name`.
-8. **Mark it done** in one bookkeeping commit on main, `docs(NN): mark task NN done`: tick "Merge into main", and set `Done` here and in the learning doc's header.
+7. **Merge through a pull request** (CLAUDE.md step 9): Claude stops at "ready to merge", and the owner pushes the branch, opens the PR and merges it with "Create a merge commit".
+8. **Mark it done** in one bookkeeping commit on local `main`, `docs(NN): mark task NN done`: tick "Merge into main", and set `Done` here and in the learning doc's header. It isn't pushed: the next task's pull request carries it to GitHub.
