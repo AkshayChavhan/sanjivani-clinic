@@ -95,7 +95,7 @@ Runs in a **new** Claude Code session, because agents and the plugin load only w
 - [x] Write the learning doc: Astro basics and islands, the folder layout, Tailwind, what shadcn init changed, package.json vs package-lock.json, the npm scripts
 - [x] Run ce-code-review (report only; most code is generated, so focus on config)
 - [ ] Review with code-reviewer and fix what it finds
-- [ ] Compound: save a lesson in document/solutions/ if one passes the counterfactual question
+- [x] Compound: save a lesson in document/solutions/ if one passes the counterfactual question
 - [ ] Merge into main
 
 ## Backlog (proposed)
