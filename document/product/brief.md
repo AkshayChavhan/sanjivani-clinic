@@ -28,25 +28,25 @@ People in and around Pune with a skin, hair or nail problem, booking for themsel
 - **Tone:** calm and trustworthy. Plain words, short sentences, no hype.
 - **Look:** deep **leaf green** (a nod to the Sanjivani herb), a warm **saffron** accent, warm **off-white** surfaces, **high-contrast** text and soft **rounded** corners.
 - **Saffron is an accent only:** highlights, large shapes, and button fills with dark labels. It's too pale on off-white for small text or meaningful icons, so text stays dark, and headings, links, icons and focus rings use leaf green.
-- **No logo or brand colours exist yet.** Task 07 (design system) creates them, and checks **contrast** (the brightness difference between two colours): at least 4.5:1 for text and 3:1 for icons.
+- **No logo or brand colours exist yet.** Task 07 creates them, and checks **contrast** (the brightness difference between two colours): at least 4.5:1 for text and 3:1 for icons.
 
 ## Languages
 
 - **English, Hindi and Marathi.** Every page is in all three.
-- Hindi and Marathi use the Devanagari script, so the fonts must include it (noted for task 07).
+- Hindi and Marathi use the Devanagari script, so the fonts must include it.
 
 ## Rules the site follows
 
-These assume a modern-medicine doctor registered with the Maharashtra Medical Council. They come from the Indian Medical Council (Professional Conduct, Etiquette and Ethics) Regulations, 2002 ("the 2002 code") and the NMC's guidelines on ethical advertising, issued in October 2026 ("the NMC guidelines"). They bind all three languages: a translation must not turn "treatment" into "cure".
+These assume a modern-medicine doctor registered with the Maharashtra Medical Council. They come from the Indian Medical Council (Professional Conduct, Etiquette and Ethics) Regulations, 2002 ("the 2002 code") and the National Medical Commission's (NMC) guidelines on ethical advertising, issued in October 2026 ("the NMC guidelines"). They bind all three languages: a translation must not turn "treatment" into "cure".
 
 1. **Facts only.** Show the doctor's name, recognised qualifications and registration number, and the address, timings, fees and services. Say "dermatologist" only if the doctor holds a dermatology qualification. (The 2002 code; the NMC guidelines.)
 2. **No praise or promises.** Never "best", "No. 1", "guaranteed", "100%", "painless", "miracle" or "permanent", and no comparisons with other doctors. Fees are stated plainly. (The NMC guidelines; the Consumer Protection Act, 2019.)
 3. **No cure claims.** Write "diagnosis and treatment of …", never that a treatment cures a condition. (The 2002 code; the Drugs and Magic Remedies (Objectionable Advertisements) Act, 1954, which lists leucoderma.)
-4. **Pigmentation in medical words.** Never "fairness" or "whitening", and never suggest darker skin is a problem. (A careful default from ASCI's self-regulation guidelines on skin-lightening ads.)
+4. **Pigmentation in medical words.** Never "fairness" or "whitening", and never suggest darker skin is a problem. (A careful default from the Advertising Standards Council of India's voluntary guidelines on skin-lightening ads.)
 5. **No soliciting.** No offers, discounts, paid referrals or product endorsements, no asking for reviews, and no promotional WhatsApp messages. (The 2002 code; the NMC guidelines.)
 6. **No testimonials or before-and-after photos.** The NMC guidelines say a patient's consent doesn't make them allowed. Any patient photo needs written consent (a parent's or guardian's if under 18) and must not identify them.
-7. **Private booking requests.** The form asks only for a name, phone number, preferred day and time, and an optional short reason. A plain notice beside it, in all three languages, says what's collected, why, who gets it, how long it's kept and how to ask for deletion. The consent box starts unticked. Only the clinic can open the Sheet, inbox and chat, and old requests are deleted after a set period. (The IT Act's privacy rules of 2011, which treat health information as sensitive; the Digital Personal Data Protection Act, 2023, whose duties start in phases.)
-8. **Booking, not advice.** The form and WhatsApp only book appointments, and the site gives no personal medical advice. (The Telemedicine Practice Guidelines, 2020.)
+7. **Private booking requests.** The form asks only for a name, phone number, preferred day and time, and an optional short reason. A plain notice beside it, in all three languages, says what's collected, why, who gets it, how long it's kept and how to ask for deletion. The consent box starts unticked. Only the clinic can open the Sheet, inbox and chat, and old requests are deleted after a set period. (The Information Technology Act's 2011 privacy rules, which treat health information as sensitive; the Digital Personal Data Protection Act, 2023, whose duties start in phases.)
+8. **Booking, not advice.** The form and WhatsApp only request appointments, and the site gives no personal medical advice. (The Telemedicine Practice Guidelines, 2020.)
 
 ## Out of scope
 
@@ -57,18 +57,18 @@ These assume a modern-medicine doctor registered with the Maharashtra Medical Co
 
 ## Still to confirm
 
-**Clinic facts.** Task 10 keeps them as marked placeholders until the owner gives the real values: the doctor's name, qualifications and registration number; the address; the timings, including closed days and holidays; the fees; the services.
+**Clinic facts.** Task 10 keeps them as marked placeholders until the owner gives real values: the doctor's name, qualifications and registration number; the address; the timings, including closed days and holidays; the fees; the services.
 
 **For the owner and the doctor:**
 
-- the patients section (an assumption);
-- this brief's additions to the first version: directions, one-tap call and WhatsApp, and the privacy notice and page;
+- the patients section;
+- this brief's first-version additions: directions, one-tap call and WhatsApp, and the privacy notice and page;
 - the opening language and web address style (task 10);
 - which task writes the privacy notice and page;
 - how long requests are kept, and who the privacy contact is;
 - who at the clinic answers new requests, and how fast;
 - whether the doctor's photo goes on the site (the NMC guidelines bar self-promotional photos);
-- the doctor's sign-off on the Rules, against the code and guidelines in force at launch;
+- the doctor's council (assumed Maharashtra's) and sign-off on the Rules, against the code and guidelines in force at launch;
 - who, fluent in Hindi and Marathi, checks the site's text against the Rules.
 
-**Before launch:** every placeholder holds a real fact, the doctor has signed off the Rules, a fluent reader has checked the Hindi and Marathi text, and the privacy notice and page are ready.
+**Before launch:** every placeholder holds a real fact, the doctor has signed off the Rules, a fluent reader has checked the Hindi and Marathi, and the privacy notice and page are ready.
