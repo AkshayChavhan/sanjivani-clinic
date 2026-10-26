@@ -43,17 +43,19 @@ A new session reads CLAUDE.md, not old learning docs, so it would have followed 
 ## New ideas in this task
 
 - **Pull request (PR):** a request on GitHub to merge one branch into another. You can see the changes, then press merge.
+- **GitHub CLI (`gh`):** a command-line tool for GitHub. `gh pr list` shows a branch's pull requests without opening the website. Step 1 now uses it, so it's in the readme's Prerequisites, and it needs `gh auth login` once.
 - **Create a merge commit / squash / rebase:** GitHub's three ways to merge a PR. Only "Create a merge commit" keeps every commit's ID. The docs cite commit IDs (like `5ff1eff`), so we always use it.
 - **Fast-forward (`git pull --ff-only`):** updating a branch by moving it forward to newer commits, with no merge of its own. `--ff-only` refuses anything else, so a pull can never quietly create a merge.
 - **Ahead / behind:** "local `main` is one ahead" means it has one commit GitHub doesn't have yet. That's expected between tasks now.
 
 ## Check that it works
 
-Leftover old rules (the only hit is a history note in the lesson, which is allowed):
+Leftover old rules. `-i` ignores letter case, so the search also catches "Open decision"; run on `main`, it finds that paragraph at `task.md:136`. On this branch the hits are task 24's own step title and a history note in the lesson, both allowed:
 
 ```text
-$ grep -rn -E -- '--no-ff|merges locally|open decision' CLAUDE.md readme.md document/task/task.md document/skills/ .claude/agents/ document/solutions/
-document/solutions/workflow-issues/check-new-steps-against-claude-md.md:35:- **Nothing after Merge.** "Merge into main" is the last step. After the owner merges [...]
+$ grep -rn -i -E -- '--no-ff|merges locally|open decision' CLAUDE.md readme.md document/task/task.md document/skills/ .claude/agents/ document/solutions/
+document/task/task.md:108:- [x] Remove the decided "Open decision" paragraph from the backlog
+document/solutions/workflow-issues/check-new-steps-against-claude-md.md:35:- **Nothing after Merge.** "Merge into main" [...]
 ```
 
 Every task's Merge step is still the last step: `grep -n -A1 "Merge into main" document/task/task.md` shows a blank line after all 8 of them.
@@ -81,6 +83,17 @@ Not testable here: code-reviewer's new push check for a branch you've already pu
 | The lesson I edited still said "six" Merge steps (it's eight) and called the GitHub question "now open" | Both reworded (`b6a11a4`) |
 | Step 1 read task.md before pulling, so it couldn't see the task that was just merged, and it didn't say what to do if that PR isn't merged yet | Pull first, then check; if not merged, ask the owner (`8fb205e`, `bbb1210`) |
 | This doc said `--no-ff` was in files that never had it, and quoted a rule that exists nowhere | Reworded |
+
+**code-reviewer, second pass** (snapshots matched). Verdict: **Needs changes**, two must fixes and two suggestions, all done:
+
+| What it found | Fix |
+| --- | --- |
+| Step 1's pull had no instruction for when it fails. After a squash, that's where a session would break first, so it would skip the merged task and branch from an old `main`. | Step 1 says: if the pull won't fast-forward, stop and tell the owner |
+| `gh` is now needed at every task's start, but the readme didn't list it and this doc didn't explain it | A Prerequisites row (`gh auth status`) and a "New ideas" entry |
+| The leftover-rules search was case-sensitive, so it couldn't find "**Open** decision" | Added `-i`, and showed it finds the paragraph on `main` |
+| Where the "mark done" commit goes (assumption A1) is the owner's call | **The owner confirmed A1:** the commit stays on local `main`, and the next PR carries it |
+
+**Lesson from pass 2:** when you add a failure rule, add it at every place that runs the command. And run a new check once against the "before" version, to watch it catch the problem.
 
 Pending: the next code-reviewer pass, then the compound question.
 
