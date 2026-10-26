@@ -16,6 +16,8 @@ This file tracks every task in this project.
 | 04 | 04_agents | 4 project subagents | Done | [04_agents](../learning/04_agents.md) |
 | 05 | 05_compound_engineering | The Compound Engineering plugin, pinned and configured | Done | [05_compound_engineering](../learning/05_compound_engineering.md) |
 | 06 | 06_react_app_setup | The Astro + React app, shadcn init, GSAP (runs in a new session) | Done | [06_react_app_setup](../learning/06_react_app_setup.md) |
+| 24 | 24_pr_merge_workflow | Every task ends with a GitHub pull request the owner merges, not a local merge | In progress | — |
+| 25 | 25_small_cleanups | `.nvmrc`, stale notes, old `.next/` lines, and a lockfile check for code-reviewer | To do | — |
 
 ## Task steps
 
@@ -98,6 +100,27 @@ Runs in a **new** Claude Code session, because agents and the plugin load only w
 - [x] Compound: save a lesson in document/solutions/ if one passes the counterfactual question
 - [x] Merge into main
 
+### 24_pr_merge_workflow
+
+- [x] Create branch
+- [ ] Plan with `/compound-engineering:ce-plan` and link the plan here
+- [ ] Rewrite CLAUDE.md step 9 and the Definition of done for the pull-request route, and update readme.md "How we work", this file's "How to add a task" and code-reviewer's push check
+- [ ] Remove the decided "Open decision" paragraph from the backlog
+- [ ] Write the learning doc
+- [ ] Review with code-reviewer and fix what it finds
+- [ ] Compound: save a lesson in document/solutions/ if one passes the counterfactual question
+- [ ] Merge into main
+
+### 25_small_cleanups
+
+- [ ] Create branch
+- [ ] Add `.nvmrc`, fix the stale `skills@1.5.18` note, and remove the `.next/` and `next-env.d.ts` lines (`.gitignore`, CLAUDE.md, code-reviewer)
+- [ ] Teach code-reviewer how to check `package-lock.json` without reading it in full
+- [ ] Write the learning doc
+- [ ] Review with code-reviewer and fix what it finds
+- [ ] Compound: save a lesson in document/solutions/ if one passes the counterfactual question
+- [ ] Merge into main
+
 ## Backlog (proposed)
 
 Ideas for later. **Proposed only: confirm each one with the product brief before it becomes a task.**
@@ -127,11 +150,7 @@ Ideas for later. **Proposed only: confirm each one with the product brief before
 - **07:** the shadcn `nova` preset uses the Geist font, which has no Devanagari letters, so Hindi and Marathi text would fall back to a system font. Pick fonts that cover Devanagari. The `design-system/` folder is already kept out of lint and the Tailwind scan.
 - **08:** the layout's viewport tag should be `width=device-width, initial-scale=1`. The Astro template's placeholder page has only `width=device-width`.
 - **First UI task (08 or 09):** add React hooks lint rules (`eslint-plugin-react-hooks`). Add accessibility lint rules (`eslint-plugin-jsx-a11y`) once a version supports ESLint 10 (6.10.2 supports only ESLint 9 or older).
-- **Small cleanups, each its own task:**
-  - a `.nvmrc` so fnm picks Node 24 on its own;
-  - the `skills@1.5.18` pin note in CLAUDE.md and readme.md, which says Node is below 22.20 (it is now 24);
-  - the `.next/` and `next-env.d.ts` lines left in `.gitignore` from an earlier stack guess (also named in CLAUDE.md and code-reviewer);
-  - code-reviewer reads every changed file in full, including `package-lock.json` (thousands of lines). Decide how it should check lockfiles instead.
+- **Small cleanups:** now task 25.
 
 **Open decision for the owner: keeping `main` in step with GitHub.** Branches were pushed and PRs merged on GitHub from the owner's account, so local `main` and GitHub's `main` have split. GitHub's `main` has PR merge commits that local `main` lacks. Local `main` has the bookkeeping commits, and also the last four 04_agents fixes, because PR #3 merged an earlier tip (`edcf7db`). Two ways forward:
 1. Keep local `--no-ff` merges, and bring GitHub's PR merge commits in with one `git merge origin/main` on main. This needs a one-time exception to the "only bookkeeping commits on main" rule in CLAUDE.md, and its own small task.
