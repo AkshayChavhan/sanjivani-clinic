@@ -136,7 +136,7 @@ Runs in a **new** Claude Code session, because agents and the plugin load only w
 
 ## Backlog (proposed)
 
-Ideas for later. **Proposed only: confirm each one with the product brief before it becomes a task.**
+Ideas for later. **Proposed only: confirm each one with [the product brief](../product/brief.md) before it becomes a task.**
 
 | # | Task | Goal | Depends on |
 | --- | --- | --- | --- |
