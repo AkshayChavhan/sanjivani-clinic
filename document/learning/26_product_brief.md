@@ -77,7 +77,7 @@ You were about to start 07_design_system, which picks the colours and fonts. Wit
    - **Fits with a change:** 07 (add a logo or wordmark), 12 (you decide the "emergency strip" wording), 14 (preferred times, not reserved slots) and 23 (four conditions before launch), all first version; 19 and 20, later.
    - **Doesn't fit, owner to decide:** 16 BMI calculator, 17 testimonials slider.
 7. **Ticked the brief and backlog steps** (`8c36f2a`).
-8. **Reviewed with code-reviewer:** Ready to merge, with six suggestions, all fixed (see "Review and lessons"). The brief went from 1,000 to 999 words.
+8. **Reviewed with code-reviewer, in two passes.** Both said Ready to merge, with no must fixes. The first pass's six suggestions are fixed, which took the brief from 1,000 to 999 words. The second pass checked those fixes (see "Review and lessons").
 
 **Skipped:** ce-code-review. CLAUDE.md step 7 runs it only for code changes, and this task changes only docs.
 
@@ -174,6 +174,12 @@ same
 
 To pay for the new words, the brief dropped a few repeated ones, such as "(noted for task 07)", which the task 06 note already covers.
 
+**code-reviewer, second pass: Ready to merge**, with no must fixes, and git again unchanged. It confirmed the six fixes and made three small suggestions:
+
+1. **Review was ticked (`7976d74`) before this final pass ran.** The tick turned out true, but a box should be ticked only after the step is done. This section now records the final pass. Next time: record the final pass, then tick Review.
+2. **"Try it yourself" asked for exactly 1000 words.** It now asks for 1,000 or fewer, so a later edit can't make it wrong.
+3. **This doc is long** (about 3,000 words). Left as it is: the legal-sources table is the part a later task will need.
+
 **Compound: Pending.** The compound question comes after the review.
 
 ## Common mistakes
@@ -188,7 +194,7 @@ To pay for the new words, the brief dropped a few repeated ones, such as "(noted
 
 About 5 minutes, and it changes nothing:
 
-1. Run `wc -w document/product/brief.md` and check 4 from the plan's "Verification Contract". Do you get 1000, then `same` and 19?
+1. Run `wc -w document/product/brief.md` and check 4 from the plan's "Verification Contract". Do you get 1,000 or fewer, then `same` and 19?
 2. Backlog row 13 (open-now badge) says it needs the closed days and holidays. Find where the brief lists them.
 3. Which of the brief's Rules does this line break? "Dr. X is Pune's No. 1 skin specialist. Our laser cures pigmentation permanently, guaranteed!" (Answer: rule 2 for "No. 1", "permanently" and "guaranteed"; rule 3 for "cures"; and rule 1 if the doctor has no dermatology qualification. A safe version: "Diagnosis and treatment of pigmentation.")
 4. See a false positive (a hit that isn't a real problem): `printf 'Testimonials (rule 6)\n' | grep -n -E '[Rr]ule [0-9]'` prints `1:Testimonials (rule 6)`. Is that a law cited by number?
