@@ -67,8 +67,9 @@ Every task runs these steps:
 
 1. **Branch:**
    1. `git switch main && git pull --ff-only origin main`. If it refuses to fast-forward, the last PR was probably squashed or rebased: stop and tell the owner (see step 9).
-   2. Read `document/task/task.md` on `main`. If an earlier task is still `In progress`, check its pull request (`gh pr list --state all --head NN_short_name`). If it's merged, do that task's step 9 now. If it isn't merged yet, stop and ask the owner to merge it first.
-   3. Then `git switch -c NN_short_name`.
+   2. Find unfinished tasks: `git branch --list --no-merged origin/main` lists every branch with commits GitHub's `main` lacks. (`main` itself may be listed, because of the expected bookkeeping commit.) For each task branch it lists, check its pull request with `gh pr list --state all --head <branch>`. If there's no PR or it isn't merged, stop and ask the owner to merge it first. If it's merged, the PR left commits out: do that task's step 9.
+   3. If `document/task/task.md` on `main` shows a task still `In progress`, its PR is merged, but its step 9 hasn't run yet: do it now.
+   4. Then `git switch -c NN_short_name`.
 2. **Tracker:** set the task's row in `document/task/task.md` to `In progress`. Tick a step only after it's done.
 3. **Read past lessons first:** `grep -ril "<topic>" document/solutions/`. A solution doc there may save you a whole investigation. (Exit code 1 just means "no matches".)
 4. **Plan:** for anything bigger than a one-file change, run `/compound-engineering:ce-plan` (run `/compound-engineering:ce-brainstorm` first if the idea is still fuzzy). Plans go in `document/plans/`; link the plan from the task's steps in task.md. When ce-plan offers next steps, stop: this workflow decides what comes next.
@@ -93,7 +94,10 @@ Every task runs these steps:
 
    Read the whole file it writes before you commit it. If the answer is no, write no lesson and say why in the learning doc.
 9. **Merge (through a GitHub pull request):**
-   - When the final code-reviewer pass says "Ready to merge", stop and tell the owner: the task is ready, how many commits are unpushed, and to choose **Create a merge commit**. Squash and rebase give commits new IDs, and the docs cite commit IDs.
+   - When the final code-reviewer pass says "Ready to merge", stop and tell the owner three things:
+     - the task is ready;
+     - the branch's last commit ID (`git log -1 --format=%h`). Merge only when the PR's last commit shows that same ID;
+     - choose **Create a merge commit**. Squash and rebase give commits new IDs, and the docs cite commit IDs.
    - The owner pushes the branch, opens a pull request into `main` and merges it. A Claude session never pushes, opens or merges a PR unless the owner asks in that session.
    - After the merge: `git switch main && git pull --ff-only origin main`. Then check that nothing was left out: `git rev-list --count origin/main..NN_short_name` must print `0`.
      - If the pull refuses to fast-forward, the PR was probably squashed or rebased. Stop and tell the owner, and don't ask for a second PR: it would add the whole task again under new commit IDs.
