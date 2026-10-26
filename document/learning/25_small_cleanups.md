@@ -1,6 +1,6 @@
 # 25_small_cleanups: .nvmrc, stale notes, old .next/ lines, and a lockfile check
 
-> **Branch:** 25_small_cleanups · **Date:** 2026-10-26 · **Status:** In progress
+> **Branch:** 25_small_cleanups · **Date:** 2026-10-26 · **Status:** Done
 
 **Plan:** [2026-10-26-1526-chore-small-cleanups-plan.md](../plans/2026-10-26-1526-chore-small-cleanups-plan.md). **Solution doc:** [check-whole-file-not-diff-window.md](../solutions/workflow-issues/check-whole-file-not-diff-window.md).
 

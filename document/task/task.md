@@ -17,7 +17,7 @@ This file tracks every task in this project.
 | 05 | 05_compound_engineering | The Compound Engineering plugin, pinned and configured | Done | [05_compound_engineering](../learning/05_compound_engineering.md) |
 | 06 | 06_react_app_setup | The Astro + React app, shadcn init, GSAP (runs in a new session) | Done | [06_react_app_setup](../learning/06_react_app_setup.md) |
 | 24 | 24_pr_merge_workflow | Every task ends with a GitHub pull request the owner merges, not a local merge | Done | [24_pr_merge_workflow](../learning/24_pr_merge_workflow.md) |
-| 25 | 25_small_cleanups | `.nvmrc`, stale notes, old `.next/` lines, and a lockfile check for code-reviewer | In progress | [25_small_cleanups](../learning/25_small_cleanups.md) |
+| 25 | 25_small_cleanups | `.nvmrc`, stale notes, old `.next/` lines, and a lockfile check for code-reviewer | Done | [25_small_cleanups](../learning/25_small_cleanups.md) |
 
 ## Task steps
 
@@ -120,7 +120,7 @@ Runs in a **new** Claude Code session, because agents and the plugin load only w
 - [x] Write the learning doc
 - [x] Review with code-reviewer and fix what it finds
 - [x] Compound: save a lesson in document/solutions/ if one passes the counterfactual question
-- [ ] Merge into main
+- [x] Merge into main
 
 ## Backlog (proposed)
 
