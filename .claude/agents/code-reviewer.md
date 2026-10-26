@@ -23,15 +23,32 @@ You review one task branch of the Sanjivani Clinic Website repo before it is mer
    - `git branch --show-current`
    - `git log main..HEAD --format='%h %s'`
    - `git diff main...HEAD --stat`
-   - `git diff main...HEAD`
-3. **Read every changed file in full**, not just the diff. Third-party folders (`.claude/skills/`, plugins) are not our code: check that they were vetted (see `document/skills/skills.md`), and don't review their content line by line.
+   - `git diff main...HEAD -- . ':(exclude)package-lock.json'` (the lockfile is checked in step 4, not read)
+3. **Read every changed file in full**, not just the diff, except `package-lock.json`. Third-party folders (`.claude/skills/`, plugins) are not our code: check that they were vetted (see `document/skills/skills.md`), and don't review their content line by line.
+4. **If `--stat` lists `package-lock.json`, check it instead of reading it.** npm writes this file, and it can be thousands of lines.
+   1. `test -f package-lock.json` must succeed. If the lockfile was deleted, that's a must fix: the project loses its pinned versions and checksums.
+   2. These four counts must be **equal and above 0**:
+      - package entries: `grep -cE '^    "node_modules/' package-lock.json`
+      - download URLs: `grep -c '"resolved": ' package-lock.json`
+      - npm-registry URLs: `grep -cF '"resolved": "https://registry.npmjs.org/' package-lock.json`
+      - checksums: `grep -c '"integrity": "sha512-' package-lock.json`
+
+      A lower npm-registry count means a package comes from somewhere else (a git URL, a tarball, another host). A lower URL count means an entry has no download location (`"resolved"`). A lower checksum count means an entry has no checksum. Each is a must fix: find the entry and say what it is. The one exception is an entry that is a local link (`"link": true`) or bundled (`"inBundle": true`), which can lack a download URL, a registry URL or a checksum: it isn't a must fix if the report names it and says why it's there. If a command errors or a count is 0 while the file exists, don't say "Ready to merge"; list it under what you couldn't check.
+   3. New install scripts. Check the whole file on both sides, not the diff: when a package already in the lockfile moves to a version that adds an install script, its name line is too far above the change for a diff search to find it.
+      - count on main: `git show main:package-lock.json | grep -c '"hasInstallScript": true'`
+      - count on the branch: `grep -c '"hasInstallScript": true' package-lock.json`
+      - names on main: `git show main:package-lock.json | grep -B6 '"hasInstallScript": true' | grep '^    "node_modules/'`
+      - names on the branch: `grep -B6 '"hasInstallScript": true' package-lock.json | grep '^    "node_modules/'`
+
+      On each side, the number of names must equal the count (a count of 0 means no names). If it doesn't, the 6-line window missed a name: don't say "Ready to merge"; list it under what you couldn't check. If `git show` fails because `main` has no lockfile, every name on the branch is new. Each name on the branch that isn't on `main` is a new install script, whether the package is new or moved to a new version. Name each one in the report as a question.
+   4. `git diff main...HEAD -- package.json` shows the dependency changes. If the lockfile changed but `package.json` didn't, ask why in the report (for example `npm update`). Name the new packages.
 
 ## Check the code
 
 - **Bugs:** wrong logic, broken paths or links, typos in commands, wrong flags.
 - **Secrets:** API keys, tokens, passwords, private keys, or a committed `.env`. Grep the diff for patterns like `sk_`, `token`, `api_key`, `BEGIN PRIVATE KEY`.
 - **Dependencies from unknown sources:** new packages, registries, URLs or unpinned downloads.
-- **Committed generated files:** `node_modules/`, `dist/`, `.astro/`, `.next/`, `coverage/`, `__pycache__/`.
+- **Committed generated files:** `node_modules/`, `dist/`, `.astro/`, `coverage/`, `__pycache__/`.
 - **UI** (when there is UI):
   - accessibility (labels, focus, contrast, alt text)
   - the widths 375, 768, 1024 and 1440 px

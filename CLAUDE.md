@@ -38,6 +38,7 @@ Claude reads this file at the start of every session. Follow it over your defaul
 | `src/` | The app: `pages/` (one file per URL), `styles/global.css` (Tailwind and theme tokens), `lib/utils.ts` (`cn()`) |
 | `public/` | Files served as they are, such as the favicons |
 | `.vscode/` | Editor settings from the Astro template: recommends the Astro extension |
+| `.nvmrc` | The project's Node version (24), for fnm and nvm |
 
 ## Commands
 
@@ -118,7 +119,7 @@ Every task runs these steps:
 - **Commit types:** `feat` (new feature), `fix` (bug fix), `docs` (documentation), `chore` (setup and tooling), `refactor` (restructure without changing behaviour), `style` (formatting only), `test` (tests).
 - Keep commits small, with one idea per commit.
 - **Never commit secrets.** They go in `.env`, which git ignores. Commit a `.env.example` with fake values instead.
-- **Never commit generated folders** (`node_modules/`, `dist/`, `.astro/`, `.next/`, `coverage/`).
+- **Never commit generated folders** (`node_modules/`, `dist/`, `.astro/`, `coverage/`).
 - Read third-party files (skills, plugins, scaffolds) before you commit them.
 - **Ask the owner first** before you:
   - push, add a remote, or open a pull request
@@ -144,7 +145,7 @@ Rules:
 - shadcn: add only official `@shadcn` items without asking. Ask before any third-party registry or URL, `--overwrite`, `init --force` or `mcp init`. Read every file it adds.
 - 21st needs the owner's login or `TWENTYFIRST_TOKEN`. Never commit the key. No hosted generation (`21st generate` or `iterate`) unless `21st usage` shows AI is enabled and the owner agrees. Never publish to 21st.dev, and never run `21st install-skill`, `21st init --write`, or any publish, profile or delete command. Review every `21st add` diff and its new npm packages.
 - Don't edit `.claude/skills/`. Project rules go in this file.
-- For a new skill: read it first, install it with the project-scope command (`DISABLE_TELEMETRY=1 npx -y skills@1.5.18 add <owner/repo> --agent claude-code --skill <name> --copy -y`; the pin is needed while Node is below 22.20), and update skills.md.
+- For a new skill: read it first, install it with the project-scope command (`DISABLE_TELEMETRY=1 npx -y skills@1.5.18 add <owner/repo> --agent claude-code --skill <name> --copy -y`; keep the `1.5.18` pin: it's the installer version we used, and a newer one must be checked first, in its own task), and update skills.md.
 
 ## Agents
 

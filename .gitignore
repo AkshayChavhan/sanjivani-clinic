@@ -2,13 +2,11 @@
 node_modules/
 
 # Build output: files the build creates; building again recreates them
-.next/
 out/
 dist/
 .astro/
 build/
 *.tsbuildinfo
-next-env.d.ts
 
 # Tests: coverage reports from test runs
 coverage/

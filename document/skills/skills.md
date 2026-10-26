@@ -116,7 +116,7 @@ python3 .claude/skills/ui-ux-pro-max/scripts/search.py "islands hydration" --sta
 
 ## Managing skills
 
-We installed with a pinned version of the installer: `npx -y skills@1.5.18 ...`. The latest version (1.7.4) needs Node 22.20 or newer, and this machine had Node 20 during setup. After upgrading Node, you can drop the pin. We also set `DISABLE_TELEMETRY=1` in front of each command, so the installer doesn't report installs to Vercel.
+We installed with a pinned version of the installer: `npx -y skills@1.5.18 ...`. We first pinned it because newer versions needed Node 22.20 or newer, and this machine had Node 20 then. Node is now 24, but we keep the pin: 1.5.18 is the installer version we used, and newer versions haven't been checked. (The vetting record below covers the skill sources, not the installer.) Moving to a newer installer means reading it first, in its own task. We also set `DISABLE_TELEMETRY=1` in front of each command, so the installer doesn't report installs to Vercel.
 
 ```bash
 DISABLE_TELEMETRY=1 npx -y skills@1.5.18 list                     # show installed skills (should be 16)
