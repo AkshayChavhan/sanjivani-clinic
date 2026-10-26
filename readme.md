@@ -42,6 +42,7 @@ The rules Claude follows in this repo (the workflow, git rules and definition of
 | `src/` | The app's code: pages, styles and helpers |
 | `public/` | Files served exactly as they are, such as the favicon |
 | `.vscode/` | VS Code settings from the Astro template (it recommends the Astro extension) |
+| `.nvmrc` | The Node version for this project (24), read by fnm and nvm |
 
 ## Run it locally
 
@@ -80,7 +81,7 @@ Other commands:
 | Claude Code | latest | `claude --version` |
 | GitHub CLI (`gh`) | any recent version, logged in to GitHub | `gh auth status` |
 
-- The app needs Node 22.23.4 or newer. Node 24 LTS is a good choice; the app was set up on Node 24.22.1.
+- The app needs Node 22.23.4 or newer. `.nvmrc` names Node 24: run `fnm use` (or `nvm use`) in the repo to switch to it. fnm can also switch on its own when you `cd` into the folder, if you turn on its `--use-on-cd` option in your shell setup.
 - The first time you open this repo in Claude Code, it asks whether you **trust this folder**. Accept, so Claude Code can use this project's settings.
 - Optional: a free [21st.dev](https://21st.dev) account for the 21st.dev skills. Log in with `npx @21st-dev/cli login`. Your login stays on your machine, never in the repo. See [document/skills/skills.md](document/skills/skills.md).
 - The skills were installed with `npx -y skills@1.5.18` (no global install). That version runs on Node 20; newer versions need Node 22.20 or newer.
