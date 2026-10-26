@@ -161,7 +161,7 @@ Not planned (the owner's choice): Google reviews, online payment.
    - Good: `07_design_system`, `14_appointment_form`
    - Bad: `7_design` (needs two digits), `14-Appointment-Form` (no dashes or capitals), `14_stuff` (says nothing), `14_form_blog_and_seo` (too big, so split it)
 3. **Add it here:** a row in the Tasks table, and a `### NN_short_name` section under "Task steps" with checkbox steps. Every task includes "Create branch", "Write the learning doc", "Review with code-reviewer and fix what it finds", "Compound" and "Merge into main".
-4. **Branch from an up-to-date main**, as CLAUDE.md step 1 says: finish the previous task's merge step if its pull request is merged, then pull `main` and create the branch.
+4. **Branch from an up-to-date main**, as CLAUDE.md step 1 says: pull `main`, finish the previous task's merge step if its pull request is merged (or ask the owner to merge it first), then create the branch.
 5. **Set the status** to `In progress`.
 6. **Write the learning doc** from `document/learning/TEMPLATE.md`, and link it in the Learning doc column.
 7. **Merge through a pull request** (CLAUDE.md step 9): Claude stops at "ready to merge", and the owner pushes the branch, opens the PR and merges it with "Create a merge commit".
