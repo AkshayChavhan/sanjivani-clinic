@@ -263,7 +263,13 @@ After it, lint, typecheck and build passed again. `npx shadcn@latest info --json
 
 **Lesson:** a permission written for one situation can quietly grow when the project changes. `npm run *` was harmless while there were no scripts.
 
-**Compound:** pending.
+**Compound:** we asked, "If this lesson weren't written down, would a future session repeat the mistake or redo the investigation?"
+
+- **The dev-server stop rule and the reviewer's permissions:** no. Both are now written in CLAUDE.md, which every session reads.
+- **Scaffolding into a non-empty folder:** no. It happens once.
+- **Tailwind's scan limit:** yes. If line 1 of `global.css` loses `source("../")`, lint, typecheck and build all still pass, and the CSS quietly grows five times. Task 07 is likely to rewrite that file (theme work or `shadcn apply`).
+
+So we ran the lightweight command from CLAUDE.md. It wrote [document/solutions/best-practices/tailwind-source-limit-in-global-css.md](../solutions/best-practices/tailwind-source-limit-in-global-css.md) and printed `✓ Documentation complete (non-interactive lightweight mode)`. We read it in full and ran its checks: `head -1` shows the line, the positive control `.text-3xl` counts 1, both canaries count 0, and neither canary appears in `src/`.
 
 ## Common mistakes
 
