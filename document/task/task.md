@@ -119,7 +119,7 @@ Runs in a **new** Claude Code session, because agents and the plugin load only w
 - [x] Teach code-reviewer how to check `package-lock.json` without reading it in full
 - [x] Write the learning doc
 - [x] Review with code-reviewer and fix what it finds
-- [ ] Compound: save a lesson in document/solutions/ if one passes the counterfactual question
+- [x] Compound: save a lesson in document/solutions/ if one passes the counterfactual question
 - [ ] Merge into main
 
 ## Backlog (proposed)
