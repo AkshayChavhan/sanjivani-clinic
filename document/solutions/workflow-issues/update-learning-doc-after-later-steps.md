@@ -21,12 +21,13 @@ tags: [learning-doc, stale-status, code-review, compound, task-tracker, must-fix
 
 The task workflow in CLAUDE.md writes the learning doc at step 6. Review (step 7), compound (step 8) and merge (step 9) all come after it. So the doc starts with placeholders for things that haven't happened yet. That's by design: `.claude/agents/learning-doc-writer.md` says "Leave 'Review and lessons' as pending unless the main session gave you the real verdict", and the header says `In progress` until the merge.
 
-Each later step makes one of those placeholders false, and nothing reminds you to replace it. In task 06, code-reviewer found a stale placeholder twice, each time as a must fix, and each one cost a review pass:
+Each later step makes one of those placeholders false, and nothing reminds you to replace it. In task 06, code-reviewer found a status out of step with reality three times, each time as a must fix, and each one cost a review pass:
 
 1. **First pass.** "Review and lessons" still said "**Pending.** ce-code-review and the code-reviewer agent haven't run yet, and the compound question isn't answered yet." But ce-code-review had run, and task.md had ticked its step (`681bd76`). Fixed in `4e2a694`.
 2. **Second pass.** The line under the header still said "No solution doc yet: the compound question comes after the review." But ce-compound had written `tailwind-source-limit-in-global-css.md` (`02504d4`), and task.md had ticked the Compound step (`2c4aa66`). The compound answer had gone into "Review and lessons" (`59145ae`), but the top line was missed. Fixed in `dae85a0`.
+3. **Third pass.** This time the tick ran ahead, not the doc. "Review with code-reviewer" was ticked in task.md (`b19b97a`) while the last verdict recorded in the learning doc was still "Needs changes": the second pass's fix hadn't been reviewed yet. Unticked in `3daf0a4`.
 
-The cause both times: one step's result belongs in more than one place in the doc, and the placeholders use different words. Updating the section you have in mind leaves the others stale.
+The cause of the first two: one step's result belongs in more than one place in the doc, and the placeholders use different words. Updating the section you have in mind leaves the others stale. The cause of the third: "every must fix is fixed" felt like "review done", but only a passing verdict is.
 
 ## Guidance
 
@@ -38,6 +39,8 @@ The cause both times: one step's result belongs in more than one place in the do
 | Each code-reviewer pass | A new entry for that pass: its verdict, each must fix and how you fixed it. The second pass gets its own entry |
 | Compound | The top line: link the solution doc, or say there is none and why. "Review and lessons": the compound question and its answer |
 | Merge | The header's Status becomes `Done`, in the bookkeeping commit `docs(NN): mark task NN done` |
+
+**Tick Review in task.md only in the same sitting as recording a code-reviewer pass whose verdict is "Ready to merge".** Fixing a pass's must fixes doesn't finish the review: the fixes need a pass of their own.
 
 **Before every code-reviewer pass, search the doc for leftover placeholders:**
 
