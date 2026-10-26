@@ -67,7 +67,7 @@ Every task runs these steps:
 
 1. **Branch:**
    1. `git switch main && git pull --ff-only origin main`. If it refuses to fast-forward, the last PR was probably squashed or rebased: stop and tell the owner (see step 9).
-   2. Find unfinished tasks: `git branch --list --no-merged origin/main` lists every branch with commits GitHub's `main` lacks. (`main` itself may be listed, because of the expected bookkeeping commit.) For each task branch it lists, check its pull requests with `gh pr list --state all --head <branch>`. If none is merged, or one is still open, stop and ask the owner to merge it first. If one is merged and none is open, the PR left commits out: do that task's step 9, which asks for a second PR, and stop there.
+   2. Find unfinished tasks: `git branch --list --no-merged origin/main` lists every branch with commits GitHub's `main` lacks. (`main` itself may be listed, because of the expected bookkeeping commit.) For each task branch it lists, check its pull requests with `gh pr list --state all --head <branch> --json number,state`. If `gh` fails (missing, not logged in, offline), stop and tell the owner. If none is merged, or one is still open, stop and ask the owner to merge it first. If one is merged and none is open, the PR left commits out: do that task's step 9, which asks for a second PR, and stop there.
    3. If `document/task/task.md` on `main` shows a task still `In progress`, its PR is merged, but its step 9 hasn't run yet: do it now.
    4. Then `git switch -c NN_short_name`.
 2. **Tracker:** set the task's row in `document/task/task.md` to `In progress`. Tick a step only after it's done.
