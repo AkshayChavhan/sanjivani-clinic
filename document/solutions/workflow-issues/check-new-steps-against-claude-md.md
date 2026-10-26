@@ -32,12 +32,12 @@ The shared cause: the new text was written from what the task needed, not checke
 Before you commit a new or changed step or rule in `.claude/agents/*.md` or `document/task/task.md`, re-read these CLAUDE.md sections: **Task workflow**, **Git rules** (the ask-first list) and **Agents**. Then check the new text against this list:
 
 - **The five required steps.** From task 05 on, every task has Create branch, Write the learning doc, Review with code-reviewer, Compound, and Merge into main. They come in that order, and Merge is the last step.
-- **Nothing after Merge.** After "Merge into main" there is only the bookkeeping commit `docs(NN): mark task NN done`. A step that merges, commits or pulls anything else into main breaks the rule.
+- **Nothing after Merge.** "Merge into main" is the last step. After the owner merges the pull request, CLAUDE.md step 9 allows only these: pull GitHub's `main` with `--ff-only`, check that no branch commit was left out, and make the bookkeeping commit `docs(NN): mark task NN done` on local `main`. A step that merges, commits or pulls anything else into main breaks the rule. (This rule changed in task 24. Before that, the merge itself was a local `git merge --no-ff`.)
 - **Owner decisions stay open.** Push, adding a remote, pull requests, global installs, anything paid, publishing, and choices about the stack or product belong to the owner. A step that does one of these, or quietly picks an answer, becomes an open question or a backlog decision instead.
 - **Agents never change git.** A step or rule that has a subagent branch, commit or merge breaks "the main session owns git".
 - **Limits must be reachable.** A step count, file limit or tool list in an agent file must leave room for everything CLAUDE.md requires.
 
-If a rule really has to change, change CLAUDE.md first, in its own small task. Then update the files that restate it. The backlog's open decision about GitHub is written this way: each option names the CLAUDE.md rule it would change.
+If a rule really has to change, change CLAUDE.md first, in its own small task. Then update the files that restate it. Task 24 did this for the merge step: it changed CLAUDE.md step 9, then readme.md, task.md, skills.md, code-reviewer and this lesson.
 
 A quick check for "nothing after Merge": every line after a `Merge into main` step should be blank.
 
