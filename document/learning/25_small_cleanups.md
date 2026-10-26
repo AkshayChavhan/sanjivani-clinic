@@ -2,7 +2,7 @@
 
 > **Branch:** 25_small_cleanups · **Date:** 2026-10-26 · **Status:** In progress
 
-**Plan:** [2026-10-26-1526-chore-small-cleanups-plan.md](../plans/2026-10-26-1526-chore-small-cleanups-plan.md). **Solution doc:** Pending (the compound question comes after the review).
+**Plan:** [2026-10-26-1526-chore-small-cleanups-plan.md](../plans/2026-10-26-1526-chore-small-cleanups-plan.md). **Solution doc:** [check-whole-file-not-diff-window.md](../solutions/workflow-issues/check-whole-file-not-diff-window.md).
 
 ## In one minute
 
@@ -130,7 +130,7 @@ $ git status --short --ignored
 - Record passes 2 and 3 here. Done in this section.
 - **Left for later:** the checksum count only matches `sha512-`. A very old package with only a `sha1-` checksum would be reported as having *no* checksum. It fails safe (it blocks the merge instead of letting something through), and today all 755 entries are `sha512-`. Fixing it means changing code-reviewer again and running another pass, so it waits for the next task that touches code-reviewer. The fix: in step 4.2, say that an entry with `"integrity": "sha1-…"` has a weaker checksum, not none, and should be named in the report as a question.
 
-**Compound:** Pending.
+**Compound:** we asked, "If this lesson weren't written down, would a future session repeat the mistake or redo the investigation?" Yes. The plan walked the check through its cases and still missed one, because a diff hides how far an unchanged line sits from the change. The next check written on a diff could repeat it, and the saved lesson on case walks (`walk-new-procedures-through-every-case.md`) doesn't cover it. We ran the lightweight command, and it wrote [check-whole-file-not-diff-window.md](../solutions/workflow-issues/check-whole-file-not-diff-window.md) (`✓ Documentation complete (non-interactive lightweight mode)`). We read it in full: the 7-line gap, the `-B5` edge and the 4-line gap in today's lockfile match the real files, and it changed nothing else in the repo.
 
 ## Common mistakes
 
