@@ -130,7 +130,7 @@ Runs in a **new** Claude Code session, because agents and the plugin load only w
 - [x] Write the product brief in `document/product/brief.md` from the owner's answers, and add it to the repo maps in readme.md and CLAUDE.md
 - [x] Check each backlog idea against the brief and write down which ones fit (changing the backlog stays the owner's call)
 - [x] Write the learning doc
-- [ ] Review with code-reviewer and fix what it finds
+- [x] Review with code-reviewer and fix what it finds
 - [ ] Compound: save a lesson in document/solutions/ if one passes the counterfactual question
 - [ ] Merge into main
 
