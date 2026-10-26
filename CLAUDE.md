@@ -66,7 +66,7 @@ Run these from the repo root.
 Every task runs these steps:
 
 1. **Branch:**
-   1. `git switch main && git pull --ff-only origin main`.
+   1. `git switch main && git pull --ff-only origin main`. If it refuses to fast-forward, the last PR was probably squashed or rebased: stop and tell the owner (see step 9).
    2. Read `document/task/task.md` on `main`. If an earlier task is still `In progress`, check its pull request (`gh pr list --state all --head NN_short_name`). If it's merged, do that task's step 9 now. If it isn't merged yet, stop and ask the owner to merge it first.
    3. Then `git switch -c NN_short_name`.
 2. **Tracker:** set the task's row in `document/task/task.md` to `In progress`. Tick a step only after it's done.
