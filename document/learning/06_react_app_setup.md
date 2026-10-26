@@ -36,7 +36,7 @@ Three things made this harder than one `npm create astro` command:
 | `eslint.config.js` | Added | The lint rules, and the folders lint skips |
 | `public/`, `.vscode/` | Added | Favicons; a suggestion to install the Astro editor extension (both from the template) |
 | `.gitignore` | Changed | `.astro/` (Astro's generated files) and `yarn-error.log*` (from the template) |
-| `CLAUDE.md`, `readme.md`, `document/skills/skills.md`, `document/task/task.md` | Changed | Stage, stack, repo map, a Commands section, "Run it locally", the shadcn note, backlog notes |
+| `CLAUDE.md`, `readme.md`, `document/skills/skills.md`, `document/task/task.md` | Changed | Stage, stack, repo map, a Commands section with the safe dev-server rule, a code-reviewer command that allows only the four checks, "Run it locally" with a note on a leftover dev server, the shadcn note, backlog notes |
 
 The folder layout, as a sketch:
 
@@ -211,11 +211,7 @@ $ npx astro dev status
 
 $ curl -sI http://localhost:4321
 HTTP/1.1 200 OK
-Vary: Origin
-content-type: text/html
-Date: Sun, 25 Oct 2026 08:58:34 GMT
-Connection: keep-alive
-Keep-Alive: timeout=5
+(5 more header lines, including content-type: text/html)
 
 $ npx astro dev stop
 {"message":"Stopped dev server (pid 49587).","label":"SKIP_FORMAT","level":"info"}
@@ -250,7 +246,24 @@ After it, lint, typecheck and build passed again. `npx shadcn@latest info --json
 
 ## Review and lessons
 
-**Pending.** ce-code-review and the code-reviewer agent haven't run yet, and the compound question isn't answered yet. The real verdict, the fixes and the compound answer go here before the merge.
+**ce-code-review** ran first: five reviewers (correctness, project standards, adversarial, agent-native, past lessons). Cross-model review is off in our config, so no code went to another AI company. Its verdict: **Ready to merge**, with no findings, plus five "residual risks" (things worth knowing that nobody proved are bugs) and one testing gap. We acted on four of them:
+
+| What it noticed | What we did |
+| --- | --- |
+| The code-reviewer command allowed `npm run *`. Once `package.json` existed, that also allowed `npm run dev` (a background server) and `npm run astro add` (an install). | Allowed only `lint`, `typecheck`, `build` and `test` (`1579037`) |
+| "Stop only the same pid" could still match the owner's server: when one is running, `npm run dev` prints "Dev server already running at … (pid N)" with *its* pid. | Stop only after your own `npm run dev` printed "Dev server running at" (`4825a96`) |
+| A dev server left by a Claude session blocks your `npm run dev`. | A note in readme's "Run it locally" (`3306b2a`) |
+| Nothing imports through `@/` yet, so the alias was untested. | A throwaway build importing `cn` from `@/lib/utils` passed and gave `p-4` for `cn("p-2", "p-4")`; the page was then restored |
+
+**code-reviewer, first pass** (in a fresh process, with the new four-check command). We saved `git status --short`, `git log -1 --oneline` and `git show-ref --heads` before and after. They matched, so it changed nothing. Verdict: **Needs changes**, with one must fix, one question and three suggestions:
+
+- **Must fix:** this section still said "pending" after ce-code-review had run. Fixed by writing it.
+- **Question, a push:** git records two pushes of this branch to GitHub, on 25 Oct at 13:55 and 26 Oct at 11:25. No command in this task ran `git push`, and GitHub has no pull request for the branch (`gh pr list` printed `[]`). Over to the owner (see the end of the task).
+- **Suggestions:** shorten this doc (we trimmed the dev-server transcript); the backlog's "open decision" about GitHub is out of date, because `cd138bb` and `8b057f7` already joined the two `main`s (it's the owner's text, so we only point it out); and the viewport tag lacks `initial-scale=1`, which is now a backlog note for task 08.
+
+**Lesson:** a permission written for one situation can quietly grow when the project changes. `npm run *` was harmless while there were no scripts.
+
+**Compound:** pending.
 
 ## Common mistakes
 
@@ -260,6 +273,7 @@ After it, lint, typecheck and build passed again. `npx shadcn@latest info --json
 - **Forgetting to import `global.css`.** Tailwind classes then do nothing. Here the page imports it; from task 08 the layout will.
 - **Committing `package.json` without `package-lock.json`.** Everyone else then installs different versions.
 - **Running `astro dev stop` without checking first.** It can stop the owner's server. Run `npx astro dev status` first.
+- **Leaving a wildcard permission like `Bash(npm run *)` as it is.** It matched nothing before this task and everything after. Name the exact commands.
 
 ## Try it yourself
 
