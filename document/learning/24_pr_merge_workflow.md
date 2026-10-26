@@ -35,7 +35,7 @@ A new session reads CLAUDE.md, not old learning docs, so it would have followed 
 
 1. **Planned with ce-plan**, then reviewed the plan with four reviewers. They changed it in three important ways:
    - **Where the "mark done" commit goes.** The first draft pushed `main` directly when no task came next, which adds a push outside the pull-request route. Now the commit stays on local `main` and travels with the next task's PR.
-   - **A trigger.** After you merge, the session has already stopped, so step 1 of the *next* task now pulls `main`, then finishes the previous task's step 9 (or asks you to merge it first).
+   - **A trigger.** After you merge, the session has already stopped, so step 1 of the *next* task now pulls `main`, asks git which branches GitHub's `main` lacks, and finishes the previous task's step 9 (or asks you to merge it first).
    - **Two more files** still described the old route: `skills.md` and a saved lesson.
 2. **Rewrote CLAUDE.md** step 1, step 9 and the Definition of done, then each file that restates them. Each of those files points back to CLAUDE.md instead of copying the commands, so there's one place to change next time.
 3. **Checked** for leftovers (below).
@@ -46,6 +46,7 @@ A new session reads CLAUDE.md, not old learning docs, so it would have followed 
 - **GitHub CLI (`gh`):** a command-line tool for GitHub. `gh pr list` shows a branch's pull requests without opening the website. Step 1 now uses it, so it's in the readme's Prerequisites, and it needs `gh auth login` once.
 - **Create a merge commit / squash / rebase:** GitHub's three ways to merge a PR. Only "Create a merge commit" keeps every commit's ID. The docs cite commit IDs (like `5ff1eff`), so we always use it.
 - **Fast-forward (`git pull --ff-only`):** updating a branch by moving it forward to newer commits, with no merge of its own. `--ff-only` refuses anything else, so a pull can never quietly create a merge.
+- **`git branch --no-merged origin/main`:** lists local branches that have commits GitHub's `main` doesn't have yet. A finished task's branch drops off the list once its PR is merged.
 - **Ahead / behind:** "local `main` is one ahead" means it has one commit GitHub doesn't have yet. That's expected between tasks now.
 
 ## Check that it works
@@ -60,13 +61,16 @@ document/solutions/workflow-issues/check-new-steps-against-claude-md.md:35:- **N
 
 Every task's Merge step is still the last step: `grep -n -A1 "Merge into main" document/task/task.md` shows a blank line after all 8 of them.
 
-The new step 1 command, for a merged task and for this one (no PR yet, so step 1 would stop and ask you to merge it):
+The new step 1 checks, run now. Git lists this branch as not yet on GitHub's `main` (`main` itself is listed because of task 06's unpushed bookkeeping commit), and this branch has no PR yet, so a new session would stop and ask you to merge it. Task 06's branch isn't listed, and its PRs show as merged:
 
 ```text
-$ gh pr list --state all --head 06_react_app_setup --json number,state
-[{"number":6,"state":"MERGED"},{"number":5,"state":"MERGED"}]
+$ git branch --list --no-merged origin/main
+* 24_pr_merge_workflow
+  main
 $ gh pr list --state all --head 24_pr_merge_workflow --json number,state
 []
+$ gh pr list --state all --head 06_react_app_setup --json number,state
+[{"number":6,"state":"MERGED"},{"number":5,"state":"MERGED"}]
 ```
 
 Not testable here: code-reviewer's new push check for a branch you've already pushed. This branch has no copy on GitHub until you push it.
@@ -94,6 +98,10 @@ Not testable here: code-reviewer's new push check for a branch you've already pu
 | Where the "mark done" commit goes (assumption A1) is the owner's call | **The owner confirmed A1:** the commit stays on local `main`, and the next PR carries it |
 
 **Lesson from pass 2:** when you add a failure rule, add it at every place that runs the command. And run a new check once against the "before" version, to watch it catch the problem.
+
+**code-reviewer, third pass** (snapshots matched). Verdict: **Needs changes**, one must fix: step 1 looked for an unmerged task in task.md on `main`, but a task becomes `In progress` only on its own branch, so `main` can never show one. Now step 1 asks git: `git branch --list --no-merged origin/main` lists branches GitHub's `main` lacks. Its suggestions are done too: step 9 now gives you the branch's last commit ID to match in the PR before you merge, and the plan's requirement order and A3 match CLAUDE.md.
+
+**Lesson from pass 3:** when you add a check, ask where the information really lives at the moment the check runs.
 
 Pending: the next code-reviewer pass, then the compound question.
 
