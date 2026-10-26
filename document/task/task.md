@@ -104,8 +104,8 @@ Runs in a **new** Claude Code session, because agents and the plugin load only w
 
 - [x] Create branch
 - [x] Plan with `/compound-engineering:ce-plan` and link the plan here: [2026-10-26-1250-docs-pr-merge-workflow-plan.md](../plans/2026-10-26-1250-docs-pr-merge-workflow-plan.md)
-- [ ] Rewrite CLAUDE.md step 9 and the Definition of done for the pull-request route, and update readme.md "How we work", this file's "How to add a task" and code-reviewer's push check
-- [ ] Remove the decided "Open decision" paragraph from the backlog
+- [x] Rewrite CLAUDE.md step 9 and the Definition of done for the pull-request route, and update readme.md "How we work", this file's "How to add a task" and code-reviewer's push check
+- [x] Remove the decided "Open decision" paragraph from the backlog
 - [ ] Write the learning doc
 - [ ] Review with code-reviewer and fix what it finds
 - [ ] Compound: save a lesson in document/solutions/ if one passes the counterfactual question
