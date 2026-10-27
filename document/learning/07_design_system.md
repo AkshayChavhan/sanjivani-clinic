@@ -1,6 +1,6 @@
 # 07_design_system: The Herbarium design system
 
-> **Branch:** 07_design_system · **Date:** 2026-10-27 · **Status:** In progress
+> **Branch:** 07_design_system · **Date:** 2026-10-27 · **Status:** Done
 
 **Plan:** [2026-10-27-1151-feat-design-system-plan.md](../plans/2026-10-27-1151-feat-design-system-plan.md). **Design system:** [MASTER.md](../../design-system/sanjivani-clinic/MASTER.md). **Solution doc:** [same-layer-defaults-and-whole-page-lang-tests.md](../solutions/best-practices/same-layer-defaults-and-whole-page-lang-tests.md).
 
