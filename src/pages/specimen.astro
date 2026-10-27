@@ -1,0 +1,144 @@
+---
+// A hidden page that shows the design system at work (task 07). It is linked
+// from nowhere and marked noindex. Before launch, remove it or keep it hidden
+// and out of the sitemap (task.md backlog notes, tasks 21 or 23).
+// The Hindi and Marathi lines are sample text for checking type, not site copy.
+import "../styles/global.css";
+import LeafMark from "../components/brand/LeafMark.astro";
+import Wordmark from "../components/brand/Wordmark.astro";
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="robots" content="noindex" />
+		<title>Design specimen | Sanjivani Clinic</title>
+	</head>
+	<body>
+		<main id="top" class="mx-auto flex max-w-5xl flex-col gap-16 px-4 py-12 sm:px-16 sm:py-18">
+			<div class="flex flex-col gap-3">
+				<h1 class="type-h2">Design specimen</h1>
+				<p class="type-small text-muted-foreground">
+					Task 07. This page isn't linked from the site. It shows the colours, type and controls in
+					design-system/sanjivani-clinic/MASTER.md.
+				</p>
+			</div>
+
+			<section class="flex flex-col gap-6" aria-labelledby="marks">
+				<h2 id="marks" class="type-h3">Wordmark and leaf mark</h2>
+				<div class="flex flex-wrap items-end gap-12">
+					<Wordmark />
+					<span class="text-[1.5rem]"><Wordmark /></span>
+				</div>
+				<div class="flex items-end gap-6">
+					<LeafMark size="16px" />
+					<LeafMark size="24px" />
+					<LeafMark size="44px" />
+				</div>
+			</section>
+
+			<section lang="en" class="flex flex-col gap-4 border-t border-border pt-10" aria-label="English type">
+				<p class="type-small text-muted-foreground">English</p>
+				<p class="type-display">Skin and hair care in Pune</p>
+				<h2 class="type-h2">Diagnosis and <a href="#top">treatment</a></h2>
+				<h3 class="type-h3">Timings, address and the doctor</h3>
+				<p class="type-lead">
+					Diagnosis and treatment of skin and hair conditions with [Doctor's name], [qualifications].
+				</p>
+				<p class="type-body max-w-[65ch]">
+					Request an appointment online, by phone or on WhatsApp, and the clinic confirms your time.
+					This sentence has a <a href="#top">link in body text</a>.
+					The clinic's name in Marathi is <span lang="mr">संजीवनी</span>, written in Devanagari.
+				</p>
+				<p class="type-small text-muted-foreground">
+					Open today, [hours]. A <a href="#top">link in muted text</a>.
+				</p>
+			</section>
+
+			<section lang="hi" class="flex flex-col gap-4 border-t border-border pt-10" aria-label="Hindi type">
+				<p class="type-small text-muted-foreground">हिंदी</p>
+				<p class="type-display">पुणे में त्वचा और बालों की देखभाल</p>
+				<h2 class="type-h2">त्वचा और बालों की समस्याओं का <a href="#top">निदान और उपचार</a></h2>
+				<h3 class="type-h3">समय, पता और डॉक्टर</h3>
+				<p class="type-lead">त्वचा और बालों की समस्याओं का निदान और उपचार।</p>
+				<p class="type-body">संयुक्ताक्षर: द्ध ह्म ङ्क ट्ट क्र। इस वाक्य में <a href="#top">एक लिंक</a> है।</p>
+				<p class="text-sm">text-sm: त्वचा और बालों की देखभाल</p>
+				<p class="tracking-tight">tracking-tight: त्वचा और बालों की देखभाल</p>
+				<p class="type-small text-muted-foreground">आज खुला है, [समय]।</p>
+			</section>
+
+			<section lang="mr" class="flex flex-col gap-4 border-t border-border pt-10" aria-label="Marathi type">
+				<p class="type-small text-muted-foreground">मराठी</p>
+				<p class="type-display">पुण्यात त्वचा आणि केसांची काळजी</p>
+				<h2 class="type-h2">निदान आणि उपचार</h2>
+				<h3 class="type-h3">वेळ, पत्ता आणि डॉक्टर</h3>
+				<p class="type-lead">त्वचा आणि केसांच्या समस्यांचे निदान आणि उपचार.</p>
+				<p class="type-body">अंक: सकाळी १० ते दुपारी २. या वाक्यात <a href="#top">एक दुवा</a> आहे.</p>
+				<p class="type-small text-muted-foreground">आज उघडे, [वेळ].</p>
+			</section>
+
+			<section class="flex flex-col gap-6 border-t border-border pt-10" aria-labelledby="controls">
+				<h2 id="controls" class="type-h3">Controls</h2>
+				<div class="flex flex-wrap items-center gap-4">
+					<button type="button" class="min-h-11 rounded-lg bg-primary px-6 font-bold text-primary-foreground">
+						Request an appointment
+					</button>
+					<button
+						type="button"
+						class="min-h-11 rounded-lg border-2 border-primary px-6 font-bold text-primary"
+					>
+						Call the clinic
+					</button>
+					<button
+						type="button"
+						class="min-h-11 rounded-lg bg-saffron px-6 font-bold text-saffron-foreground transition-colors duration-300 hover:bg-secondary"
+					>
+						Saffron fill
+					</button>
+					<a
+						href="#top"
+						class="inline-flex min-h-11 items-center rounded-lg bg-secondary px-6 font-bold text-secondary-foreground"
+					>
+						Link styled as a button
+					</a>
+				</div>
+				<div class="flex max-w-sm flex-col gap-2">
+					<label for="specimen-name" class="type-small font-medium">Your name</label>
+					<input
+						id="specimen-name"
+						type="text"
+						class="min-h-11 rounded-lg border border-input bg-card px-3 text-[1.125rem]"
+						aria-invalid="true"
+						aria-describedby="specimen-name-error"
+					/>
+					<p id="specimen-name-error" class="type-small text-destructive">
+						Enter your name, so the clinic knows who to call.
+					</p>
+				</div>
+			</section>
+
+			<section class="flex flex-col gap-6 border-t border-border pt-10" aria-labelledby="surfaces">
+				<h2 id="surfaces" class="type-h3">Surfaces</h2>
+				<div class="type-body rounded-xl bg-muted p-6">
+					Sage band, with muted text: <span class="text-muted-foreground">Open today, [hours]</span>.
+					A <a href="#top">link on sage</a>.
+				</div>
+				<div class="type-body rounded-xl border border-border bg-card p-6">
+					Paper card with a hairline border. A <a href="#top">link on a card</a>.
+				</div>
+				<div class="type-body flex flex-col gap-4 rounded-xl bg-primary p-6 text-primary-foreground [--ring:var(--brand-off-white)]">
+					<p>Green area. Here the focus outline is off-white.</p>
+					<div class="flex flex-wrap items-center gap-4">
+						<a href="#top" class="font-bold text-primary-foreground underline underline-offset-4">A link on green</a>
+						<button type="button" class="min-h-11 rounded-lg bg-background px-6 font-bold text-primary">
+							A button on green
+						</button>
+					</div>
+				</div>
+			</section>
+		</main>
+	</body>
+</html>

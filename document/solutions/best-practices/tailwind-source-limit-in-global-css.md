@@ -54,12 +54,12 @@ After anything rewrites `src/styles/global.css`, run these checks.
 
    ```bash
    npm run build
-   grep -c -F '.text-3xl' dist/_astro/*.css     # positive control: expect 1
+   grep -c -F '.type-body' dist/_astro/*.css    # positive control: expect 1
    grep -c -F 'w-\[200px\]' dist/_astro/*.css   # canary: expect 0
    grep -c -F 'w-\[900px\]' dist/_astro/*.css   # canary: expect 0
    ```
 
-   The backslashes are there because the built CSS escapes the brackets in the selector. `text-3xl` is on the placeholder page in `src/pages/index.astro`. When that page changes, use any class the site really uses.
+   The backslashes are there because the built CSS escapes the brackets in the selector. `type-body` is on the placeholder page in `src/pages/index.astro` (it replaced `text-3xl` in task 07). When that page changes, use any class the site really uses.
 
 3. **Keep the canaries honest.** A canary is a class that appears outside `src/` but never inside it. If it ever shows up in the built CSS, the scan is leaking. Today `w-[200px]` is in `.claude/skills/ui-ux-pro-max/data/stacks/shadcn.csv` and `w-[900px]` is in `.claude/skills/ui-ux-pro-max/data/stacks/html-tailwind.csv`. Both are also in `document/`. Before you trust a canary, confirm both halves:
 

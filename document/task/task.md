@@ -16,9 +16,10 @@ This file tracks every task in this project.
 | 04 | 04_agents | 4 project subagents | Done | [04_agents](../learning/04_agents.md) |
 | 05 | 05_compound_engineering | The Compound Engineering plugin, pinned and configured | Done | [05_compound_engineering](../learning/05_compound_engineering.md) |
 | 06 | 06_react_app_setup | The Astro + React app, shadcn init, GSAP (runs in a new session) | Done | [06_react_app_setup](../learning/06_react_app_setup.md) |
+| 07 | 07_design_system | The brief's look as a design system: colours, Latin and Devanagari fonts, type scale, spacing, radius and a wordmark | In progress | [07_design_system](../learning/07_design_system.md) |
 | 24 | 24_pr_merge_workflow | Every task ends with a GitHub pull request the owner merges, not a local merge | Done | [24_pr_merge_workflow](../learning/24_pr_merge_workflow.md) |
 | 25 | 25_small_cleanups | `.nvmrc`, stale notes, old `.next/` lines, and a lockfile check for code-reviewer | Done | [25_small_cleanups](../learning/25_small_cleanups.md) |
-| 26 | 26_product_brief | A one-page product brief: the clinic, its patients, what the site must do, its look, languages and scope | In progress | [26_product_brief](../learning/26_product_brief.md) |
+| 26 | 26_product_brief | A one-page product brief: the clinic, its patients, what the site must do, its look, languages and scope | Done | [26_product_brief](../learning/26_product_brief.md) |
 
 ## Task steps
 
@@ -101,6 +102,17 @@ Runs in a **new** Claude Code session, because agents and the plugin load only w
 - [x] Compound: save a lesson in document/solutions/ if one passes the counterfactual question
 - [x] Merge into main
 
+### 07_design_system
+
+- [x] Create branch
+- [x] Show the owner three visual directions within the brief's look, and record the choice: the owner chose A, Herbarium (2026-10-27)
+- [x] Plan with `/compound-engineering:ce-plan` and link the plan here: [2026-10-27-1151-feat-design-system-plan.md](../plans/2026-10-27-1151-feat-design-system-plan.md)
+- [x] Build the design system from the chosen direction: colours, fonts, type scale, spacing, radius, the leaf mark and wordmark, a new favicon, the placeholder and a hidden specimen page, and a contrast check (`npm run test`), written up in `design-system/sanjivani-clinic/MASTER.md` and applied to `src/styles/global.css`
+- [x] Write the learning doc
+- [x] Review with code-reviewer and fix what it finds
+- [x] Compound: save a lesson in document/solutions/ if one passes the counterfactual question
+- [ ] Merge into main
+
 ### 24_pr_merge_workflow
 
 - [x] Create branch
@@ -132,7 +144,7 @@ Runs in a **new** Claude Code session, because agents and the plugin load only w
 - [x] Write the learning doc
 - [x] Review with code-reviewer and fix what it finds
 - [x] Compound: save a lesson in document/solutions/ if one passes the counterfactual question
-- [ ] Merge into main
+- [x] Merge into main
 
 ## Backlog (proposed)
 
@@ -140,7 +152,6 @@ Ideas for later. **Proposed only: confirm each one with [the product brief](../p
 
 | # | Task | Goal | Depends on |
 | --- | --- | --- | --- |
-| 07 | 07_design_system | Colors, type and spacing from ui-ux-pro-max + frontend-design, saved in design-system/sanjivani-clinic/ | 06 |
 | 08 | 08_layout_shell | Header, footer and the page layout every page uses | 07 |
 | 09 | 09_home_page | Home page with one GSAP entrance animation and a reduced-motion fallback | 08 |
 | 10 | 10_clinic_data_and_i18n | Clinic data files (contact, timings, doctor, services) and English / Hindi / Marathi pages | 08 |
@@ -180,14 +191,23 @@ Ideas for later. **Proposed only: confirm each one with [the product brief](../p
 
 **Notes from task 06 for later tasks** (to fold into a task when it is planned):
 
-- **07:** the shadcn `nova` preset uses the Geist font, which has no Devanagari letters, so Hindi and Marathi text would fall back to a system font. Pick fonts that cover Devanagari. The `design-system/` folder is already kept out of lint and the Tailwind scan.
+- **07:** the shadcn `nova` preset uses the Geist font, which has no Devanagari letters, so Hindi and Marathi text would fall back to a system font. Pick fonts that cover Devanagari. The `design-system/` folder is already kept out of lint and the Tailwind scan. *Done in task 07: Martel and Mukta replaced Geist.*
 - **08:** the layout's viewport tag should be `width=device-width, initial-scale=1`. The Astro template's placeholder page has only `width=device-width`.
 - **First UI task (08 or 09):** add React hooks lint rules (`eslint-plugin-react-hooks`). Add accessibility lint rules (`eslint-plugin-jsx-a11y`) once a version supports ESLint 10 (6.10.2 supports only ESLint 9 or older).
 - **Small cleanups:** now task 25.
 
 **Notes from task 26 for later tasks** (to fold into a task when it is planned):
 
-- **07 or its own small task:** add one-line pointers to [the product brief](../product/brief.md) from `document/skills/skills.md` (its "the brief's own words win" line), the ui-engineer and task-planner agents (then update CLAUDE.md's Agents table), and CLAUDE.md's "The project" section. readme.md and CLAUDE.md also say patients "book" an appointment, while the brief says the form only sends a request: match that wording at the same time.
+- **Its own small task** (task 07 left it out at the owner's request): add one-line pointers to [the product brief](../product/brief.md) from `document/skills/skills.md` (its "the brief's own words win" line), the ui-engineer and task-planner agents (then update CLAUDE.md's Agents table), and CLAUDE.md's "The project" section. readme.md and CLAUDE.md also say patients "book" an appointment, while the brief says the form only sends a request: match that wording at the same time.
+
+**Notes from task 07 for later tasks** (to fold into a task when it is planned):
+
+- **08:** preload one font file per page, chosen by language (Mukta 400 Latin for `en`, Mukta 400 Devanagari for `hi` and `mr`). Make controls and the language switch at least 44px tall, and set `<html lang>` on every page. base-nova stays (decided 2026-10-27): size each patient-facing control up to 44px as it's added, and never run `shadcn init --force` without asking. Before the first `shadcn add`, also settle the two other points in MASTER.md's "Before the first `shadcn add`": a Devanagari phrase inside a heading, and the focus rule on `tabindex="-1"` popups.
+- **09:** build the large specimen leaf for the hero, from MASTER.md's "Style Guidelines".
+- **14:** highlighted options in Select and Combobox need a cue that isn't only colour (MASTER.md, "Focus and touch targets").
+- **18:** derive `.dark` from the palette, and add the dark pairs to `npm run test`.
+- **21 or 23:** add an `apple-touch-icon` and a web manifest made from the favicon. Remove `src/pages/specimen.astro`, or keep it `noindex` and out of the sitemap.
+- **With the task 26 pointer note:** point the ui-engineer and task-planner agents at MASTER.md too.
 
 Not planned (the owner's choice): Google reviews, online payment.
 

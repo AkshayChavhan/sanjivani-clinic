@@ -1,13 +1,22 @@
 @import "tailwindcss" source("../");
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-@import "@fontsource-variable/geist";
+@import "@fontsource/mukta/400.css";
+@import "@fontsource/mukta/500.css";
+@import "@fontsource/mukta/700.css";
+@import "@fontsource/martel/700.css";
+@import "@fontsource/martel/800.css";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-    --font-heading: var(--font-sans);
-    --font-sans: 'Geist Variable', sans-serif;
+    --font-heading: 'Martel', ui-serif, Georgia, serif;
+    --font-sans: 'Mukta', ui-sans-serif, system-ui, sans-serif;
+    /* Saffron has its own utilities, because shadcn's accent is the hover
+       wash. It is only ever bg-saffron with text-saffron-foreground (MASTER.md).
+       Leaf green has none: use the semantic tokens (text-primary and friends). */
+    --color-saffron: var(--brand-saffron);
+    --color-saffron-foreground: var(--brand-ink);
     --color-sidebar-ring: var(--sidebar-ring);
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -49,38 +58,54 @@
 }
 
 :root {
-    --background: oklch(1 0 0);
-    --foreground: oklch(0.145 0 0);
-    --card: oklch(1 0 0);
-    --card-foreground: oklch(0.145 0 0);
-    --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.145 0 0);
-    --primary: oklch(0.205 0 0);
-    --primary-foreground: oklch(0.985 0 0);
-    --secondary: oklch(0.97 0 0);
-    --secondary-foreground: oklch(0.205 0 0);
-    --muted: oklch(0.97 0 0);
-    --muted-foreground: oklch(0.556 0 0);
-    --accent: oklch(0.97 0 0);
-    --accent-foreground: oklch(0.205 0 0);
-    --destructive: oklch(0.577 0.245 27.325);
-    --border: oklch(0.922 0 0);
-    --input: oklch(0.922 0 0);
-    --ring: oklch(0.708 0 0);
+    /* Palette: the Herbarium colours (design-system/sanjivani-clinic/MASTER.md).
+       Each colour is named once here. Everything below points at these. */
+    --brand-leaf: #1E5236;
+    --brand-ink: #1B2620;
+    --brand-muted: #55635A;
+    --brand-off-white: #F6F4EC;
+    --brand-paper: #FFFDF7;
+    --brand-sage: #E4EBDD;
+    --brand-saffron: #E3A23A;
+    --brand-hairline: #D9DDD0;
+    /* Two more, needed for contrast: form-field edges (3:1) and error text (4.5:1). */
+    --brand-field-edge: #76837A;
+    --brand-error: #B42318;
+
+    /* shadcn's semantic tokens, pointed at the palette. */
+    --background: var(--brand-off-white);
+    --foreground: var(--brand-ink);
+    --card: var(--brand-paper);
+    --card-foreground: var(--brand-ink);
+    --popover: var(--brand-paper);
+    --popover-foreground: var(--brand-ink);
+    --primary: var(--brand-leaf);
+    --primary-foreground: var(--brand-off-white);
+    --secondary: var(--brand-sage);
+    --secondary-foreground: var(--brand-leaf);
+    --muted: var(--brand-sage);
+    --muted-foreground: var(--brand-muted);
+    /* shadcn's hover and highlight wash. Never saffron: it would flash on every hover. */
+    --accent: var(--brand-sage);
+    --accent-foreground: var(--brand-ink);
+    --destructive: var(--brand-error);
+    --border: var(--brand-hairline);
+    --input: var(--brand-field-edge);
+    --ring: var(--brand-leaf);
     --chart-1: oklch(0.87 0 0);
     --chart-2: oklch(0.556 0 0);
     --chart-3: oklch(0.439 0 0);
     --chart-4: oklch(0.371 0 0);
     --chart-5: oklch(0.269 0 0);
     --radius: 0.625rem;
-    --sidebar: oklch(0.985 0 0);
-    --sidebar-foreground: oklch(0.145 0 0);
-    --sidebar-primary: oklch(0.205 0 0);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.97 0 0);
-    --sidebar-accent-foreground: oklch(0.205 0 0);
-    --sidebar-border: oklch(0.922 0 0);
-    --sidebar-ring: oklch(0.708 0 0);
+    --sidebar: var(--card);
+    --sidebar-foreground: var(--card-foreground);
+    --sidebar-primary: var(--primary);
+    --sidebar-primary-foreground: var(--primary-foreground);
+    --sidebar-accent: var(--accent);
+    --sidebar-accent-foreground: var(--accent-foreground);
+    --sidebar-border: var(--border);
+    --sidebar-ring: var(--ring);
 }
 
 .dark {
@@ -119,7 +144,7 @@
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border outline-ring;
     }
   body {
     @apply bg-background text-foreground;
@@ -127,4 +152,163 @@
   html {
     @apply font-sans;
     }
+
+  /* Headings use Martel unless a class says otherwise. */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+
+  /* Plain links in text are underlined before any hover: leaf green next to
+     ink is only 1.7:1, and phones have no hover. The gap clears the marks
+     under Devanagari letters. Links with a class (buttons, navigation) set
+     their own look. */
+  a:not([class]) {
+    color: var(--primary);
+    text-decoration-line: underline;
+    text-decoration-thickness: 0.08em;
+    text-underline-offset: 0.2em;
+  }
+  a:not([class]):hover {
+    text-decoration-thickness: 0.14em;
+  }
+
+  /* Line heights for the type-* utilities, by role: the Latin values. They
+     sit in this layer, just above the :lang rule, so that rule wins on a
+     Hindi or Marathi page's <html>. In the unlayered :root they would beat
+     every layered rule, and whole Hindi pages would keep these values. */
+  :root {
+    --lh-display: 1.15;
+    --lh-h2: 1.25;
+    --lh-h3: 1.3;
+    --lh-lead: 1.6;
+    --lh-body: 1.6;
+    --lh-small: 1.5;
+  }
+
+  /* Hindi and Marathi (Devanagari) need taller lines than English, so the
+     marks above and below the letters don't touch the next line. Every
+     element inside a Hindi or Marathi page or phrase gets these values. */
+  :lang(hi), :lang(mr) {
+    --lh-display: 1.4;
+    --lh-h2: 1.45;
+    --lh-h3: 1.45;
+    --lh-lead: 1.7;
+    --lh-body: 1.75;
+    --lh-small: 1.7;
+    /* Tailwind's own line heights, used by text-sm and friends in shadcn components. */
+    --text-xs--line-height: 1.7;
+    --text-sm--line-height: 1.7;
+    --text-base--line-height: 1.75;
+    --text-lg--line-height: 1.75;
+    --text-xl--line-height: 1.6;
+    --text-2xl--line-height: 1.5;
+    --text-3xl--line-height: 1.45;
+    --text-4xl--line-height: 1.4;
+    --text-5xl--line-height: 1.35;
+    --text-6xl--line-height: 1.35;
+    --text-7xl--line-height: 1.35;
+    --text-8xl--line-height: 1.35;
+    --text-9xl--line-height: 1.35;
+    --leading-tight: 1.45;
+    --leading-snug: 1.5;
+    --leading-normal: 1.75;
+    --leading-relaxed: 1.8;
+    /* Martel and Mukta have no italics; never let the browser fake them on Devanagari. */
+    font-synthesis-style: none;
+  }
+
+  /* Plain text gets the taller line height only where the language starts
+     (the page's <html>, or a phrase with its own lang). Setting it on every
+     element would override what a link inside a heading inherits. */
+  [lang|="hi"], [lang|="mr"] {
+    line-height: var(--lh-body);
+  }
+
+  /* Neither font has italics, and Devanagari never gets fake ones, so
+     emphasis in Hindi and Marathi is bold instead. */
+  :is(em, i, cite):is(:lang(hi), :lang(mr)) {
+    font-style: normal;
+    font-weight: 700;
+  }
+
+  /* Tailwind's reset gives buttons the arrow cursor; show the hand instead. */
+  button:not(:disabled), [role="button"]:not([aria-disabled="true"]), summary {
+    cursor: pointer;
+  }
+}
+
+/* Letter-spacing breaks the line that joins Devanagari letters. This rule is
+   outside every layer, so no tracking-* class can switch it back on. */
+:lang(hi), :lang(mr) {
+  letter-spacing: 0;
+}
+
+/* Keyboard focus: a solid 2px outline with a 2px gap, on everything a
+   keyboard can reach. shadcn's half-transparent ring is too faint here
+   (about 2.5:1), so it's switched off. This rule is outside every layer, so
+   a component's outline-none can't hide it. On a leaf-green area, set
+   --ring to var(--brand-off-white) on that area. */
+:where(a, button, input, select, textarea, summary, [tabindex], [role="option"], [role="menuitem"], [role="tab"], [role="checkbox"], [role="radio"], [role="switch"]):focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+  box-shadow: none;
+}
+
+/* "Reduce motion": CSS animations and transitions finish at once. GSAP
+   handles its own animations through gsap.matchMedia(). */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* The type scale (design-system/sanjivani-clinic/MASTER.md). Sizes are in rem,
+   so they grow when a patient raises the browser's text size. Display, h2 and
+   lead grow from phone (375px) to desktop (1440px) widths. */
+@utility type-display {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: clamp(2.25rem, 1.722rem + 2.254vw, 3.75rem);
+  line-height: var(--lh-display);
+  overflow-wrap: break-word;
+}
+
+@utility type-h2 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 1.236rem + 1.127vw, 2.25rem);
+  line-height: var(--lh-h2);
+  overflow-wrap: break-word;
+}
+
+@utility type-h3 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.3125rem;
+  line-height: var(--lh-h3);
+  overflow-wrap: break-word;
+}
+
+@utility type-lead {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: clamp(1.125rem, 1.059rem + 0.282vw, 1.3125rem);
+  line-height: var(--lh-lead);
+}
+
+@utility type-body {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: var(--lh-body);
+}
+
+@utility type-small {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: var(--lh-small);
 }

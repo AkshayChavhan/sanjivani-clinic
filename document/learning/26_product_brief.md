@@ -1,6 +1,6 @@
 # 26_product_brief: A one-page product brief for the clinic site
 
-> **Branch:** 26_product_brief · **Date:** 2026-10-26 · **Status:** In progress
+> **Branch:** 26_product_brief · **Date:** 2026-10-26 · **Status:** Done
 
 **Plan:** [2026-10-26-1936-docs-product-brief-plan.md](../plans/2026-10-26-1936-docs-product-brief-plan.md). **Solution doc:** [check-legal-rules-against-official-sources.md](../solutions/workflow-issues/check-legal-rules-against-official-sources.md).
 
