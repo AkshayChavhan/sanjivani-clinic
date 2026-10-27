@@ -107,7 +107,7 @@ Runs in a **new** Claude Code session, because agents and the plugin load only w
 - [x] Create branch
 - [x] Show the owner three visual directions within the brief's look, and record the choice: the owner chose A, Herbarium (2026-10-27)
 - [x] Plan with `/compound-engineering:ce-plan` and link the plan here: [2026-10-27-1151-feat-design-system-plan.md](../plans/2026-10-27-1151-feat-design-system-plan.md)
-- [ ] Build the design system from the chosen direction: colours, fonts, type scale, spacing, radius and a wordmark, saved in `design-system/sanjivani-clinic/` and applied to `src/styles/global.css`
+- [ ] Build the design system from the chosen direction: colours, fonts, type scale, spacing, radius, the leaf mark and wordmark, a new favicon, the placeholder and a hidden specimen page, and a contrast check (`npm run test`), written up in `design-system/sanjivani-clinic/MASTER.md` and applied to `src/styles/global.css`
 - [ ] Write the learning doc
 - [ ] Review with code-reviewer and fix what it finds
 - [ ] Compound: save a lesson in document/solutions/ if one passes the counterfactual question
@@ -199,6 +199,15 @@ Ideas for later. **Proposed only: confirm each one with [the product brief](../p
 **Notes from task 26 for later tasks** (to fold into a task when it is planned):
 
 - **07 or its own small task:** add one-line pointers to [the product brief](../product/brief.md) from `document/skills/skills.md` (its "the brief's own words win" line), the ui-engineer and task-planner agents (then update CLAUDE.md's Agents table), and CLAUDE.md's "The project" section. readme.md and CLAUDE.md also say patients "book" an appointment, while the brief says the form only sends a request: match that wording at the same time.
+
+**Notes from task 07 for later tasks** (to fold into a task when it is planned):
+
+- **08:** preload one font file per page, chosen by language (Mukta 400 Latin for `en`, Mukta 400 Devanagari for `hi` and `mr`). Make controls and the language switch at least 44px tall, and set `<html lang>` on every page. Before the first `shadcn add`, ask the owner: keep base-nova (32px controls) and size each control up to 44px, or switch to a roomier shadcn style with `shadcn init --force`?
+- **09:** build the large specimen leaf for the hero, from MASTER.md's "Style Guidelines".
+- **14:** highlighted options in Select and Combobox need a cue that isn't only colour (MASTER.md, "Focus and touch targets").
+- **18:** derive `.dark` from the palette, and add the dark pairs to `npm run test`.
+- **21 or 23:** add an `apple-touch-icon` and a web manifest made from the favicon. Remove `src/pages/specimen.astro`, or keep it `noindex` and out of the sitemap.
+- **With the task 26 pointer note:** point the ui-engineer and task-planner agents at MASTER.md too.
 
 Not planned (the owner's choice): Google reviews, online payment.
 
