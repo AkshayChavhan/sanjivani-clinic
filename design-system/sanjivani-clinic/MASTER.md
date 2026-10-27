@@ -268,7 +268,7 @@ Before delivering any UI code, verify:
 
 ## Before the first `shadcn add` (task 08)
 
-- **An open owner decision:** base-nova's controls are 32px tall, under the 44px floor. Either keep base-nova and size each patient-facing control up to 44px, or switch to a roomier shadcn style while no component exists yet. A style change needs `shadcn init --force`, so the owner decides first.
+- **Decided (2026-10-27, the owner left it to Claude): keep base-nova, and size each patient-facing control up to 44px** (`min-h-11`, or a size variant) as it's added. base-nova's controls are 32px tall. A roomier style would still need resizing to reach 44px, and switching needs `shadcn init --force`, which rewrites `components.json` and can rewrite the theme in `global.css`, where this design system lives. Never run `shadcn init --force` here without asking the owner.
 - **A design call:** a Devanagari phrase inside an English heading makes that line much taller, because a phrase with its own `lang` gets the body line height (a 60px display line grows from about 69px to about 105px). Decide before the wordmark or a Hindi phrase goes in a heading: limit the rule to block elements, or give headings their own value.
 - **Recheck the focus rule:** `[tabindex]` also matches `tabindex="-1"` popups, and the rule's `box-shadow: none` removes a component's shadow while it has focus. No installed component is affected yet.
 
@@ -282,3 +282,5 @@ Downloads measured on 2026-10-27 (woff2):
 | A typical Hindi or Marathi page | Mukta 400 Devanagari, Mukta 400 and 500 Latin, Martel 700 and 800 Devanagari | about 228 KB |
 
 Each Mukta Devanagari weight is about 100 KB, so bold Hindi or Marathi text adds about 100 KB more. Task 08 preloads one file per page, chosen by language.
+
+**Decided (2026-10-27, the owner left it to Claude): keep all five weights.** Most of a Hindi or Marathi page's weight is the Devanagari body font, which every such page needs. Dropping a weight would save little and change the look. Revisit if task 09 measures a slow load.
