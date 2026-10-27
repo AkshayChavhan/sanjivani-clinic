@@ -106,15 +106,6 @@
     --sidebar-accent-foreground: var(--accent-foreground);
     --sidebar-border: var(--border);
     --sidebar-ring: var(--ring);
-
-    /* Line heights for the type-* utilities, by role. These are the Latin
-       values; the :lang(hi), :lang(mr) rule below swaps in taller ones. */
-    --lh-display: 1.15;
-    --lh-h2: 1.25;
-    --lh-h3: 1.3;
-    --lh-lead: 1.6;
-    --lh-body: 1.6;
-    --lh-small: 1.5;
 }
 
 .dark {
@@ -179,6 +170,19 @@
   }
   a:not([class]):hover {
     text-decoration-thickness: 0.14em;
+  }
+
+  /* Line heights for the type-* utilities, by role: the Latin values. They
+     sit in this layer, just above the :lang rule, so that rule wins on a
+     Hindi or Marathi page's <html>. In the unlayered :root they would beat
+     every layered rule, and whole Hindi pages would keep these values. */
+  :root {
+    --lh-display: 1.15;
+    --lh-h2: 1.25;
+    --lh-h3: 1.3;
+    --lh-lead: 1.6;
+    --lh-body: 1.6;
+    --lh-small: 1.5;
   }
 
   /* Hindi and Marathi (Devanagari) need taller lines than English, so the
