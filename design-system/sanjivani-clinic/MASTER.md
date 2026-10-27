@@ -3,6 +3,7 @@
 > **LOGIC:** When building a specific page, first check `design-system/sanjivani-clinic/pages/[page-name].md`.
 > If that file exists, its rules **override** this Master file.
 > If not, strictly follow the rules below.
+> Page files are written by hand too, like this one. Never generate one: ui-ux-pro-max's `--persist` writes a page file even without `--force`, from its own suggestion (medical teal), and it would override these rules.
 
 ---
 
@@ -35,11 +36,11 @@ Each colour is named once, as a `--brand-*` variable in `:root` in `src/styles/g
 
 **Saffron rules.** The only saffron utilities are `bg-saffron` with `text-saffron-foreground` (ink), and the leaf mark's own veins. Saffron is never text, a meaningful icon, a border or a focus ring: it is 2.01:1 on the page. Leaf green on saffron is 4.10:1, so a saffron fill always takes an ink label. `--accent` is sage, not saffron: in shadcn, `--accent` is the hover wash, and saffron there would flash on every hover.
 
-**Never use:** saffron text, leaf text on saffron, and the hairline as a form-field edge (1.25:1).
+**Never use:** saffron text, leaf text on saffron, the hairline as a form-field edge (1.25:1), and error text on an error tint stronger than 10% (`bg-destructive/20` is 4.29:1, so a hover can't darken the tint).
 
 **On a leaf-green area,** set `[--ring:var(--brand-off-white)]` on the area, so the focus outline turns off-white (8.24:1). A light card inside that area inherits the off-white ring, so set `[--ring:var(--brand-leaf)]` back on the card. Plain text links on green need their own class (for example `text-primary-foreground underline`), because the default link colour is leaf.
 
-**The contrast check.** `npm run test` runs `scripts/check-contrast.mjs`. It reads the hex values from `global.css` and checks every pair below, and it scans `src/` for any saffron class other than `bg-saffron`. Its table decides which pairs are checked; add a row whenever a new pairing appears. It isn't part of `npm run build`, and there is no CI yet, so run it before every merge. Output on 2026-10-27:
+**The contrast check.** `npm run test` runs `scripts/check-contrast.mjs`. It reads the hex values from `global.css` and checks every pair below, and it scans `src/` for any saffron class other than `bg-saffron` and `text-saffron-foreground` (including side borders, opacity and arbitrary values). The scan can't check pairings: every `bg-saffron` still needs an ink label, checked by eye. Its table decides which pairs are checked; add a row whenever a new pairing appears. It isn't part of `npm run build`, and there is no CI yet, so run it before every merge. Output on 2026-10-27:
 
 ```text
 Pairs the site uses:
@@ -119,17 +120,17 @@ The Latin line heights are set in `@layer base`, just above the `:lang` rule. Th
 
 ### Spacing Variables
 
-Tailwind's 4px steps are the spacing scale; there are no custom `--space-*` tokens.
+Tailwind's 4px steps are the spacing scale. There are no `--space-*` CSS variables: use the Tailwind class (an undefined variable fails silently).
 
-| Token | Value | Usage |
-|-------|-------|-------|
-| `--space-xs` → `1` | 4px | tight gaps, icon to label |
-| `--space-sm` → `2` | 8px | inline gaps, label to field |
-| `--space-md` → `4` | 16px | gaps between controls; page gutter on phones |
-| `--space-lg` → `6` | 24px | card padding |
-| `--space-xl` → `8` | 32px | between groups |
-| `--space-2xl` → `12` | 48px | between sections on phones |
-| `--space-3xl` → `16` | 64px | page gutter on desktop |
+| Role | Value | Tailwind step | Usage |
+|------|-------|---------------|-------|
+| xs | 4px | `1` (`gap-1`) | tight gaps, icon to label |
+| sm | 8px | `2` (`gap-2`) | inline gaps, label to field |
+| md | 16px | `4` (`gap-4`, `px-4`) | gaps between controls; page gutter on phones |
+| lg | 24px | `6` (`p-6`) | card padding |
+| xl | 32px | `8` (`gap-8`) | between groups |
+| 2xl | 48px | `12` (`py-12`) | between sections on phones |
+| 3xl | 64px | `16` (`px-16`) | page gutter on desktop |
 
 - **Page gutters:** 16px on phones (`px-4`), 64px from 640px up (`sm:px-16`).
 - **Sections:** 48px apart on phones, 72px on desktop (`py-12`, `sm:py-18`).
@@ -232,6 +233,7 @@ The favicon and this file hold copies of the palette's hex values, and `npm run 
 ## Anti-Patterns (Do NOT Use)
 
 - Saffron text or icons, and leaf text on saffron.
+- Error text on an error tint stronger than 10% (`bg-destructive/20` is 4.29:1).
 - Letter-spacing or italics on Devanagari.
 - Patient-facing text under 16px.
 - `leading-none` or `truncate` on Devanagari.
