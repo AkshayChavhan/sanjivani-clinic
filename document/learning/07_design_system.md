@@ -136,7 +136,9 @@ $ file public/favicon.ico
 public/favicon.ico: PNG image data, 32 x 32, 8-bit colormap, non-interlaced
 ```
 
-**Font weight.** The `.woff2` files each kind of page loads total 88,272 bytes (86 KiB) for the English page and 233,772 bytes (228 KiB) for a typical Hindi or Marathi page. Each extra Mukta Devanagari weight adds about 100 KB. Which weights to keep is your call.
+**Font weight.** The `.woff2` files each kind of page loads total 88,272 bytes (86 KiB) for the English page and 233,772 bytes (228 KiB) for a typical Hindi or Marathi page. Each extra Mukta Devanagari weight adds about 100 KB. You left the choice to Claude (2026-10-27): all five weights stay, because most of a Hindi page's weight is the Devanagari body font it needs anyway. Revisit if task 09 measures a slow load.
+
+**shadcn style.** Also left to Claude: base-nova stays, and each patient-facing control is sized up to 44px as it's added. Switching styles needs `shadcn init --force`, which can rewrite the theme in `global.css`, and even a roomier style would still need resizing.
 
 The rest is pasted from the final run of the plan's Verification Contract (its checklist), not re-run here:
 
