@@ -27,4 +27,10 @@ export default defineConfig([
     files: ["**/*.astro"],
     rules: { "no-undef": "off" },
   },
+  {
+    // Node scripts, such as the contrast check. Listed here instead of
+    // installing the "globals" package for two names.
+    files: ["scripts/**/*.mjs"],
+    languageOptions: { globals: { process: "readonly", console: "readonly" } },
+  },
 ]);
