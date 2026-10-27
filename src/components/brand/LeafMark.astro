@@ -1,0 +1,52 @@
+---
+// The Sanjivani leaf mark: a leaf-green leaf with a saffron midrib and veins
+// (design-system/sanjivani-clinic/MASTER.md, "Brand marks").
+// It's decorative: screen readers skip it, and the wordmark's text carries
+// the name. If you change the drawing, change public/favicon.svg to match.
+interface Props {
+  /** Width and height, as a CSS length. 1em follows the text around it. */
+  size?: string;
+  class?: string;
+}
+
+const { size = "1em", class: className } = Astro.props;
+---
+
+<svg
+  class:list={["leaf-mark", className]}
+  width={size}
+  height={size}
+  viewBox="0 0 40 40"
+  aria-hidden="true"
+  focusable="false"
+>
+  <path class="leaf-mark__body" d="M20 3 C33 10 35 25 20 37 C5 25 7 10 20 3 Z"></path>
+  <path
+    class="leaf-mark__veins"
+    d="M20 8 L20 34 M20 16 L26 12 M20 16 L14 12 M20 23 L27 18 M20 23 L13 18"
+  ></path>
+</svg>
+
+<style>
+  .leaf-mark {
+    flex: none;
+  }
+  .leaf-mark__body {
+    fill: var(--brand-leaf);
+  }
+  .leaf-mark__veins {
+    fill: none;
+    stroke: var(--brand-saffron);
+    stroke-width: 1.6;
+    stroke-linecap: round;
+  }
+  /* Windows contrast themes: draw the leaf in the system's own colours. */
+  @media (forced-colors: active) {
+    .leaf-mark__body {
+      fill: CanvasText;
+    }
+    .leaf-mark__veins {
+      stroke: Canvas;
+    }
+  }
+</style>
