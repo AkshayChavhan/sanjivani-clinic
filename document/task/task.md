@@ -202,7 +202,7 @@ Ideas for later. **Proposed only: confirm each one with [the product brief](../p
 
 **Notes from task 07 for later tasks** (to fold into a task when it is planned):
 
-- **08:** preload one font file per page, chosen by language (Mukta 400 Latin for `en`, Mukta 400 Devanagari for `hi` and `mr`). Make controls and the language switch at least 44px tall, and set `<html lang>` on every page. Before the first `shadcn add`, ask the owner: keep base-nova (32px controls) and size each control up to 44px, or switch to a roomier shadcn style with `shadcn init --force`? Also settle the two other points in MASTER.md's "Before the first `shadcn add`": a Devanagari phrase inside a heading, and the focus rule on `tabindex="-1"` popups.
+- **08:** preload one font file per page, chosen by language (Mukta 400 Latin for `en`, Mukta 400 Devanagari for `hi` and `mr`). Make controls and the language switch at least 44px tall, and set `<html lang>` on every page. base-nova stays (decided 2026-10-27): size each patient-facing control up to 44px as it's added, and never run `shadcn init --force` without asking. Before the first `shadcn add`, also settle the two other points in MASTER.md's "Before the first `shadcn add`": a Devanagari phrase inside a heading, and the focus rule on `tabindex="-1"` popups.
 - **09:** build the large specimen leaf for the hero, from MASTER.md's "Style Guidelines".
 - **14:** highlighted options in Select and Combobox need a cue that isn't only colour (MASTER.md, "Focus and touch targets").
 - **18:** derive `.dark` from the palette, and add the dark pairs to `npm run test`.
