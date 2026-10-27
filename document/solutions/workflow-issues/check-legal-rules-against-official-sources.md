@@ -80,7 +80,7 @@ Rule 6, before and after the check:
 Testimonials and before-and-after photos also stay off the site unless the
 doctor checks the current rules and decides otherwise.
 
-<!-- after: brief rule 6, checked on nmc.org.in on 2026-10-26 (gated by the owner's decision on 2026-10-27; see Context) -->
+<!-- after: brief rule 6 as first written (8f7291f), checked on nmc.org.in on 2026-10-26; later gated by the owner, see Context -->
 6. **No testimonials or before-and-after photos.** The NMC guidelines say a
    patient's consent doesn't make them allowed.
 ```
