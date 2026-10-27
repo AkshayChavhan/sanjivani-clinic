@@ -257,6 +257,8 @@ diff <(git show main:document/task/task.md | sed -n '/^## Backlog/,/^## How to a
 sed -n '/^## Backlog/,/^## How to add/p' document/task/task.md | grep -c '^|'
 ```
 
+*After the owner's decisions (2026-10-27): row 12's goal changed and rows 16 and 17 are kept, so check 4 shows row 12 until the merge, and the brief has three 2026 dates (the header has two). See task.md and the learning doc.*
+
 Check 4 compares the whole table on both sides, so it works before and after committing. A diff of commits alone prints nothing while the edit is uncommitted, and that silence looks like a pass (`document/solutions/workflow-issues/check-whole-file-not-diff-window.md`).
 
 | Check | Passes when |
