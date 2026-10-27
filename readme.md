@@ -24,6 +24,7 @@ The rules Claude follows in this repo (the workflow, git rules and definition of
 | `CLAUDE.md` | The rules Claude reads at the start of every session |
 | `.gitignore` | The list of files git must never track: dependencies, build output, secrets |
 | `document/task/task.md` | The task tracker: every task, its status and its steps |
+| `design-system/sanjivani-clinic/MASTER.md` | The design system: colours, fonts, sizes, spacing, brand marks and the rules UI work follows |
 | `document/product/brief.md` | The product brief: the clinic, its patients, what the site must do, its look, languages and rules. Every new task checks its choices against it |
 | `document/learning/TEMPLATE.md` | The template every learning doc starts from |
 | `document/learning/NN_name.md` | One learning doc per task, for example `01_project_setup.md` |
@@ -40,7 +41,8 @@ The rules Claude follows in this repo (the workflow, git rules and definition of
 | `tsconfig.json` | TypeScript's config, including the `@/` shortcut for `src/` |
 | `eslint.config.js` | ESLint's config: the code checker behind `npm run lint` |
 | `components.json` | shadcn/ui's config |
-| `src/` | The app's code: pages, styles and helpers |
+| `src/` | The app's code: pages, styles, the brand's leaf mark and wordmark, and helpers |
+| `scripts/` | Small Node scripts, such as the palette's contrast check (`npm run test`) |
 | `public/` | Files served exactly as they are, such as the favicon |
 | `.vscode/` | VS Code settings from the Astro template (it recommends the Astro extension) |
 | `.nvmrc` | The Node version for this project (24), read by fnm and nvm |
@@ -70,6 +72,7 @@ Other commands:
 | `npm run build` | Builds the finished site into `dist/` |
 | `npm run lint` | Checks the code for mistakes (ESLint) |
 | `npm run typecheck` | Checks the TypeScript types (`astro check`) |
+| `npm run test` | Checks that the site's colour pairs are easy to read (contrast) |
 
 ## Prerequisites
 
