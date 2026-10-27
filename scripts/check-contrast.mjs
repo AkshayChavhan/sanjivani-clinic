@@ -111,9 +111,16 @@ const NEVER = [
   ["Error text on a 20% error tint", "--destructive", { top: "--destructive", alpha: 0.2, over: "--background" }, TEXT],
 ];
 
-// Saffron classes other than bg-saffron (and text-saffron-foreground, its label).
-const BANNED_SAFFRON =
-  /(?<![\w-])(?:[\w-]+:)*(?:text|border|ring|outline|decoration|fill|stroke|from|via|to|shadow|accent|caret|placeholder|divide)-saffron(?!-foreground)(?![\w-])/g;
+// Saffron classes. Only bg-saffron (any variant, such as hover:) and its
+// label text-saffron-foreground are allowed. Everything else is banned:
+// text-, border-t-, ring-offset-, opacity like /50, and arbitrary values such
+// as text-(--color-saffron) or text-[var(--brand-saffron)]. CSS variables
+// (--brand-saffron in a <style> block) aren't classes, so they don't count.
+// It can't check pairings: a bg-saffron still needs an ink label, by eye.
+const SAFFRON_CLASS = /(?<![\w-])(?:[\w-]+:)*[a-z][\w-]*-(?:saffron(?:-foreground)?(?:\/\d+)?(?![\w-])|[([][^\s"'`]*saffron[^\s"'`]*)/g;
+const ALLOWED_SAFFRON = new Set(["bg-saffron", "text-saffron-foreground"]);
+const bannedSaffronIn = (text) =>
+  (text.match(SAFFRON_CLASS) ?? []).filter((cls) => !ALLOWED_SAFFRON.has(cls.split(":").pop()));
 
 const problems = [];
 const line = (status, value, need, name) =>
@@ -141,17 +148,35 @@ if (control.toFixed(2) !== "21.00") problems.push("Black on white isn't 21.00:1,
 
 // The saffron scan. First prove the pattern works on known examples, so a
 // broken pattern can't pass quietly.
-const mustMatch = ["text-saffron", "hover:border-saffron", "md:ring-saffron/50"];
-const mustNotMatch = ["bg-saffron", "text-saffron-foreground", "--brand-saffron", "--color-saffron"];
+const mustMatch = [
+  "text-saffron",
+  "hover:border-saffron",
+  "md:ring-saffron/50",
+  "border-t-saffron",
+  "ring-offset-saffron",
+  "drop-shadow-saffron",
+  "bg-saffron/50",
+  "text-(--color-saffron)",
+  "text-[var(--brand-saffron)]",
+];
+const mustNotMatch = [
+  "bg-saffron",
+  "hover:bg-saffron",
+  "text-saffron-foreground",
+  "--brand-saffron",
+  "--color-saffron",
+  "stroke: var(--brand-saffron);",
+];
 const selfTestOk =
-  mustMatch.every((s) => s.match(BANNED_SAFFRON)) && mustNotMatch.every((s) => !s.match(BANNED_SAFFRON));
+  mustMatch.every((s) => bannedSaffronIn(` ${s} `).length === 1) &&
+  mustNotMatch.every((s) => bannedSaffronIn(` ${s} `).length === 0);
 if (!selfTestOk) problems.push("The saffron pattern failed its own examples, so the scan is broken");
 
 const srcDir = fileURLToPath(new URL("../src/", import.meta.url));
 const files = readdirSync(srcDir, { recursive: true }).filter((f) => /\.(astro|tsx?|jsx?|mdx?|css|html)$/.test(f));
 const banned = [];
 for (const file of files) {
-  for (const hit of readFileSync(join(srcDir, file), "utf8").match(BANNED_SAFFRON) ?? []) {
+  for (const hit of bannedSaffronIn(readFileSync(join(srcDir, file), "utf8"))) {
     banned.push(`${file}: ${hit}`);
   }
 }
