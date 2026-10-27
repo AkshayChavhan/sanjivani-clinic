@@ -184,7 +184,12 @@ Also fixed from its notes:
 4. **The spacing table listed `--space-*` variables that don't exist.** It now shows each role's Tailwind class instead (`7603104`).
 5. **`--color-leaf` was registered but unused.** Removed: leaf green goes through the semantic tokens (`f16ddbe`).
 
-**code-reviewer, second pass:** Pending.
+**code-reviewer, second pass: Ready to merge**, with no must fixes, and git unchanged. Two suggestions, both fixed:
+
+1. **The saffron scan still missed two forms:** opacity in brackets (`bg-saffron/[0.5]`) and arbitrary properties (`[color:var(--brand-saffron)]`). We added them to the self-test first, and it failed, which proved the gap. Then we widened the pattern; the self-test passed, and a scratch file with both forms made the check exit 1 (`d37bb75`).
+2. **Two rule files disagreed about `--force`.** The `f375887` rewording made CLAUDE.md say "never", while skills.md still said "never without asking". "Never" is the rule now, since MASTER.md is hand-written, and skills.md says so (`a480517`). This is stricter than before task 07.
+
+**code-reviewer, third pass:** Pending.
 
 **Compound:** Pending.
 
