@@ -20,6 +20,7 @@ Claude reads this file at the start of every session. Follow it over your defaul
 | `CLAUDE.md` | This file: the rules Claude follows here |
 | `.gitignore` | Files git must never track |
 | `document/task/task.md` | The task tracker: tasks, statuses, steps, backlog |
+| `design-system/sanjivani-clinic/MASTER.md` | The design system: colours, fonts, type scale, spacing, brand marks and rules. Written by hand; read it before UI work |
 | `document/product/brief.md` | The product brief: what the site is for, its patients, look, languages, rules and scope. Read it before planning a feature or doing UI work |
 | `document/learning/TEMPLATE.md` | The template for learning docs |
 | `document/learning/NN_name.md` | One learning doc per task |
@@ -36,7 +37,8 @@ Claude reads this file at the start of every session. Follow it over your defaul
 | `tsconfig.json` | TypeScript config: the `@/*` alias for `src/`, and `.claude/` and `document/` excluded |
 | `eslint.config.js` | ESLint config, with the folders lint must skip |
 | `components.json` | shadcn config: Base UI, `nova` preset, CSS variables, aliases |
-| `src/` | The app: `pages/` (one file per URL), `styles/global.css` (Tailwind and theme tokens), `lib/utils.ts` (`cn()`) |
+| `src/` | The app: `pages/` (one file per URL; `specimen.astro` is the hidden design specimen), `styles/global.css` (Tailwind, fonts and theme tokens), `components/brand/` (the leaf mark and wordmark), `lib/utils.ts` (`cn()`) |
+| `scripts/` | Node scripts: `check-contrast.mjs`, the palette's contrast check behind `npm run test` |
 | `public/` | Files served as they are, such as the favicons |
 | `.vscode/` | Editor settings from the Astro template: recommends the Astro extension |
 | `.nvmrc` | The project's Node version (24), for fnm and nvm |
@@ -52,6 +54,7 @@ Run these from the repo root.
 | `npm run build` | Builds the site into `dist/` |
 | `npm run lint` | Checks the code with ESLint |
 | `npm run typecheck` | Checks types with `astro check` |
+| `npm run test` | Runs the palette's contrast check (`scripts/check-contrast.mjs`) |
 
 **The dev server in a Claude session.** Astro detects Claude Code and runs `npm run dev` in the background. It prints the URL, which may not be 4321, and returns.
 
@@ -142,6 +145,7 @@ Full guide: [document/skills/skills.md](document/skills/skills.md). Order for UI
 Rules:
 
 - Run `python3 .claude/skills/ui-ux-pro-max/scripts/search.py` from the repo root, and ignore the `${CLAUDE_PLUGIN_ROOT}` prefix in its SKILL.md. Save with `--persist --output-dir .`; never use `--force` without asking.
+- `design-system/sanjivani-clinic/MASTER.md` is written by hand (task 07). Read it before UI work and follow it; the brief wins over it. Never regenerate it with `--persist --force`.
 - ui-ux-pro-max results are input and a checklist; frontend-design makes the call. When skills disagree, accessibility wins.
 - shadcn: add only official `@shadcn` items without asking. Ask before any third-party registry or URL, `--overwrite`, `init --force` or `mcp init`. Read every file it adds.
 - 21st needs the owner's login or `TWENTYFIRST_TOKEN`. Never commit the key. No hosted generation (`21st generate` or `iterate`) unless `21st usage` shows AI is enabled and the owner agrees. Never publish to 21st.dev, and never run `21st install-skill`, `21st init --write`, or any publish, profile or delete command. Review every `21st add` diff and its new npm packages.
