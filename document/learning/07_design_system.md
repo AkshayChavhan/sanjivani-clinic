@@ -2,7 +2,7 @@
 
 > **Branch:** 07_design_system · **Date:** 2026-10-27 · **Status:** In progress
 
-**Plan:** [2026-10-27-1151-feat-design-system-plan.md](../plans/2026-10-27-1151-feat-design-system-plan.md). **Design system:** [MASTER.md](../../design-system/sanjivani-clinic/MASTER.md). **Solution doc:** Pending.
+**Plan:** [2026-10-27-1151-feat-design-system-plan.md](../plans/2026-10-27-1151-feat-design-system-plan.md). **Design system:** [MASTER.md](../../design-system/sanjivani-clinic/MASTER.md). **Solution doc:** [same-layer-defaults-and-whole-page-lang-tests.md](../solutions/best-practices/same-layer-defaults-and-whole-page-lang-tests.md).
 
 ## In one minute
 
@@ -196,7 +196,7 @@ Also fixed from its notes:
 
 These were wording fixes after the final pass, so there was no fourth pass.
 
-**Compound:** Pending.
+**Compound:** we asked, "If this lesson weren't written down, would a future session repeat the mistake or redo the investigation?" Yes. The unlayered-`:root` bug was silent (lint, typecheck, build and `npm run test` all passed), and our own browser check missed it because it tested Hindi only inside an English page. Tasks 08 and 10 set `<html lang>` and will edit `global.css`, and no saved lesson covered cascade layers. We ran the lightweight command, and it wrote [same-layer-defaults-and-whole-page-lang-tests.md](../solutions/best-practices/same-layer-defaults-and-whole-page-lang-tests.md) (`✓ Documentation complete (non-interactive lightweight mode)`). We read it in full: its code matches `global.css` and `7870380`, and it adds a console check for whole Hindi and Marathi pages.
 
 ## Common mistakes
 
