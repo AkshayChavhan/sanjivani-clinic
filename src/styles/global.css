@@ -12,9 +12,9 @@
 @theme inline {
     --font-heading: 'Martel', ui-serif, Georgia, serif;
     --font-sans: 'Mukta', ui-sans-serif, system-ui, sans-serif;
-    /* Brand colours with their own utilities. Saffron is only ever
-       bg-saffron with text-saffron-foreground (MASTER.md). */
-    --color-leaf: var(--brand-leaf);
+    /* Saffron has its own utilities, because shadcn's accent is the hover
+       wash. It is only ever bg-saffron with text-saffron-foreground (MASTER.md).
+       Leaf green has none: use the semantic tokens (text-primary and friends). */
     --color-saffron: var(--brand-saffron);
     --color-saffron-foreground: var(--brand-ink);
     --color-sidebar-ring: var(--sidebar-ring);
