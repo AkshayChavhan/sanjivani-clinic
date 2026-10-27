@@ -37,9 +37,9 @@ Each colour is named once, as a `--brand-*` variable in `:root` in `src/styles/g
 
 **Never use:** saffron text, leaf text on saffron, and the hairline as a form-field edge (1.25:1).
 
-**On a leaf-green area,** set `[--ring:var(--brand-off-white)]` on the area, so the focus outline turns off-white (8.24:1). Plain text links there need their own class (for example `text-primary-foreground underline`), because the default link colour is leaf.
+**On a leaf-green area,** set `[--ring:var(--brand-off-white)]` on the area, so the focus outline turns off-white (8.24:1). A light card inside that area inherits the off-white ring, so set `[--ring:var(--brand-leaf)]` back on the card. Plain text links on green need their own class (for example `text-primary-foreground underline`), because the default link colour is leaf.
 
-**The contrast check.** `npm run test` runs `scripts/check-contrast.mjs`. It reads the hex values from `global.css` and checks every pair below. Its table decides which pairs are checked; add a row whenever a new pairing appears. Output on 2026-10-27:
+**The contrast check.** `npm run test` runs `scripts/check-contrast.mjs`. It reads the hex values from `global.css` and checks every pair below, and it scans `src/` for any saffron class other than `bg-saffron`. Its table decides which pairs are checked; add a row whenever a new pairing appears. It isn't part of `npm run build`, and there is no CI yet, so run it before every merge. Output on 2026-10-27:
 
 ```text
 Pairs the site uses:
@@ -57,8 +57,12 @@ pass                7.06:1  (needs 4.5)  Ink label on saffron (saffron fill)
 pass                5.97:1  (needs 4.5)  Error text on the page
 pass                5.39:1  (needs 4.5)  Error text on sage bands
 pass                5.07:1  (needs 4.5)  Error text on its 10% tint
+pass                6.46:1  (needs 4.5)  Error text on cards
+pass               12.81:1  (needs 4.5)  Hover and highlight text (accent)
+pass               15.35:1  (needs 4.5)  Menu and dialog text
 pass                8.24:1  (needs 3)  Focus outline on the page
 pass                8.92:1  (needs 3)  Focus outline on cards
+pass                8.92:1  (needs 3)  Focus outline on menus and dialogs
 pass                7.44:1  (needs 3)  Focus outline on sage bands
 pass                8.24:1  (needs 3)  Off-white focus outline on leaf
 pass                3.60:1  (needs 3)  Field edge on the page
@@ -69,10 +73,13 @@ Never-use pairs (each must fail):
 fails, as expected  2.01:1  (needs 4.5)  Saffron text on the page
 fails, as expected  4.10:1  (needs 4.5)  Leaf text on saffron
 fails, as expected  1.25:1  (needs 3)  Hairline as a form-field edge
+fails, as expected  4.29:1  (needs 4.5)  Error text on a 20% error tint
 
 Control: black on white is 21.00:1 (must be 21.00)
 
-All 25 checks passed: 21 pairs, 3 never-use pairs and the control.
+Saffron scan: 6 files in src/, 0 banned saffron classes (pattern self-test passed)
+
+All 31 checks passed: 25 pairs, 4 never-use pairs, the control and the saffron scan.
 ```
 
 **Dark mode** is task 18. The `.dark` block is still shadcn's grey default, and nothing applies `.dark`.
@@ -107,6 +114,8 @@ Each file declares every script with a `unicode-range`, so a browser downloads t
 | `type-small` | Mukta 400 | 16px | 16px | 1.5 | 1.7 |
 
 The Devanagari values were checked on the specimen page (`/specimen`) on 2026-10-27 in Chrome at 375 to 1440px: no marks touch the next line, so they weren't changed. Text a patient must read is never smaller than 16px. Body text is 18px at every width.
+
+The Latin line heights are set in `@layer base`, just above the `:lang` rule. They must never move to the unlayered `:root`: an unlayered rule beats every layered one, and whole Hindi or Marathi pages would keep the Latin values (ce-code-review caught this in task 07).
 
 ### Spacing Variables
 
@@ -175,7 +184,8 @@ The home page (task 09): the headline and the two actions ("Request an appointme
 
 - Every page sets `<html lang>` to `en`, `hi` or `mr`. Marathi is `mr`, never `hi`.
 - Every phrase in another language carries its own `lang` (for example `<span lang="mr">संजीवनी</span>` inside English).
-- The `:lang(hi), :lang(mr)` rule gives the `type-*` utilities and Tailwind's own line heights (`text-sm`, `leading-*`) their Devanagari values. It also turns off fake italics.
+- The `:lang(hi), :lang(mr)` rule gives the `type-*` utilities and Tailwind's own line heights (`text-sm` to `text-9xl`, `leading-*`) their Devanagari values. It also turns off fake italics, so emphasis (`em`, `i`, `cite`) in Hindi and Marathi is bold instead.
+- English text inside a Hindi or Marathi page keeps the taller Devanagari line heights. That's looser than needed, but never clipped.
 - Plain text gets the taller line height only where the language starts (the page, or a phrase with its own `lang`), so a link inside a heading keeps the heading's line height.
 - Letter-spacing on Devanagari is always 0: it breaks the line that joins the letters. An unlayered rule enforces it, so no `tracking-*` class can switch it back on.
 - `leading-none` and `truncate` clip Devanagari marks. Never use them on text that can be Hindi or Marathi.
@@ -190,12 +200,15 @@ The home page (task 09): the headline and the two actions ("Request an appointme
 | `src/components/brand/Wordmark.astro` | The leaf mark, "संजीवनी" (Martel 800, leaf, `lang="mr"`) and "Sanjivani Clinic" (Mukta 500, ink, `lang="en"`) | Every size is in em: set `font-size` on it or its parent to scale it. At 1rem the leaf is 44px and the lockup is 58px tall on English, Hindi and Marathi pages alike. Wrap it in an `<h1>` or the header's home link. Screen readers read both lines; there's no `aria-label`. |
 | `public/favicon.svg`, `public/favicon.ico` | The leaf and midrib only, on a paper tile | The only brand files with fixed hex colours. Keep them in step with LeafMark by hand. The `.ico` is a 32×32 PNG made from the SVG with the `sharp` that Astro installs (the command is in the task 07 learning doc). |
 
-Smallest sizes: the leaf mark reads at 16px; keep the wordmark's leaf at 32px or larger (font-size 0.75rem or more).
+Smallest sizes: the leaf mark reads at 16px. Keep the wordmark at font-size 1rem or more, so its English line stays at least 16px. The wordmark's two names have a real space between them in the page text, so copied text reads "संजीवनी Sanjivani Clinic".
+
+The favicon and this file hold copies of the palette's hex values, and `npm run test` doesn't compare them with `global.css`. When a palette colour changes, change them by hand.
 
 ## Focus and touch targets
 
 - Keyboard focus is a solid 2px outline in `--ring` (leaf), with a 2px gap. An unlayered `:focus-visible` rule draws it on links, buttons, form fields, `summary`, `[tabindex]` and the option, menu-item, tab, checkbox, radio and switch roles. It also turns off shadcn's half-transparent ring shadow, which is too faint (about 2.5:1). A component's `outline-none` can't hide it.
-- Plain links in text are underlined before any hover, with the line 0.2em below the text so it clears the marks under Devanagari letters. Leaf next to ink is only 1.7:1, and phones have no hover.
+- Plain links in text are underlined before any hover, with the line 0.2em below the text so it clears the marks under Devanagari letters. Leaf next to ink is only 1.7:1, and phones have no hover. The rule matches links with no `class` attribute at all: a link with any class, even `class=""`, gets no colour or underline, so give every styled link its own look.
+- Buttons, `[role="button"]` and `summary` show the hand cursor (a base rule).
 - Patient-facing controls are at least 44px tall (`min-h-11`), including task 08's language switch.
 - Highlighted options in menus, selects and comboboxes need a cue that isn't only colour (sage on paper is 1.2:1), such as an inset outline. Add it when the first one is installed (task 14).
 
@@ -253,7 +266,9 @@ Before delivering any UI code, verify:
 
 ## Before the first `shadcn add` (task 08)
 
-An open owner decision: base-nova's controls are 32px tall, under the 44px floor. Either keep base-nova and size each patient-facing control up to 44px, or switch to a roomier shadcn style while no component exists yet. A style change needs `shadcn init --force`, so the owner decides first.
+- **An open owner decision:** base-nova's controls are 32px tall, under the 44px floor. Either keep base-nova and size each patient-facing control up to 44px, or switch to a roomier shadcn style while no component exists yet. A style change needs `shadcn init --force`, so the owner decides first.
+- **A design call:** a Devanagari phrase inside an English heading makes that line much taller, because a phrase with its own `lang` gets the body line height (a 60px display line grows from about 69px to about 105px). Decide before the wordmark or a Hindi phrase goes in a heading: limit the rule to block elements, or give headings their own value.
+- **Recheck the focus rule:** `[tabindex]` also matches `tabindex="-1"` popups, and the rule's `box-shadow: none` removes a component's shadow while it has focus. No installed component is affected yet.
 
 ## Font weight
 
