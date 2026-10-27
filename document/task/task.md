@@ -106,7 +106,7 @@ Runs in a **new** Claude Code session, because agents and the plugin load only w
 
 - [x] Create branch
 - [x] Show the owner three visual directions within the brief's look, and record the choice: the owner chose A, Herbarium (2026-10-27)
-- [ ] Plan with `/compound-engineering:ce-plan` and link the plan here
+- [x] Plan with `/compound-engineering:ce-plan` and link the plan here: [2026-10-27-1151-feat-design-system-plan.md](../plans/2026-10-27-1151-feat-design-system-plan.md)
 - [ ] Build the design system from the chosen direction: colours, fonts, type scale, spacing, radius and a wordmark, saved in `design-system/sanjivani-clinic/` and applied to `src/styles/global.css`
 - [ ] Write the learning doc
 - [ ] Review with code-reviewer and fix what it finds
