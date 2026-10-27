@@ -176,7 +176,15 @@ Also fixed from its notes:
 
 **Left for task 08** (MASTER.md, "Before the first `shadcn add`"): base-nova's 32px controls versus the 44px floor (your call; switching needs `shadcn init --force`), a Devanagari phrase that makes a heading line much taller, and the focus rule also matching `tabindex="-1"` popups. **Known and accepted:** English text inside a Hindi page keeps the looser Devanagari line heights.
 
-**code-reviewer:** Pending.
+**code-reviewer, first pass: Ready to merge**, with no must fixes, and git unchanged before and after. It re-ran every number in this doc and got the same results, down to the byte. Its five suggestions, all fixed:
+
+1. **A generated page file could quietly override MASTER.md.** MASTER.md kept the template's rule that `pages/<page>.md` overrides it, and ui-ux-pro-max's `--persist` writes such a file even without `--force`, from its own medical-teal idea. Now MASTER.md says page files are hand-written too, and CLAUDE.md and skills.md say never to run `--persist` here (`7603104`, `3e5d729`, `5c6177c`, `f375887`).
+2. **The saffron scan missed some forms:** side borders (`border-t-saffron`), `ring-offset-saffron`, opacity (`bg-saffron/50`) and arbitrary values (`text-(--color-saffron)`). The scan now bans every saffron class except `bg-saffron` and `text-saffron-foreground`, and its self-test covers those forms (`36490e0`). A scratch file with three of them made it exit 1, then was deleted. MASTER.md now says it can't check pairings: each `bg-saffron` still needs an ink label, checked by eye.
+3. **MASTER.md's never-use list missed the fourth pair** (error text on a 20% tint, 4.29:1). Added there and to the anti-patterns (`7603104`).
+4. **The spacing table listed `--space-*` variables that don't exist.** It now shows each role's Tailwind class instead (`7603104`).
+5. **`--color-leaf` was registered but unused.** Removed: leaf green goes through the semantic tokens (`f16ddbe`).
+
+**code-reviewer, second pass:** Pending.
 
 **Compound:** Pending.
 
