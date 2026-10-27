@@ -110,7 +110,7 @@ Runs in a **new** Claude Code session, because agents and the plugin load only w
 - [x] Build the design system from the chosen direction: colours, fonts, type scale, spacing, radius, the leaf mark and wordmark, a new favicon, the placeholder and a hidden specimen page, and a contrast check (`npm run test`), written up in `design-system/sanjivani-clinic/MASTER.md` and applied to `src/styles/global.css`
 - [x] Write the learning doc
 - [x] Review with code-reviewer and fix what it finds
-- [ ] Compound: save a lesson in document/solutions/ if one passes the counterfactual question
+- [x] Compound: save a lesson in document/solutions/ if one passes the counterfactual question
 - [ ] Merge into main
 
 ### 24_pr_merge_workflow
