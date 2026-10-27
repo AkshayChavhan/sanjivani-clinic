@@ -36,7 +36,7 @@ Without a brief, task 07 would pick colours with no direction. Ideas like a BMI 
 
 **What the brief says**
 
-- R1. It describes the clinic as the owner gave it: a dermatology clinic (skin, hair and nails) in Pune, with one doctor.
+- R1. It describes the clinic as the owner gave it: a dermatology clinic (skin, hair and nails) in Pune, with one doctor. *Changed after owner review (2026-10-27): skin and hair only. The owner's answer was "Dermatology (skin, hair)"; nails had been added in the planning request.*
 - R2. It says who the patients are and what they come to the site to do.
 - R3. It lists what the first version of the site must do.
 - R4. It states the tone and the look: calm and trustworthy; deep leaf green (a nod to the Sanjivani herb); a warm saffron accent; warm off-white surfaces; high-contrast text; soft rounded corners. It says there is no logo or brand colours yet, and that task 07_design_system creates them.
@@ -109,7 +109,7 @@ Without a brief, task 07 would pick colours with no direction. Ideas like a BMI 
 
   If the implementer's session can use the web, it checks these sources on nmc.org.in, indiacode.nic.in, meity.gov.in and ascionline.in. It may then add what it confirmed, and say so in the learning doc. Research notes: see Sources.
 - KTD3. **The backlog verdicts go in task.md as a note directly under the backlog table**, above the task 06 notes. It has a bold lead-in that names the brief, then a bulleted list (not a table, so the backlog-table check stays exact) with one line per row in row order: the row number, a verdict, "first version" or "later", and a reason of a few words. Three verdicts: Fits / Fits with a change / Doesn't fit, owner to decide. The table rows stay byte-for-byte the same. Why: the verdicts sit next to the rows they judge, where task-planner and the owner already look. The "Notes from task 06 for later tasks" list already set this pattern, and it keeps the brief short (Scope Boundaries).
-- KTD4. **The draft verdicts.** The implementer starts here and re-checks each one against the finished brief:
+- KTD4. **The draft verdicts.** The implementer starts here and re-checks each one against the finished brief. (The owner decided rows 12, 16 and 17 on 2026-10-27: drop the emergency strip, keep the BMI calculator, keep testimonials behind the doctor's written OK. task.md has the final verdicts.)
 
   | Row | Verdict | Why |
   | --- | --- | --- |
@@ -247,7 +247,7 @@ The commands that contain `|` are in this block rather than in the table, so the
 
 ```bash
 # 1. The owner's answers: every count is 1 or more
-for t in dermatolog 'skin, hair and nail' Pune 'one doctor' calm trustworthy 'leaf green' saffron 'off-white' 'high-contrast' rounded logo 'brand colo' 'task 07' English Hindi Marathi; do printf '%s: ' "$t"; grep -c -i -- "$t" document/product/brief.md; done
+for t in dermatolog 'skin and hair' Pune 'one doctor' calm trustworthy 'leaf green' saffron 'off-white' 'high-contrast' rounded logo 'brand colo' 'task 07' English Hindi Marathi; do printf '%s: ' "$t"; grep -c -i -- "$t" document/product/brief.md; done
 # 2. No law cited by number: no hits, or each hit is recorded as checked in the learning doc
 grep -n -E '[Ss]ection [0-9]|[Ss]ec\. ?[0-9]|[Rr]egulation [0-9]|[Rr]ule [0-9]' document/product/brief.md
 # 3. No law cited by date: every year printed is 1954, 2002, 2011, 2019, 2020 or 2023 (inside a law's title) or 2026 (the header date)
