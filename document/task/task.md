@@ -191,7 +191,7 @@ Ideas for later. **Proposed only: confirm each one with [the product brief](../p
 
 **Notes from task 06 for later tasks** (to fold into a task when it is planned):
 
-- **07:** the shadcn `nova` preset uses the Geist font, which has no Devanagari letters, so Hindi and Marathi text would fall back to a system font. Pick fonts that cover Devanagari. The `design-system/` folder is already kept out of lint and the Tailwind scan.
+- **07:** the shadcn `nova` preset uses the Geist font, which has no Devanagari letters, so Hindi and Marathi text would fall back to a system font. Pick fonts that cover Devanagari. The `design-system/` folder is already kept out of lint and the Tailwind scan. *Done in task 07: Martel and Mukta replaced Geist.*
 - **08:** the layout's viewport tag should be `width=device-width, initial-scale=1`. The Astro template's placeholder page has only `width=device-width`.
 - **First UI task (08 or 09):** add React hooks lint rules (`eslint-plugin-react-hooks`). Add accessibility lint rules (`eslint-plugin-jsx-a11y`) once a version supports ESLint 10 (6.10.2 supports only ESLint 9 or older).
 - **Small cleanups:** now task 25.
@@ -202,7 +202,7 @@ Ideas for later. **Proposed only: confirm each one with [the product brief](../p
 
 **Notes from task 07 for later tasks** (to fold into a task when it is planned):
 
-- **08:** preload one font file per page, chosen by language (Mukta 400 Latin for `en`, Mukta 400 Devanagari for `hi` and `mr`). Make controls and the language switch at least 44px tall, and set `<html lang>` on every page. Before the first `shadcn add`, ask the owner: keep base-nova (32px controls) and size each control up to 44px, or switch to a roomier shadcn style with `shadcn init --force`?
+- **08:** preload one font file per page, chosen by language (Mukta 400 Latin for `en`, Mukta 400 Devanagari for `hi` and `mr`). Make controls and the language switch at least 44px tall, and set `<html lang>` on every page. Before the first `shadcn add`, ask the owner: keep base-nova (32px controls) and size each control up to 44px, or switch to a roomier shadcn style with `shadcn init --force`? Also settle the two other points in MASTER.md's "Before the first `shadcn add`": a Devanagari phrase inside a heading, and the focus rule on `tabindex="-1"` popups.
 - **09:** build the large specimen leaf for the hero, from MASTER.md's "Style Guidelines".
 - **14:** highlighted options in Select and Combobox need a cue that isn't only colour (MASTER.md, "Focus and touch targets").
 - **18:** derive `.dark` from the palette, and add the dark pairs to `npm run test`.
