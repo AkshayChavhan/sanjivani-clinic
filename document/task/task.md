@@ -169,7 +169,7 @@ Ideas for later. **Proposed only: confirm each one with [the product brief](../p
 - **13** open-now badge: Fits, later. Patients can book without it, and it needs the closed days and holidays from task 10.
 - **14** appointment form: Fits with a change, first version. Its "time slots" are preferred times the clinic confirms, not reserved slots, and it follows the brief's privacy rule.
 - **15** booking backends: Fits, first version. Already decided; the clinic stays responsible for the patient data each service holds.
-- **16** BMI calculator: Kept by the owner (2026-10-27), later. It isn't part of skin or hair care, so it's a general health tool that gives no personal advice.
+- **16** BMI calculator: Kept by the owner (2026-10-27), later. It isn't part of skin or hair care, so it must stay a general health tool that gives no personal advice (the brief's rule 8).
 - **17** testimonials slider: Kept by the owner (2026-10-27), later. The NMC guidelines say consent alone doesn't allow testimonials, so none go live until the doctor confirms in writing that the rules allow them (the brief's rule 6).
 - **18** dark mode: Fits, later. Patients don't need it to book, and the brief's look is a light, warm off-white.
 - **19** gallery: Fits with a change, later. Photos of the clinic, its rooms and equipment only: no patients, no before-and-after.
