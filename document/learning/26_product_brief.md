@@ -8,8 +8,8 @@
 
 - **New: [the product brief](../product/brief.md).** It's one page, 999 words (the plan's limit is 1,000). It covers the clinic (dermatology, in Pune, one doctor), its patients, what the first version must do, the look, the three languages, the rules and what's left out.
 - **Every later task checks its choices against it.** Both repo maps list it, and the backlog note links to it.
-- **All 17 backlog ideas got a verdict** in a note under the backlog table. Two don't fit (16 BMI calculator, 17 testimonials slider), and you decide what happens to them. No backlog row changed.
-- **The legal rules were checked on official websites.** The plan's legal facts came from memory, and that memory was out of date. On 6 October 2026 the National Medical Commission (NMC) issued new advertising guidelines, and they rule out testimonials.
+- **All 17 backlog ideas got a verdict** in a note under the backlog table. Two didn't fit (16 BMI calculator, 17 testimonials slider). You then kept both, and dropped the emergency strip from 12, the one backlog row that changed (step 9).
+- **The legal rules were checked on official websites.** The plan's legal facts came from memory, and that memory was out of date. On 6 October 2026 the National Medical Commission (NMC) issued new advertising guidelines: patient consent alone doesn't make testimonials allowed. You kept testimonials, so none go live until the doctor confirms in writing that the rules allow them.
 - Docs only. No app code changed.
 
 ## Why: the problem we solved
@@ -68,7 +68,7 @@ You were about to start 07_design_system, which picks the colours and fonts. Wit
 
    The plan asked this doc to say the legal facts weren't checked against live sources. The check happened after the plan was written, so this doc records the check instead.
 
-4. **Wrote the brief** (`8f7291f`). It has the plan's eight sections, in order: the clinic, patients, the first version, tone and look, languages, rules, out of scope, and still to confirm. It says "skin, hair and nail", because dermatology covers nails too and the plan's R1 asks for those words. We made two fixes along the way:
+4. **Wrote the brief** (`8f7291f`). It has the plan's eight sections, in order: the clinic, patients, the first version, tone and look, languages, rules, out of scope, and still to confirm. It first said "skin, hair and nail", because the planning request added nails. You corrected that to skin and hair (step 9). We made two fixes along the way:
    - The first draft was 1,165 words, and the plan caps the brief at 1,000. Following the plan, we shortened the patients and first-version sections first. That got it to exactly 1,000 without dropping any required item.
    - Check 2 (below) flagged "(rule 6)". That was the brief pointing at its own rule, not citing a law by number. We changed it to "(see the Rules)", so the check stays clean for the next person who runs it.
 5. **Made the brief easy to find:** a row in the readme's repo map (`b7dfbdd`), a row in CLAUDE.md's (`659ecd2`), and a link from the backlog note (`693d9de`).
@@ -78,6 +78,13 @@ You were about to start 07_design_system, which picks the colours and fonts. Wit
    - **Doesn't fit, owner to decide:** 16 BMI calculator, 17 testimonials slider.
 7. **Ticked the brief and backlog steps** (`8c36f2a`).
 8. **Reviewed with code-reviewer, in two passes.** Both said Ready to merge, with no must fixes. The first pass's six suggestions are fixed, which took the brief from 1,000 to 999 words. The second pass checked those fixes (see "Review and lessons").
+9. **Your decisions, 2026-10-27.** You answered the four open questions:
+   - **Skin and hair, not nails.** The brief now says "skin and hair" (`9cf6473`), and the plan notes the change (`aa2750d`).
+   - **Keep 16, the BMI calculator.** Its verdict now says you kept it, for later (`486ab37`).
+   - **Keep 17, testimonials.** The NMC guidelines say consent alone doesn't allow them, so the brief's rule 6 now gates them: none go live until the doctor confirms in writing that the rules allow them (`9cf6473`, `486ab37`). The lesson notes this too (`367750b`). To stay within 1,000 words, the brief dropped a "Still to confirm" bullet that "Before launch" already covers, and a repeated fee note.
+   - **Drop the emergency strip.** Row 12's goal no longer has it. That's the one backlog row this task changed, because you decided it (`486ab37`).
+
+   Also: pull request #10 was merged when only this branch's first commit (`378e90b`) was on GitHub. The rest goes in a second pull request from the same branch (CLAUDE.md step 9).
 
 **Skipped:** ce-code-review. CLAUDE.md step 7 runs it only for code changes, and this task changes only docs.
 
@@ -88,6 +95,7 @@ You were about to start 07_design_system, which picks the colours and fonts. Wit
 - **No invented clinic facts.** The doctor's name, qualifications and registration number, the address, timings, fees and services all sit under "Still to confirm". Task 10 keeps them as clearly marked placeholders. Guesses, such as who the patients are, are labelled as assumptions.
 - **The verdicts live in task.md, not in the brief.** They sit next to the rows they judge, and the brief stays short. They're proposals: changing the backlog is your call.
 - **Careful defaults, not legal advice.** The doctor signs off the Rules before launch.
+- **Testimonials are yours to keep, but gated.** You chose to keep them knowing the NMC rule, so the brief holds them back until the doctor's written OK. The risk is to the doctor's registration, not to the website.
 - **Left for later:** one-line pointers to the brief from skills.md, from the ui-engineer and task-planner agents, and from CLAUDE.md's "The project" section. The plan suggests doing them in task 07.
 
 ## New ideas in this task
@@ -103,7 +111,7 @@ You were about to start 07_design_system, which picks the colours and fonts. Wit
 
 ## Check that it works
 
-All of these were run on the branch, with every change committed. The word count, check 1 and check 3 were run again after the review's fixes.
+All of these were run on the branch, with every change committed. The word count and checks 1, 3 and 4 were run again after your decisions (step 9).
 
 ```text
 $ wc -w document/product/brief.md
@@ -113,9 +121,9 @@ $ wc -w document/product/brief.md
 Check 1 from the plan: each part of your answers appears at least once. This is the plan's loop, and its raw output:
 
 ```text
-$ for t in dermatolog 'skin, hair and nail' Pune 'one doctor' calm trustworthy 'leaf green' saffron 'off-white' 'high-contrast' rounded logo 'brand colo' 'task 07' English Hindi Marathi; do printf '%s: ' "$t"; grep -c -i -- "$t" document/product/brief.md; done
+$ for t in dermatolog 'skin and hair' Pune 'one doctor' calm trustworthy 'leaf green' saffron 'off-white' 'high-contrast' rounded logo 'brand colo' 'task 07' English Hindi Marathi; do printf '%s: ' "$t"; grep -c -i -- "$t" document/product/brief.md; done
 dermatolog: 2
-skin, hair and nail: 1
+skin and hair: 1
 Pune: 2
 one doctor: 1
 calm: 1
@@ -129,13 +137,13 @@ logo: 1
 brand colo: 1
 task 07: 1
 English: 2
-Hindi: 5
-Marathi: 5
+Hindi: 4
+Marathi: 4
 ```
 
 Check 2 looks for laws cited by number. It printed nothing (`grep` exit 1 means no matches). Normally silence alone proves little, but this check did catch "(rule 6)" in the draft, so we know it works.
 
-Check 3 looks for years. Each one is part of a law's title, the header date (2026) or the checked NMC date (2026):
+Check 3 looks for years. Each one is part of a law's title, the header's two dates (2026) or the checked NMC date (2026):
 
 ```text
 $ grep -o -E "(19|20)[0-9]{2}" document/product/brief.md | sort | uniq -c
@@ -145,13 +153,16 @@ $ grep -o -E "(19|20)[0-9]{2}" document/product/brief.md | sort | uniq -c
    1 2019
    1 2020
    1 2023
-   2 2026
+   3 2026
 ```
 
-Check 4 confirms the backlog table is the same as on `main`: 19 lines (header, separator and 17 rows):
+Check 4 compares the backlog table with `main`. The only difference is row 12, which you changed, and the table still has 19 lines (header, separator and 17 rows):
 
 ```text
-same
+8c8
+< | 12 | 12_patient_quick_actions | Click-to-call, WhatsApp, directions, emergency strip, mobile action bar | 10 |
+---
+> | 12 | 12_patient_quick_actions | Click-to-call, WhatsApp, directions, mobile action bar | 10 |
 19
 ```
 
@@ -194,7 +205,7 @@ To pay for the new words, the brief dropped a few repeated ones, such as "(noted
 
 About 5 minutes, and it changes nothing:
 
-1. Run `wc -w document/product/brief.md` and check 4 from the plan's "Verification Contract". Do you get 1,000 or fewer, then `same` and 19?
+1. Run `wc -w document/product/brief.md` and check 4 from the plan's "Verification Contract". Do you get 1,000 or fewer, then one changed line (row 12) and 19?
 2. Backlog row 13 (open-now badge) says it needs the closed days and holidays. Find where the brief lists them.
 3. Which of the brief's Rules does this line break? "Dr. X is Pune's No. 1 skin specialist. Our laser cures pigmentation permanently, guaranteed!" (Answer: rule 2 for "No. 1", "permanently" and "guaranteed"; rule 3 for "cures"; and rule 1 if the doctor has no dermatology qualification. A safe version: "Diagnosis and treatment of pigmentation.")
 4. See a false positive (a hit that isn't a real problem): `printf 'Testimonials (rule 6)\n' | grep -n -E '[Rr]ule [0-9]'` prints `1:Testimonials (rule 6)`. Is that a law cited by number?
