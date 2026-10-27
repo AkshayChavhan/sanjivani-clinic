@@ -7,12 +7,15 @@
 // - Text needs 4.5:1. Icons, form-field edges and focus outlines need 3:1.
 // - The "never use" pairs must FAIL. If one passes, the maths is broken.
 // - Black on white must give exactly 21.00:1, for the same reason.
+// - Saffron is only ever bg-saffron (with text-saffron-foreground). The last
+//   check scans src/ for any other saffron class.
 //
 // The PAIRS table below is the one place that decides what gets checked.
 // design-system/sanjivani-clinic/MASTER.md pastes this script's output.
 
-import { readFileSync } from "node:fs";
-import { URL } from "node:url";
+import { readdirSync, readFileSync } from "node:fs";
+import { join } from "node:path";
+import { fileURLToPath, URL } from "node:url";
 
 const TEXT = 4.5;
 const PARTS = 3;
@@ -87,8 +90,12 @@ const PAIRS = [
   ["Error text on the page", "--destructive", "--background", TEXT],
   ["Error text on sage bands", "--destructive", "--muted", TEXT],
   ["Error text on its 10% tint", "--destructive", { top: "--destructive", alpha: 0.1, over: "--background" }, TEXT],
+  ["Error text on cards", "--destructive", "--card", TEXT],
+  ["Hover and highlight text (accent)", "--accent-foreground", "--accent", TEXT],
+  ["Menu and dialog text", "--popover-foreground", "--popover", TEXT],
   ["Focus outline on the page", "--ring", "--background", PARTS],
   ["Focus outline on cards", "--ring", "--card", PARTS],
+  ["Focus outline on menus and dialogs", "--ring", "--popover", PARTS],
   ["Focus outline on sage bands", "--ring", "--muted", PARTS],
   ["Off-white focus outline on leaf", "--brand-off-white", "--brand-leaf", PARTS],
   ["Field edge on the page", "--input", "--background", PARTS],
@@ -101,7 +108,12 @@ const NEVER = [
   ["Saffron text on the page", "--brand-saffron", "--background", TEXT],
   ["Leaf text on saffron", "--brand-leaf", "--brand-saffron", TEXT],
   ["Hairline as a form-field edge", "--border", "--background", PARTS],
+  ["Error text on a 20% error tint", "--destructive", { top: "--destructive", alpha: 0.2, over: "--background" }, TEXT],
 ];
+
+// Saffron classes other than bg-saffron (and text-saffron-foreground, its label).
+const BANNED_SAFFRON =
+  /(?<![\w-])(?:[\w-]+:)*(?:text|border|ring|outline|decoration|fill|stroke|from|via|to|shadow|accent|caret|placeholder|divide)-saffron(?!-foreground)(?![\w-])/g;
 
 const problems = [];
 const line = (status, value, need, name) =>
@@ -127,10 +139,35 @@ const control = ratio("#000000", "#FFFFFF");
 console.log(`\nControl: black on white is ${control.toFixed(2)}:1 (must be 21.00)`);
 if (control.toFixed(2) !== "21.00") problems.push("Black on white isn't 21.00:1, so the maths is broken");
 
-const total = PAIRS.length + NEVER.length + 1;
+// The saffron scan. First prove the pattern works on known examples, so a
+// broken pattern can't pass quietly.
+const mustMatch = ["text-saffron", "hover:border-saffron", "md:ring-saffron/50"];
+const mustNotMatch = ["bg-saffron", "text-saffron-foreground", "--brand-saffron", "--color-saffron"];
+const selfTestOk =
+  mustMatch.every((s) => s.match(BANNED_SAFFRON)) && mustNotMatch.every((s) => !s.match(BANNED_SAFFRON));
+if (!selfTestOk) problems.push("The saffron pattern failed its own examples, so the scan is broken");
+
+const srcDir = fileURLToPath(new URL("../src/", import.meta.url));
+const files = readdirSync(srcDir, { recursive: true }).filter((f) => /\.(astro|tsx?|jsx?|mdx?|css|html)$/.test(f));
+const banned = [];
+for (const file of files) {
+  for (const hit of readFileSync(join(srcDir, file), "utf8").match(BANNED_SAFFRON) ?? []) {
+    banned.push(`${file}: ${hit}`);
+  }
+}
+console.log(
+  `\nSaffron scan: ${files.length} files in src/, ${banned.length} banned saffron classes (pattern self-test ${selfTestOk ? "passed" : "FAILED"})`,
+);
+for (const b of banned) console.log(`  ${b}`);
+if (files.length === 0) problems.push("The saffron scan found no files in src/");
+if (banned.length > 0) problems.push(`${banned.length} banned saffron classes in src/ (only bg-saffron is allowed)`);
+
+const total = PAIRS.length + NEVER.length + 2;
 if (problems.length > 0) {
-  console.error(`\n${problems.length} of ${total} checks failed:`);
+  console.error(`\nThe check failed. Problems found: ${problems.length}`);
   for (const p of problems) console.error(`- ${p}`);
   process.exit(1);
 }
-console.log(`\nAll ${total} checks passed: ${PAIRS.length} pairs, ${NEVER.length} never-use pairs and the control.`);
+console.log(
+  `\nAll ${total} checks passed: ${PAIRS.length} pairs, ${NEVER.length} never-use pairs, the control and the saffron scan.`,
+);
