@@ -21,7 +21,7 @@ People in and around Pune with a skin or hair problem, booking for themselves, a
 - **One tap** to call, WhatsApp or get directions.
 - **An appointment request form.** The patient picks a preferred day and time, and the clinic confirms by phone or WhatsApp. It's a request, not a booking: a Google Sheet, an email or a chat can't hold a slot. Where requests go is backlog 15.
 - **A privacy notice** beside the form, and **a privacy page**.
-- **Fast on a phone**, easy to read, usable with a keyboard alone, and respects the "reduce motion" setting.
+- **Fast on a phone**, easy to read, usable with a keyboard alone, and respects "reduce motion".
 
 ## Tone and look
 
@@ -45,7 +45,7 @@ These assume a modern-medicine doctor registered with the Maharashtra Medical Co
 4. **Pigmentation in medical words.** Never "fairness" or "whitening", and never suggest darker skin is a problem. (A careful default from the Advertising Standards Council of India's voluntary guidelines on skin-lightening ads.)
 5. **No soliciting.** No offers, discounts, paid referrals or product endorsements, no asking for reviews, and no promotional WhatsApp messages. (The 2002 code; the NMC guidelines.)
 6. **Testimonials only with the doctor's written OK; no before-and-after photos.** The owner wants testimonials (backlog 17), but the NMC guidelines say patient consent doesn't make them allowed. None go live until the doctor confirms in writing that the rules allow them, each with the patient's written consent. Any patient photo needs written consent (a parent's or guardian's if under 18) and must not identify them.
-7. **Private booking requests.** The form asks only for a name, phone number, preferred day and time, and an optional short reason. A plain notice beside it, in all three languages, says what's collected, why, who gets it, how long it's kept and how to ask for deletion. The consent box starts unticked. Only the clinic can open the Sheet, inbox and chat, and old requests are deleted after a set period. (The Information Technology Act's 2011 privacy rules, which treat health information as sensitive; the Digital Personal Data Protection Act, 2023, whose duties start in phases.)
+7. **Private booking requests.** The form asks only for a name, phone number, preferred day and time, and an optional short reason. A plain notice beside it, in all three languages, says what's collected, why, who gets it, how long it's kept and how to ask for deletion. The consent box starts unticked. Only the clinic can open the Sheet, inbox and chat, and old requests are deleted after a set period. (The Information Technology Act's 2011 privacy rules, which treat health information as sensitive; the Digital Personal Data Protection Act, 2023, whose duties phase in.)
 8. **Booking, not advice.** The form and WhatsApp only request appointments, and the site gives no personal medical advice. (The Telemedicine Practice Guidelines, 2020.)
 
 ## Out of scope
@@ -66,8 +66,8 @@ These assume a modern-medicine doctor registered with the Maharashtra Medical Co
 - the opening language and web address style (task 10);
 - which task writes the privacy notice and page;
 - how long requests are kept, and who the privacy contact is;
-- who at the clinic answers new requests, and how fast;
-- whether the doctor's photo goes on the site (the NMC guidelines bar self-promotion);
-- the doctor's council (assumed Maharashtra's) and sign-off on the Rules in force at launch;
+- who at the clinic answers new requests, and how fast, and who checks the Hindi and Marathi;
+- whether the doctor's photo goes on the site;
+- the doctor's council (assumed Maharashtra's), written OK on testimonials, and sign-off on the Rules at launch.
 
 **Before launch:** every placeholder holds a real fact, the doctor has signed off the Rules, a fluent reader has checked the Hindi and Marathi, and the privacy notice and page are ready.
