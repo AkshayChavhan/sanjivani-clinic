@@ -20,6 +20,7 @@ Claude reads this file at the start of every session. Follow it over your defaul
 | `CLAUDE.md` | This file: the rules Claude follows here |
 | `.gitignore` | Files git must never track |
 | `document/task/task.md` | The task tracker: tasks, statuses, steps, backlog |
+| `document/product/brief.md` | The product brief: what the site is for, its patients, look, languages, rules and scope. Read it before planning a feature or doing UI work |
 | `document/learning/TEMPLATE.md` | The template for learning docs |
 | `document/learning/NN_name.md` | One learning doc per task |
 | `document/skills/skills.md` | The skills guide: what each skill does, how to manage them, the vetting record |

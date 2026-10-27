@@ -18,7 +18,7 @@ This file tracks every task in this project.
 | 06 | 06_react_app_setup | The Astro + React app, shadcn init, GSAP (runs in a new session) | Done | [06_react_app_setup](../learning/06_react_app_setup.md) |
 | 24 | 24_pr_merge_workflow | Every task ends with a GitHub pull request the owner merges, not a local merge | Done | [24_pr_merge_workflow](../learning/24_pr_merge_workflow.md) |
 | 25 | 25_small_cleanups | `.nvmrc`, stale notes, old `.next/` lines, and a lockfile check for code-reviewer | Done | [25_small_cleanups](../learning/25_small_cleanups.md) |
-| 26 | 26_product_brief | A one-page product brief: the clinic, its patients, what the site must do, its look, languages and scope | In progress | — |
+| 26 | 26_product_brief | A one-page product brief: the clinic, its patients, what the site must do, its look, languages and scope | In progress | [26_product_brief](../learning/26_product_brief.md) |
 
 ## Task steps
 
@@ -126,17 +126,17 @@ Runs in a **new** Claude Code session, because agents and the plugin load only w
 ### 26_product_brief
 
 - [x] Create branch
-- [ ] Plan with `/compound-engineering:ce-plan` and link the plan here
-- [ ] Write the product brief in `document/product/brief.md` from the owner's answers, and add it to the repo maps in readme.md and CLAUDE.md
-- [ ] Check each backlog idea against the brief and write down which ones fit (changing the backlog stays the owner's call)
-- [ ] Write the learning doc
-- [ ] Review with code-reviewer and fix what it finds
-- [ ] Compound: save a lesson in document/solutions/ if one passes the counterfactual question
+- [x] Plan with `/compound-engineering:ce-plan` and link the plan here: [2026-10-26-1936-docs-product-brief-plan.md](../plans/2026-10-26-1936-docs-product-brief-plan.md)
+- [x] Write the product brief in `document/product/brief.md` from the owner's answers, and add it to the repo maps in readme.md and CLAUDE.md
+- [x] Check each backlog idea against the brief and write down which ones fit (changing the backlog stays the owner's call)
+- [x] Write the learning doc
+- [x] Review with code-reviewer and fix what it finds
+- [x] Compound: save a lesson in document/solutions/ if one passes the counterfactual question
 - [ ] Merge into main
 
 ## Backlog (proposed)
 
-Ideas for later. **Proposed only: confirm each one with the product brief before it becomes a task.**
+Ideas for later. **Proposed only: confirm each one with [the product brief](../product/brief.md) before it becomes a task.**
 
 | # | Task | Goal | Depends on |
 | --- | --- | --- | --- |
@@ -158,12 +158,36 @@ Ideas for later. **Proposed only: confirm each one with the product brief before
 | 22 | 22_admin_panel | Decap CMS at /admin, with GitHub login through Vercel | 10, 23 |
 | 23 | 23_deploy_vercel | Deploy the site to Vercel | 09 |
 
+**Backlog check against [the product brief](../product/brief.md)** (task 26, 2026-10-26). Proposals only: changing, dropping or reordering a row is the owner's call.
+
+- **07** design system: Fits with a change, first version. Its goal should add a logo or wordmark, since none exists yet, and use the brief's colours and Devanagari fonts.
+- **08** layout shell: Fits, first version. Every page needs it.
+- **09** home page: Fits, first version. Keep the one entrance animation calm, with its reduced-motion fallback.
+- **10** clinic data and i18n: Fits, first version. Clinic facts stay marked placeholders until the owner gives the real ones.
+- **11** info pages: Fits, first version. FAQ answers stay general and factual, with no personal medical advice.
+- **12** quick actions: Fits with a change, first version. An "emergency strip" could suggest a skin clinic handles emergencies: owner to decide its wording, or drop it.
+- **13** open-now badge: Fits, later. Patients can book without it, and it needs the closed days and holidays from task 10.
+- **14** appointment form: Fits with a change, first version. Its "time slots" are preferred times the clinic confirms, not reserved slots, and it follows the brief's privacy rule.
+- **15** booking backends: Fits, first version. Already decided; the clinic stays responsible for the patient data each service holds.
+- **16** BMI calculator: Doesn't fit, owner to decide. BMI isn't part of skin, hair or nail care. Suggest dropping it.
+- **17** testimonials slider: Doesn't fit, owner to decide. The NMC guidelines don't allow testimonials, even with consent. Suggest dropping it.
+- **18** dark mode: Fits, later. Patients don't need it to book, and the brief's look is a light, warm off-white.
+- **19** gallery: Fits with a change, later. Photos of the clinic, its rooms and equipment only: no patients, no before-and-after.
+- **20** health blog: Fits with a change, later. Teaching articles under the doctor's name, with no self-promotion or cure claims. Each article in three languages adds translation work.
+- **21** SEO, schema, sitemap: Fits, first version. The schema uses facts only, with no ratings, since Google reviews aren't planned.
+- **22** admin panel: Fits, later. Lets the clinic change timings and fees without code, but every editor needs a GitHub login.
+- **23** deploy to Vercel: Fits with a change, first version. Before the site goes public: every placeholder is a real fact, the doctor has signed off the brief's Rules, a fluent reader has checked the Hindi and Marathi text, and the privacy notice and page are ready.
+
 **Notes from task 06 for later tasks** (to fold into a task when it is planned):
 
 - **07:** the shadcn `nova` preset uses the Geist font, which has no Devanagari letters, so Hindi and Marathi text would fall back to a system font. Pick fonts that cover Devanagari. The `design-system/` folder is already kept out of lint and the Tailwind scan.
 - **08:** the layout's viewport tag should be `width=device-width, initial-scale=1`. The Astro template's placeholder page has only `width=device-width`.
 - **First UI task (08 or 09):** add React hooks lint rules (`eslint-plugin-react-hooks`). Add accessibility lint rules (`eslint-plugin-jsx-a11y`) once a version supports ESLint 10 (6.10.2 supports only ESLint 9 or older).
 - **Small cleanups:** now task 25.
+
+**Notes from task 26 for later tasks** (to fold into a task when it is planned):
+
+- **07 or its own small task:** add one-line pointers to [the product brief](../product/brief.md) from `document/skills/skills.md` (its "the brief's own words win" line), the ui-engineer and task-planner agents (then update CLAUDE.md's Agents table), and CLAUDE.md's "The project" section. readme.md and CLAUDE.md also say patients "book" an appointment, while the brief says the form only sends a request: match that wording at the same time.
 
 Not planned (the owner's choice): Google reviews, online payment.
 
