@@ -1,0 +1,56 @@
+---
+// The Sanjivani Clinic wordmark: the leaf mark, "संजीवनी" in Martel 800 and
+// "Sanjivani Clinic" in Mukta 500 (design-system/sanjivani-clinic/MASTER.md).
+//
+// - Every size is in em: set font-size on the wordmark (or its parent) to
+//   scale the whole lockup. At the default 1rem, the leaf is 44px.
+// - It renders a plain inline container. Wrap it in an <h1>, or in the
+//   header's home link (task 08).
+// - Both lines have fixed line heights, so the lockup is the same height on
+//   English, Hindi and Marathi pages and the header doesn't jump.
+// - Screen readers read both lines ("संजीवनी Sanjivani Clinic"), matching
+//   what's on screen, so there's no aria-label.
+import LeafMark from "./LeafMark.astro";
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<span class:list={["wordmark", className]}>
+  <LeafMark size="2.75em" />
+  <span class="wordmark__text">
+    <span class="wordmark__deva" lang="mr">संजीवनी</span>
+    <span class="wordmark__latin" lang="en">Sanjivani Clinic</span>
+  </span>
+</span>
+
+<style>
+  .wordmark {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.875em;
+    max-width: 100%;
+  }
+  .wordmark__text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+  .wordmark__deva {
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 1.875em;
+    line-height: 1.3;
+    color: var(--brand-leaf);
+  }
+  .wordmark__latin {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 1em;
+    line-height: 1.2;
+    color: var(--brand-ink);
+  }
+</style>
