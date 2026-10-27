@@ -189,7 +189,12 @@ Also fixed from its notes:
 1. **The saffron scan still missed two forms:** opacity in brackets (`bg-saffron/[0.5]`) and arbitrary properties (`[color:var(--brand-saffron)]`). We added them to the self-test first, and it failed, which proved the gap. Then we widened the pattern; the self-test passed, and a scratch file with both forms made the check exit 1 (`d37bb75`).
 2. **Two rule files disagreed about `--force`.** The `f375887` rewording made CLAUDE.md say "never", while skills.md still said "never without asking". "Never" is the rule now, since MASTER.md is hand-written, and skills.md says so (`a480517`). This is stricter than before task 07.
 
-**code-reviewer, third pass:** Pending.
+**code-reviewer, third pass: Ready to merge**, with no must fixes, and git unchanged. It confirmed both second-pass fixes, and also traced the saffron pattern against forms its self-test doesn't list (`[&>p]:text-saffron`, `text-saffron!`): both are caught. Two doc suggestions, both fixed:
+
+1. "Try it yourself" said the undo command throws away *unsaved* changes. It throws away *uncommitted* ones, including saved edits. Fixed, and it now shows the clearer `git restore`.
+2. task.md's brief-pointer note still began "07 or its own small task", though task 07 left that work out. It now says "Its own small task" (`d61ff8c`).
+
+These were wording fixes after the final pass, so there was no fourth pass.
 
 **Compound:** Pending.
 
@@ -213,7 +218,7 @@ About 5 minutes. Nothing stays changed.
    The check failed. Problems found: 3
    ```
 
-   Undo it with `git checkout -- src/styles/global.css` (this throws away every unsaved change to that file), and run `npm run test` again: all 31 checks pass.
+   Undo it with `git restore src/styles/global.css` (the older `git checkout -- src/styles/global.css` does the same). It puts the file back to its last committed version, so it throws away every *uncommitted* change to that file, including edits you've already saved. Then run `npm run test` again: all 31 checks pass.
 2. Run `npm run dev` and open the specimen page (usually http://localhost:4321/specimen). Press Tab a few times. Where does the outline turn off-white? Compare the gaps between lines in the English and Hindi paragraphs. Stop the server with Ctrl+C.
 
 ## Learn more
