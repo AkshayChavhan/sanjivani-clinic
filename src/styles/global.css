@@ -12,6 +12,11 @@
 @theme inline {
     --font-heading: 'Martel', ui-serif, Georgia, serif;
     --font-sans: 'Mukta', ui-sans-serif, system-ui, sans-serif;
+    /* Brand colours with their own utilities. Saffron is only ever
+       bg-saffron with text-saffron-foreground (MASTER.md). */
+    --color-leaf: var(--brand-leaf);
+    --color-saffron: var(--brand-saffron);
+    --color-saffron-foreground: var(--brand-ink);
     --color-sidebar-ring: var(--sidebar-ring);
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -53,38 +58,54 @@
 }
 
 :root {
-    --background: oklch(1 0 0);
-    --foreground: oklch(0.145 0 0);
-    --card: oklch(1 0 0);
-    --card-foreground: oklch(0.145 0 0);
-    --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.145 0 0);
-    --primary: oklch(0.205 0 0);
-    --primary-foreground: oklch(0.985 0 0);
-    --secondary: oklch(0.97 0 0);
-    --secondary-foreground: oklch(0.205 0 0);
-    --muted: oklch(0.97 0 0);
-    --muted-foreground: oklch(0.556 0 0);
-    --accent: oklch(0.97 0 0);
-    --accent-foreground: oklch(0.205 0 0);
-    --destructive: oklch(0.577 0.245 27.325);
-    --border: oklch(0.922 0 0);
-    --input: oklch(0.922 0 0);
-    --ring: oklch(0.708 0 0);
+    /* Palette: the Herbarium colours (design-system/sanjivani-clinic/MASTER.md).
+       Each colour is named once here. Everything below points at these. */
+    --brand-leaf: #1E5236;
+    --brand-ink: #1B2620;
+    --brand-muted: #55635A;
+    --brand-off-white: #F6F4EC;
+    --brand-paper: #FFFDF7;
+    --brand-sage: #E4EBDD;
+    --brand-saffron: #E3A23A;
+    --brand-hairline: #D9DDD0;
+    /* Two more, needed for contrast: form-field edges (3:1) and error text (4.5:1). */
+    --brand-field-edge: #76837A;
+    --brand-error: #B42318;
+
+    /* shadcn's semantic tokens, pointed at the palette. */
+    --background: var(--brand-off-white);
+    --foreground: var(--brand-ink);
+    --card: var(--brand-paper);
+    --card-foreground: var(--brand-ink);
+    --popover: var(--brand-paper);
+    --popover-foreground: var(--brand-ink);
+    --primary: var(--brand-leaf);
+    --primary-foreground: var(--brand-off-white);
+    --secondary: var(--brand-sage);
+    --secondary-foreground: var(--brand-leaf);
+    --muted: var(--brand-sage);
+    --muted-foreground: var(--brand-muted);
+    /* shadcn's hover and highlight wash. Never saffron: it would flash on every hover. */
+    --accent: var(--brand-sage);
+    --accent-foreground: var(--brand-ink);
+    --destructive: var(--brand-error);
+    --border: var(--brand-hairline);
+    --input: var(--brand-field-edge);
+    --ring: var(--brand-leaf);
     --chart-1: oklch(0.87 0 0);
     --chart-2: oklch(0.556 0 0);
     --chart-3: oklch(0.439 0 0);
     --chart-4: oklch(0.371 0 0);
     --chart-5: oklch(0.269 0 0);
     --radius: 0.625rem;
-    --sidebar: oklch(0.985 0 0);
-    --sidebar-foreground: oklch(0.145 0 0);
-    --sidebar-primary: oklch(0.205 0 0);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.97 0 0);
-    --sidebar-accent-foreground: oklch(0.205 0 0);
-    --sidebar-border: oklch(0.922 0 0);
-    --sidebar-ring: oklch(0.708 0 0);
+    --sidebar: var(--card);
+    --sidebar-foreground: var(--card-foreground);
+    --sidebar-primary: var(--primary);
+    --sidebar-primary-foreground: var(--primary-foreground);
+    --sidebar-accent: var(--accent);
+    --sidebar-accent-foreground: var(--accent-foreground);
+    --sidebar-border: var(--border);
+    --sidebar-ring: var(--ring);
 }
 
 .dark {
