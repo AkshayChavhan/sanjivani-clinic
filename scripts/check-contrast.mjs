@@ -113,11 +113,13 @@ const NEVER = [
 
 // Saffron classes. Only bg-saffron (any variant, such as hover:) and its
 // label text-saffron-foreground are allowed. Everything else is banned:
-// text-, border-t-, ring-offset-, opacity like /50, and arbitrary values such
-// as text-(--color-saffron) or text-[var(--brand-saffron)]. CSS variables
+// text-, border-t-, ring-offset-, any opacity (/50, /[0.5], /(--a)), arbitrary
+// values such as text-(--color-saffron) or text-[var(--brand-saffron)], and
+// arbitrary properties such as [color:var(--brand-saffron)]. CSS variables
 // (--brand-saffron in a <style> block) aren't classes, so they don't count.
 // It can't check pairings: a bg-saffron still needs an ink label, by eye.
-const SAFFRON_CLASS = /(?<![\w-])(?:[\w-]+:)*[a-z][\w-]*-(?:saffron(?:-foreground)?(?:\/\d+)?(?![\w-])|[([][^\s"'`]*saffron[^\s"'`]*)/g;
+const SAFFRON_CLASS =
+  /(?<![\w-])(?:[\w-]+:)*(?:[a-z][\w-]*-(?:saffron(?:-foreground)?(?:\/[^\s"'`]+)?(?![\w-])|[([][^\s"'`]*saffron[^\s"'`]*)|\[[\w-]+:[^\s"'`]*saffron[^\s"'`]*\])/g;
 const ALLOWED_SAFFRON = new Set(["bg-saffron", "text-saffron-foreground"]);
 const bannedSaffronIn = (text) =>
   (text.match(SAFFRON_CLASS) ?? []).filter((cls) => !ALLOWED_SAFFRON.has(cls.split(":").pop()));
@@ -158,6 +160,9 @@ const mustMatch = [
   "bg-saffron/50",
   "text-(--color-saffron)",
   "text-[var(--brand-saffron)]",
+  "bg-saffron/[0.5]",
+  "text-saffron-foreground/(--a)",
+  "[color:var(--brand-saffron)]",
 ];
 const mustNotMatch = [
   "bg-saffron",
