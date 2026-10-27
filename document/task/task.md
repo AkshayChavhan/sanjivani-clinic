@@ -17,6 +17,7 @@ This file tracks every task in this project.
 | 05 | 05_compound_engineering | The Compound Engineering plugin, pinned and configured | Done | [05_compound_engineering](../learning/05_compound_engineering.md) |
 | 06 | 06_react_app_setup | The Astro + React app, shadcn init, GSAP (runs in a new session) | Done | [06_react_app_setup](../learning/06_react_app_setup.md) |
 | 07 | 07_design_system | The brief's look as a design system: colours, Latin and Devanagari fonts, type scale, spacing, radius and a wordmark | Done | [07_design_system](../learning/07_design_system.md) |
+| 08 | 08_layout_shell | Header, footer and the page layout every page uses | In progress | — |
 | 24 | 24_pr_merge_workflow | Every task ends with a GitHub pull request the owner merges, not a local merge | Done | [24_pr_merge_workflow](../learning/24_pr_merge_workflow.md) |
 | 25 | 25_small_cleanups | `.nvmrc`, stale notes, old `.next/` lines, and a lockfile check for code-reviewer | Done | [25_small_cleanups](../learning/25_small_cleanups.md) |
 | 26 | 26_product_brief | A one-page product brief: the clinic, its patients, what the site must do, its look, languages and scope | Done | [26_product_brief](../learning/26_product_brief.md) |
@@ -113,6 +114,17 @@ Runs in a **new** Claude Code session, because agents and the plugin load only w
 - [x] Compound: save a lesson in document/solutions/ if one passes the counterfactual question
 - [x] Merge into main
 
+### 08_layout_shell
+
+- [x] Create branch
+- [ ] Plan with `/compound-engineering:ce-plan` and link the plan here
+- [ ] Build the shared page layout (`<html lang>`, the head, a skip link, the header and the footer) and use it on the placeholder and the specimen
+- [ ] Update MASTER.md, CLAUDE.md and readme.md
+- [ ] Write the learning doc
+- [ ] Review with code-reviewer and fix what it finds
+- [ ] Compound: save a lesson in document/solutions/ if one passes the counterfactual question
+- [ ] Merge into main
+
 ### 24_pr_merge_workflow
 
 - [x] Create branch
@@ -152,7 +164,6 @@ Ideas for later. **Proposed only: confirm each one with [the product brief](../p
 
 | # | Task | Goal | Depends on |
 | --- | --- | --- | --- |
-| 08 | 08_layout_shell | Header, footer and the page layout every page uses | 07 |
 | 09 | 09_home_page | Home page with one GSAP entrance animation and a reduced-motion fallback | 08 |
 | 10 | 10_clinic_data_and_i18n | Clinic data files (contact, timings, doctor, services) and English / Hindi / Marathi pages | 08 |
 | 11 | 11_info_pages | Doctor, Services, Timings, Contact & Location and FAQ pages | 10 |
