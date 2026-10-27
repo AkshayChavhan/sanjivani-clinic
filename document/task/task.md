@@ -145,7 +145,7 @@ Ideas for later. **Proposed only: confirm each one with [the product brief](../p
 | 09 | 09_home_page | Home page with one GSAP entrance animation and a reduced-motion fallback | 08 |
 | 10 | 10_clinic_data_and_i18n | Clinic data files (contact, timings, doctor, services) and English / Hindi / Marathi pages | 08 |
 | 11 | 11_info_pages | Doctor, Services, Timings, Contact & Location and FAQ pages | 10 |
-| 12 | 12_patient_quick_actions | Click-to-call, WhatsApp, directions, emergency strip, mobile action bar | 10 |
+| 12 | 12_patient_quick_actions | Click-to-call, WhatsApp, directions, mobile action bar | 10 |
 | 13 | 13_open_now_badge | "Open now / Closed" badge in clinic time (IST), a React island | 10 |
 | 14 | 14_appointment_form | Appointment form with time slots built from the clinic timings, a React island | 10 |
 | 15 | 15_booking_backends | Send bookings to a Google Sheet, to email (Web3Forms), or to WhatsApp as the fallback | 14 |
@@ -158,19 +158,19 @@ Ideas for later. **Proposed only: confirm each one with [the product brief](../p
 | 22 | 22_admin_panel | Decap CMS at /admin, with GitHub login through Vercel | 10, 23 |
 | 23 | 23_deploy_vercel | Deploy the site to Vercel | 09 |
 
-**Backlog check against [the product brief](../product/brief.md)** (task 26, 2026-10-26). Proposals only: changing, dropping or reordering a row is the owner's call.
+**Backlog check against [the product brief](../product/brief.md)** (task 26, 2026-10-26). Proposals only: changing, dropping or reordering a row is the owner's call. The owner's decisions of 2026-10-27 are marked.
 
 - **07** design system: Fits with a change, first version. Its goal should add a logo or wordmark, since none exists yet, and use the brief's colours and Devanagari fonts.
 - **08** layout shell: Fits, first version. Every page needs it.
 - **09** home page: Fits, first version. Keep the one entrance animation calm, with its reduced-motion fallback.
 - **10** clinic data and i18n: Fits, first version. Clinic facts stay marked placeholders until the owner gives the real ones.
 - **11** info pages: Fits, first version. FAQ answers stay general and factual, with no personal medical advice.
-- **12** quick actions: Fits with a change, first version. An "emergency strip" could suggest a skin clinic handles emergencies: owner to decide its wording, or drop it.
+- **12** quick actions: Fits, first version. The owner dropped the emergency strip (2026-10-27), since it could suggest a skin clinic handles emergencies.
 - **13** open-now badge: Fits, later. Patients can book without it, and it needs the closed days and holidays from task 10.
 - **14** appointment form: Fits with a change, first version. Its "time slots" are preferred times the clinic confirms, not reserved slots, and it follows the brief's privacy rule.
 - **15** booking backends: Fits, first version. Already decided; the clinic stays responsible for the patient data each service holds.
-- **16** BMI calculator: Doesn't fit, owner to decide. BMI isn't part of skin, hair or nail care. Suggest dropping it.
-- **17** testimonials slider: Doesn't fit, owner to decide. The NMC guidelines don't allow testimonials, even with consent. Suggest dropping it.
+- **16** BMI calculator: Kept by the owner (2026-10-27), later. It isn't part of skin or hair care, so it's a general health tool that gives no personal advice.
+- **17** testimonials slider: Kept by the owner (2026-10-27), later. The NMC guidelines say consent alone doesn't allow testimonials, so none go live until the doctor confirms in writing that the rules allow them (the brief's rule 6).
 - **18** dark mode: Fits, later. Patients don't need it to book, and the brief's look is a light, warm off-white.
 - **19** gallery: Fits with a change, later. Photos of the clinic, its rooms and equipment only: no patients, no before-and-after.
 - **20** health blog: Fits with a change, later. Teaching articles under the doctor's name, with no self-promotion or cure claims. Each article in three languages adds translation work.
