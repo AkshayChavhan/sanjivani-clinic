@@ -144,7 +144,7 @@ Full guide: [document/skills/skills.md](document/skills/skills.md). Order for UI
 
 Rules:
 
-- Run `python3 .claude/skills/ui-ux-pro-max/scripts/search.py` from the repo root, and ignore the `${CLAUDE_PLUGIN_ROOT}` prefix in its SKILL.md. Save with `--persist --output-dir .`; never use `--force` without asking.
+- Run `python3 .claude/skills/ui-ux-pro-max/scripts/search.py` from the repo root, and ignore the `${CLAUDE_PLUGIN_ROOT}` prefix in its SKILL.md. Its output is printed only: don't save it with `--persist` (next rule), and never use `--force`.
 - `design-system/sanjivani-clinic/MASTER.md` is written by hand (task 07). Read it before UI work and follow it; the brief wins over it. Never run `--persist` for this project: even without `--force` it writes a `pages/<page>.md` from the tool's own suggestion, and page files override MASTER.md. Page files are written by hand too.
 - ui-ux-pro-max results are input and a checklist; frontend-design makes the call. When skills disagree, accessibility wins.
 - shadcn: add only official `@shadcn` items without asking. Ask before any third-party registry or URL, `--overwrite`, `init --force` or `mcp init`. Read every file it adds.
