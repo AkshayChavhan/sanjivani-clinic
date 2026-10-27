@@ -153,7 +153,7 @@
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border outline-ring;
     }
   body {
     @apply bg-background text-foreground;
@@ -165,6 +165,20 @@
   /* Headings use Martel unless a class says otherwise. */
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
+  }
+
+  /* Plain links in text are underlined before any hover: leaf green next to
+     ink is only 1.7:1, and phones have no hover. The gap clears the marks
+     under Devanagari letters. Links with a class (buttons, navigation) set
+     their own look. */
+  a:not([class]) {
+    color: var(--primary);
+    text-decoration-line: underline;
+    text-decoration-thickness: 0.08em;
+    text-underline-offset: 0.2em;
+  }
+  a:not([class]):hover {
+    text-decoration-thickness: 0.14em;
   }
 
   /* Hindi and Marathi (Devanagari) need taller lines than English, so the
@@ -206,6 +220,28 @@
    outside every layer, so no tracking-* class can switch it back on. */
 :lang(hi), :lang(mr) {
   letter-spacing: 0;
+}
+
+/* Keyboard focus: a solid 2px outline with a 2px gap, on everything a
+   keyboard can reach. shadcn's half-transparent ring is too faint here
+   (about 2.5:1), so it's switched off. This rule is outside every layer, so
+   a component's outline-none can't hide it. On a leaf-green area, set
+   --ring to var(--brand-off-white) on that area. */
+:where(a, button, input, select, textarea, summary, [tabindex], [role="option"], [role="menuitem"], [role="tab"], [role="checkbox"], [role="radio"], [role="switch"]):focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+  box-shadow: none;
+}
+
+/* "Reduce motion": CSS animations and transitions finish at once. GSAP
+   handles its own animations through gsap.matchMedia(). */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* The type scale (design-system/sanjivani-clinic/MASTER.md). Sizes are in rem,
