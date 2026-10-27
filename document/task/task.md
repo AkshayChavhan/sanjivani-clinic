@@ -109,7 +109,7 @@ Runs in a **new** Claude Code session, because agents and the plugin load only w
 - [x] Plan with `/compound-engineering:ce-plan` and link the plan here: [2026-10-27-1151-feat-design-system-plan.md](../plans/2026-10-27-1151-feat-design-system-plan.md)
 - [x] Build the design system from the chosen direction: colours, fonts, type scale, spacing, radius, the leaf mark and wordmark, a new favicon, the placeholder and a hidden specimen page, and a contrast check (`npm run test`), written up in `design-system/sanjivani-clinic/MASTER.md` and applied to `src/styles/global.css`
 - [x] Write the learning doc
-- [ ] Review with code-reviewer and fix what it finds
+- [x] Review with code-reviewer and fix what it finds
 - [ ] Compound: save a lesson in document/solutions/ if one passes the counterfactual question
 - [ ] Merge into main
 
