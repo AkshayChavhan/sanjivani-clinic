@@ -30,6 +30,8 @@ The plan knew this, and guarded against one risk: it cited laws by name only, be
 
 A research subagent with web search checked the plan's legal facts on official sites on 2026-10-26, before the brief was written. That check changed the brief's rule 6 to a flat "No testimonials or before-and-after photos". It also added "painless", "miracle" and "no promotional WhatsApp messages" to rules 2 and 5, and changed the verdict on backlog 17 (testimonials slider). Task 26 made these fixes (`8f7291f`, `fd90550`) on the same branch as this doc.
 
+On 2026-10-27, told about the guidelines, the owner chose to keep testimonials (backlog 17). Rule 6 now gates them instead: none go live until the doctor confirms in writing that the rules allow them (`9cf6473`). The check still did its job. The owner made that call knowing the rule, not from a memory that missed it.
+
 Some of what memory said was right: the check confirmed that the NMC's 2023 conduct regulations are on hold, so the 2002 code still applies. The problem isn't that memory is always wrong. It's that nobody can tell which parts are wrong until someone checks.
 
 ## Guidance
@@ -48,7 +50,7 @@ Before you write or change any rule a doctor's website must follow, do these fou
 | Topic | Later task | What to re-check |
 | --- | --- | --- |
 | Privacy notice and page, the form, where requests go | 14, 15, and the privacy page's task (not chosen yet) | The Digital Personal Data Protection (DPDP) Act, 2023 and its Rules. Task 26 found that most duties start about May 2027, with the Information Technology Act's 2011 rules applying until then. |
-| Testimonials, reviews, before-and-after photos | 17 | The NMC guidelines |
+| Testimonials, reviews, before-and-after photos | 17 | The NMC guidelines, and the doctor's written OK before any testimonial goes live |
 | Doctor's photo, gallery | 19 | The NMC guidelines on self-promotional photos; written consent for any patient photo |
 | Health blog | 20 | The NMC guidelines and the 2002 code: no cure claims, no self-promotion |
 | Clinic schema (JSON-LD) | 21 | Facts only; no ratings |
@@ -78,7 +80,7 @@ Rule 6, before and after the check:
 Testimonials and before-and-after photos also stay off the site unless the
 doctor checks the current rules and decides otherwise.
 
-<!-- after: brief rule 6, checked on nmc.org.in on 2026-10-26 -->
+<!-- after: brief rule 6, checked on nmc.org.in on 2026-10-26 (gated by the owner's decision on 2026-10-27; see Context) -->
 6. **No testimonials or before-and-after photos.** The NMC guidelines say a
    patient's consent doesn't make them allowed.
 ```
